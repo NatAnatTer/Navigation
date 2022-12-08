@@ -7,16 +7,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class FeedViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "First VC"
+        self.navigationItem.title = "Лента"
         view.backgroundColor = .systemMint
         
-        var tabBarItem = UITabBarItem()
-        tabBarItem = UITabBarItem(tabBarSystemItem: .contacts, tag: 0)
-        self.tabBarItem = tabBarItem
+        
     }
 
 

@@ -10,14 +10,16 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func createFeedController() -> UINavigationController{
-        let feedNC = UINavigationController(rootViewController: ViewController())
-        feedNC.tabBarItem = UITabBarItem(title: "FirstNC", image: UIImage(systemName: "list.bullet"), tag: 0)
+        let feedNC = UINavigationController(rootViewController: FeedViewController())
+        feedNC.tabBarItem = UITabBarItem(title: "FirstNC", image: UIImage(systemName: "house"), tag: 0)
+        feedNC.title = "Лента"
         return feedNC
     }
     
     func createProfileController() -> UINavigationController{
         let profileNC = UINavigationController(rootViewController: ProfileViewController())
         profileNC.tabBarItem = UITabBarItem(title: "SecondNC", image: UIImage(systemName: "person.circle"), tag: 1)
+        profileNC.title = "Профиль"
         return profileNC
     }
     
@@ -38,22 +40,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = createTabBar()
         window.makeKeyAndVisible()
         self.window = window
-        
-        
-        
-  //     self.window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-//        self.window?.rootViewController = UINavigationController(rootViewController: ViewController())
-//        self.window?.makeKeyAndVisible()
-//
-   //----------
-//        let window = UIWindow(windowScene: windowScene)
-//
-//        window.rootViewController = UINavigationController(rootViewController: ViewController())
-//        window.makeKeyAndVisible()
-//
-//        self.window = window
-//     
-        
         
     }
 

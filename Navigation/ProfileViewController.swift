@@ -11,13 +11,10 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        super.viewDidLoad()
-        self.navigationItem.title = "Second VC"
+
+        self.navigationItem.title = "Профиль"
         view.backgroundColor = .systemGray2
-        
-        var tabBarItem = UITabBarItem()
-        tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 1)
-        self.tabBarItem = tabBarItem
+
     }
   
 
