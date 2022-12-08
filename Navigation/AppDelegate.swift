@@ -10,14 +10,39 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+   
+    
+    
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+       
         
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-                self.window?.rootViewController = UINavigationController(rootViewController: ViewController())
-                self.window?.makeKeyAndVisible()
+  //     let window = UIWindow(frame: UIScreen.main.bounds)
+//                self.window?.rootViewController = UINavigationController(rootViewController: ViewController())
+//                self.window?.makeKeyAndVisible()
+        
+//        let feedVC = ViewController()
+//        let profileVC = ProfileViewController()
+//        let tabBarVC = UITabBarController()
+//
+       
+        
+        
+                //navigation
+//        let feedNavController = UINavigationController(rootViewController: feedVC)
+//        let profileNavController = UINavigationController(rootViewController: profileVC)
+//
+//
+//        tabBarVC.setViewControllers([feedNavController, profileNavController], animated: true)
+//
+//        self.window?.rootViewController = tabBarVC
+//        self.window?.makeKeyAndVisible()
+//        self.window = window
+               
+                
+        
+        
         
         return true
     }

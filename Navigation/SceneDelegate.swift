@@ -9,26 +9,50 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    func createFeedController() -> UINavigationController{
+        let feedNC = UINavigationController(rootViewController: ViewController())
+        feedNC.tabBarItem = UITabBarItem(title: "FirstNC", image: UIImage(systemName: "list.bullet"), tag: 0)
+        return feedNC
+    }
+    
+    func createProfileController() -> UINavigationController{
+        let profileNC = UINavigationController(rootViewController: ProfileViewController())
+        profileNC.tabBarItem = UITabBarItem(title: "SecondNC", image: UIImage(systemName: "person.circle"), tag: 1)
+        return profileNC
+    }
+    
+    func createTabBar() -> UITabBarController{
+        let tabBar = UITabBarController()
+        tabBar.viewControllers = [createFeedController(), createProfileController()]
+        return tabBar
+    }
+    
+    
     var window: UIWindow?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+      
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = createTabBar()
+        window.makeKeyAndVisible()
+        self.window = window
         
-//        self.window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        
+        
+  //     self.window = UIWindow(frame: windowScene.coordinateSpace.bounds)
 //        self.window?.rootViewController = UINavigationController(rootViewController: ViewController())
 //        self.window?.makeKeyAndVisible()
 //
-        
-        let window = UIWindow(windowScene: windowScene)
-
-        window.rootViewController = UINavigationController(rootViewController: ViewController())
-        window.makeKeyAndVisible()
-
-        self.window = window
+   //----------
+//        let window = UIWindow(windowScene: windowScene)
+//
+//        window.rootViewController = UINavigationController(rootViewController: ViewController())
+//        window.makeKeyAndVisible()
+//
+//        self.window = window
+//     
         
         
     }
