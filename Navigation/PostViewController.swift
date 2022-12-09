@@ -9,13 +9,24 @@ import UIKit
 
 class PostViewController: UIViewController {
 
+    
+    var titleOfPost: String = "Default"
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Пост"
-        view.backgroundColor = .secondarySystemBackground
+        setupView()
+        
+        
+        let infoButton = UIBarButtonItem(barButtonSystemItem: "info", target: self, action: #selector(openInfo()))
+    }
+
+    private func setupView() {
+           self.view.backgroundColor = .lightGray
+           self.navigationItem.title = titleOfPost
+           //self.navigationItem.rightBarButtonItem = UIBarButtonItem
+       }
+
+    @objc private func openInfo(){
+        
     }
     
-
-
-
 }
