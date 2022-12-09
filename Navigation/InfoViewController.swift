@@ -27,31 +27,40 @@ class InfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupButtonAllert()
       
     }
     
     private func setupView() {
         self.view.backgroundColor = .orange
-      //  self.navigationController?.title = postDetail.title
-  //      self.navigationItem.title = postDetail.title
           
        }
+    private func setupButtonAllert(){
+        self.view.addSubview(self.allertButton)
+        self.allertButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant:  -200).isActive = true
+        self.allertButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
+        self.allertButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
+        self.allertButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+       
+    }
 
     @objc private func pressAllertButton(){
-        let infoViewController = InfoViewController()
-    
-        self.present(infoViewController, animated: true, completion: nil)
-        infoViewController.postDetail = Post(title: titleOfPost)
+        showOurAllert(text: self.postDetail.title)
     }
-    
-    /*
-    // MARK: - Navigation
+    private  func showOurAllert(text: String) {
+        let alert = UIAlertController(title: "Хотите удалить пост?", message: text, preferredStyle: UIAlertController.Style.alert)
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { _ in
+                print("Удалили пост")
+            }))
+            alert.addAction(UIAlertAction(title: "No",
+                                          style: UIAlertAction.Style.default,
+                                          handler: {(_: UIAlertAction!) in
+                                            print("Не стали удалять пост")
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+    
+  
 
 }
