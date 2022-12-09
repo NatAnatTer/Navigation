@@ -37,7 +37,6 @@ class FeedViewController: UIViewController {
     private func setupView() {
            self.view.backgroundColor = .systemMint
            self.navigationItem.title = "Лента"
-           //self.navigationItem.rightBarButtonItem = UIBarButtonItem
        }
     
     private func setupButtonPost(){

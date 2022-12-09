@@ -11,11 +11,14 @@ class ProfileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationItem.title = "Профиль"
-        view.backgroundColor = .systemGray2
-
+        setupView()
     }
+    
+    private func setupView() {
+        view.backgroundColor = .systemGray2
+        self.navigationItem.title = "Профиль"
+           //self.navigationItem.rightBarButtonItem = UIBarButtonItem
+       }
   
 
 }
