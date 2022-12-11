@@ -17,7 +17,6 @@ class ProfileViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .systemGray2
         self.navigationItem.title = "Профиль"
-           //self.navigationItem.rightBarButtonItem = UIBarButtonItem
        }
   
 

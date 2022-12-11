@@ -28,9 +28,6 @@ class FeedViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupButtonPost()
-        
-
-//        let toPostButton = UIButton(frame: CGRect(x: 50, y: 100, width: 100, height: 40))
 
     }
     
