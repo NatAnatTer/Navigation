@@ -14,9 +14,9 @@ class InfoViewController: UIViewController {
     private lazy var allertButton: UIButton = {
           let button = UIButton()
            button.backgroundColor = .systemGray6
-           button.setTitle("Allert button", for: .normal)
+           button.setTitle("Удалить пост", for: .normal)
            button.layer.cornerRadius = 12
-           button.setTitleColor(.systemGray4, for: .normal)
+           button.setTitleColor(.systemGreen, for: .normal)
            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
            button.addTarget(self, action: #selector(pressAllertButton), for: .touchUpInside)
            button.translatesAutoresizingMaskIntoConstraints = false
@@ -50,10 +50,10 @@ class InfoViewController: UIViewController {
     private  func showOurAllert(text: String) {
         let alert = UIAlertController(title: "Хотите удалить пост?", message: text, preferredStyle: UIAlertController.Style.alert)
 
-        alert.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Да", style: UIAlertAction.Style.default, handler: { _ in
                 print("Удалили пост")
             }))
-            alert.addAction(UIAlertAction(title: "No",
+            alert.addAction(UIAlertAction(title: "Нет",
                                           style: UIAlertAction.Style.default,
                                           handler: {(_: UIAlertAction!) in
                                             print("Не стали удалять пост")
