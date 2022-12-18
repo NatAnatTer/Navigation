@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    let profileHeader = ProfileHeaderView()
+//    let profileHeader = ProfileHeaderView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,13 +19,13 @@ class ProfileViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .lightGray
         self.navigationItem.title = "Профиль"
-        
+        let profileHeader = ProfileHeaderView()
         self.view.addSubview(profileHeader)
        }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        profileHeader.frame = view.frame
+        //profileHeader.frame = view.frame
         
         /*
          Создайте экземпляр класса ProfileHeaderView в классе ProfileViewController, добавьте его в качестве subview и в методе viewWillLayoutSubviews() задайте ему frame, равный frame корневого view.
