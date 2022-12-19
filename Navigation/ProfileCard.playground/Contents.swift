@@ -21,12 +21,6 @@ class MyViewController : UIViewController {
         profileIconView.contentMode = .scaleAspectFill
         profileIconView.layer.masksToBounds = true
         
-//        let photoFrameView = getPhotoFrameView()
-//        self.view.addSubview(photoFrameView)
-//        let photoView = getPhotoView()
-//        photoFrameView.addSubview(photoView)
-//        set(view: photoView, toCenterOFview: photoFrameView)
-        
         let nameView = getNameView()
         self.view.addSubview(nameView)
         
@@ -53,7 +47,7 @@ class MyViewController : UIViewController {
     private func getRootView()->
         UIView{
             let view = UIView()
-            view.backgroundColor = .systemGray
+            view.backgroundColor = .lightGray
             return view
     }
     
@@ -64,24 +58,7 @@ class MyViewController : UIViewController {
         profileImageView.image = UIImage(named: "profileIcon")
         return profileImageView
     }
-    
-//    private func getPhotoFrameView() ->
-//    UIView{
-//        let viewFrame = CGRect(x: 16, y: 16, width: 100, height: 100)
-//        let view = UIView(frame: viewFrame)
-//        view.backgroundColor = .darkGray
-//        return view
-//    }
-    
-//    private func getPhotoView() ->
-//    UIView{
-//        let viewFrame = CGRect(x: 16, y: 16, width: 90, height: 90)
-//        let view = UIView(frame: viewFrame)
-//        view.backgroundColor = .white
-//        return view
-//    }
-//
-    
+ 
     
     private func getNameView() ->
     UILabel{
@@ -92,31 +69,17 @@ class MyViewController : UIViewController {
         view.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         return view
     }
-//    UITextView{
-//        let viewFrame = CGRect(x: 132, y: 27, width: 200, height: 20)
-//
-//        let view = UITextView(frame: viewFrame) //(frame: viewFrame)//(frame: self.view.bounds)
-//        view.text = "Hipster Cat"
-//        view.contentInset = UIEdgeInsets(top: -10, left: -5, bottom: 0, right: 0)
-//        view.font = UIFont.systemFont(ofSize: 18)
-//        view.textColor = .black
-//        view.backgroundColor = .systemGray
-//
-//        return view
-//    }
-//    UIView{
-//        let viewFrame = CGRect(x: 132, y: 27, width: 200, height: 25)
-//        let view = UIView(frame: viewFrame)
-//        view.backgroundColor = .green
-//        return view
-//    }
+
     private func getDescriptionView() ->
-    UIView{
-        let viewFrame = CGRect(x: 132, y: 60, width: 200, height: 20)
-        let view = UIView(frame: viewFrame)
-        view.backgroundColor = .red
+    UILabel{
+        let viewFrame = CGRect(x: 132, y: 98, width: 200, height: 20)
+        let view = UILabel(frame: viewFrame)
+        view.text = "Waiting for something beautiful, pretty good"
+        view.textColor = .gray
+        view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         return view
     }
+
     private func getShowStatusButton() ->
     UIButton{
         let viewFrame = CGRect(x: 16, y: 132, width: 300, height: 50)
@@ -124,22 +87,6 @@ class MyViewController : UIViewController {
         button.backgroundColor = .systemBlue
         return button
     }
-    
-//    private func set(view moveView: UIView, toCenterOFview baseView: UIView){
-//        let moveViewWidth = moveView.frame.width
-//        let moveViewHeight = moveView.frame.height
-//
-//        let baseViewWidth = baseView.bounds.width
-//        let baseViewHeight = baseView.bounds.height
-//
-//        let newXCoordinate = (baseViewWidth - moveViewWidth)/2
-//        let newYCoordinate = (baseViewHeight - moveViewHeight)/2
-//
-//        moveView.frame.origin = CGPoint(x: newXCoordinate, y: newYCoordinate)
-//    }
-//
-    
-    
 }
 
 
