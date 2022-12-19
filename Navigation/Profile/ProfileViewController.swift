@@ -9,13 +9,13 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-  // let profileHeader = ProfileHeaderView()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
 
+    var printedText = ""
     
     private func setupView() {
         view.backgroundColor = .white
@@ -54,22 +54,23 @@ class ProfileViewController: UIViewController {
         showStatusView.layer.shadowColor = UIColor.black.cgColor
         showStatusView.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
         showStatusView.setTitle("Show status", for: .normal)
-
-       // showStatusView.addTarget(self, action: #selector(pressPost), for: .touchUpInside)
+        printedText = profileHeader.statusText
+        showStatusView.addTarget(self, action: #selector(pressShowStatus), for: .touchUpInside)
         
-        
-    
        }
+    
+ 
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        //profileHeader.frame = view.frame
         
        
     }
     
     
-   
+    @objc private func pressShowStatus(){
+        print(printedText)
+    }
 }
 
 extension UIResponder {
