@@ -8,8 +8,8 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-
- 
+    
+    
     init(){
         super .init(frame: CGRect(x: 50, y: 50, width: 400, height: 600))
         self.backgroundColor = .white
@@ -29,24 +29,24 @@ class ProfileHeaderView: UIView {
         }
     }
     
-     func getRootView()->
-        UIView{
-            let viewFrame = CGRect(x: 0, y: 100, width: 500, height: 600)
-            let view = UIView(frame: viewFrame)
-            view.backgroundColor = .lightGray
-            return view
+    func getRootView()->
+    UIView{
+        let viewFrame = CGRect(x: 0, y: 100, width: 500, height: 600)
+        let view = UIView(frame: viewFrame)
+        view.backgroundColor = .lightGray
+        return view
     }
     
-     func getProfileImageView() ->
+    func getProfileImageView() ->
     UIImageView{
         let viewFrame = CGRect(x: 16, y: 16, width: 100, height: 100)
         let profileImageView = UIImageView(frame: viewFrame)
         profileImageView.image = UIImage(named: "profileIcon")
         return profileImageView
     }
- 
     
-     func getNameView() ->
+    
+    func getNameView() ->
     UILabel{
         let viewFrame = CGRect(x: 132, y: 27, width: 200, height: 20)
         let view = UILabel(frame: viewFrame)
@@ -55,8 +55,8 @@ class ProfileHeaderView: UIView {
         view.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         return view
     }
-
-     func getDescriptionView() ->
+    
+    func getDescriptionView() ->
     UILabel{
         let viewFrame = CGRect(x: 132, y: 98, width: 200, height: 20)
         let view = UILabel(frame: viewFrame)
@@ -65,7 +65,7 @@ class ProfileHeaderView: UIView {
         view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         return view
     }
-
+    
     func getShowStatusButton() ->
     UIButton{
         let viewFrame = CGRect(x: 16, y: 132, width: 360, height: 50)
@@ -73,5 +73,5 @@ class ProfileHeaderView: UIView {
         button.backgroundColor = .systemBlue
         return button
     }
-
+    
 }

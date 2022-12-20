@@ -8,13 +8,12 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
-
+    
     var printedText = ""
     
     private func setupView() {
@@ -22,11 +21,10 @@ class ProfileViewController: UIViewController {
         self.navigationItem.title = "Профиль"
         
         var profileHeader = ProfileHeaderView()
-        //self.view.addSubview(profileHeader)
-       
-       
+        
         let profileView = profileHeader.getRootView()
         self.view.addSubview(profileView)
+        
         let profileIconView = profileHeader.getProfileImageView()
         profileView.addSubview(profileIconView)
         
@@ -57,14 +55,9 @@ class ProfileViewController: UIViewController {
         printedText = profileHeader.statusText
         showStatusView.addTarget(self, action: #selector(pressShowStatus), for: .touchUpInside)
         
-       }
-    
- 
-    
+    }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-       
     }
     
     
