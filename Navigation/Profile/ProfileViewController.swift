@@ -20,30 +20,44 @@ class ProfileViewController: UIViewController {
         view.backgroundColor = .white
         self.navigationItem.title = "Профиль"
         
-        var profileHeader = ProfileHeaderView()
+        self.view.addSubview(profileHeaderView)
         
-        let profileView = profileHeader.getRootView()
-        self.view.addSubview(profileView)
+        profileHeaderView.addSubview(profileIconView)
+
+        let nameView = ProfileHeaderView().getNameView
+        profileHeaderView.addSubview(nameView)
         
-        let profileIconView = profileHeader.getProfileImageView()
-        profileView.addSubview(profileIconView)
+        let descriptionView = ProfileHeaderView().getDescriptionView
+        profileHeaderView.addSubview(descriptionView)
         
-        profileIconView.layer.cornerRadius = 50
-        profileIconView.layer.borderWidth = 3
-        profileIconView.layer.borderColor = UIColor.white.cgColor
-        profileIconView.contentMode = .scaleAspectFill
-        profileIconView.layer.masksToBounds = true
+        profileHeaderView.addSubview(showStatusView)
         
-        let nameView = profileHeader.getNameView()
-        profileView.addSubview(nameView)
+        printedText = ProfileHeaderView().statusText
+        showStatusView.addTarget(self, action: #selector(pressShowStatus), for: .touchUpInside)
+
+    }
+    
+    private let profileHeaderView: UIView = {
+        let view = ProfileHeaderView()
+       let rootView = view.getRootView
         
-        
-        let descriptionView = profileHeader.getDescriptionView()
-        profileView.addSubview(descriptionView)
-        
-        
-        let showStatusView = profileHeader.getShowStatusButton()
-        profileView.addSubview(showStatusView)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return rootView
+    }()
+    
+   
+    private let profileIconView: UIImageView = {
+       let newIcon = ProfileHeaderView().getProfileImageView
+        newIcon.layer.cornerRadius = 50
+        newIcon.layer.borderWidth = 3
+        newIcon.layer.borderColor = UIColor.white.cgColor
+        newIcon.contentMode = .scaleAspectFill
+        newIcon.layer.masksToBounds = true
+        return newIcon
+    }()
+    
+    private let showStatusView:UIButton = {
+       let showStatusView = ProfileHeaderView().getShowStatusButton
         showStatusView.layer.cornerRadius = 10.0
         showStatusView.layer.borderWidth = 2.0
         showStatusView.layer.borderColor = UIColor.systemBlue.cgColor
@@ -52,10 +66,12 @@ class ProfileViewController: UIViewController {
         showStatusView.layer.shadowColor = UIColor.black.cgColor
         showStatusView.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
         showStatusView.setTitle("Show status", for: .normal)
-        printedText = profileHeader.statusText
-        showStatusView.addTarget(self, action: #selector(pressShowStatus), for: .touchUpInside)
-        
-    }
+        return showStatusView
+    }()
+    
+    
+    
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
     }
