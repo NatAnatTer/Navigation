@@ -8,53 +8,58 @@
 import UIKit
 
 class FeedViewController: UIViewController {
-
+    
     var postOne = Post(title: "My first post")
     
     private lazy var toPostButton: UIButton = {
-          let button = UIButton()
-           button.backgroundColor = .systemGray6
-           button.setTitle("Пост", for: .normal)
-           button.layer.cornerRadius = 12
-           button.setTitleColor(.systemCyan, for: .normal)
-           button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-           button.addTarget(self, action: #selector(pressPost), for: .touchUpInside)
-           button.translatesAutoresizingMaskIntoConstraints = false
-           return button
-       }()
+        let button = UIButton()
+        button.backgroundColor = .systemGray6
+        button.setTitle("Пост", for: .normal)
+        button.layer.cornerRadius = 12
+        button.setTitleColor(.systemCyan, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(pressPost), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     private lazy var toPostButtonTwo: UIButton = {
-          let button = UIButton()
-           button.backgroundColor = .systemGray
-           button.setTitle("Пост 2", for: .normal)
-           button.layer.cornerRadius = 12
-           button.setTitleColor(.black, for: .normal)
-           button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-           button.addTarget(self, action: #selector(pressPost), for: .touchUpInside)
-           button.translatesAutoresizingMaskIntoConstraints = false
-           return button
-       }()
+        let button = UIButton()
+        button.backgroundColor = .systemGray
+        button.setTitle("Пост 2", for: .normal)
+        button.layer.cornerRadius = 12
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(pressPost), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-//        setupButtonPost()
-//        setupButtonPostTwo()
-//        setupStackView()
-
+        
     }
     
     private func setupView() {
-           self.view.backgroundColor = .systemMint
-           self.navigationItem.title = "Лента"
+        self.view.backgroundColor = .systemMint
+        self.navigationItem.title = "Лента"
         
         setupButtonPost()
         setupButtonPostTwo()
         setupStackView()
-
-        
-       }
+    }
     
+    @objc private func pressPost(){
+        let postViewController = PostViewController()
+        self.navigationController?.pushViewController(postViewController, animated: true)
+        postViewController.titleOfPost = postOne.title
+        
+        print("Open post")
+    }
+}
+
+extension FeedViewController{
     private func setupStackView(){
         let stackView = UIStackView()
         stackView.axis = .vertical
@@ -68,14 +73,13 @@ class FeedViewController: UIViewController {
         
         stackView.addArrangedSubview(toPostButton)
         stackView.addArrangedSubview(toPostButtonTwo)
-      //  stackView.widthAnchor.constraint(equalToConstant: 300)
     }
     
     private func setupButtonPost(){
         self.view.addSubview(self.toPostButton)
         self.toPostButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         self.toPostButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
-       
+        
     }
     private func setupButtonPostTwo(){
         self.view.addSubview(self.toPostButton)
@@ -83,14 +87,4 @@ class FeedViewController: UIViewController {
         self.toPostButtonTwo.widthAnchor.constraint(equalToConstant: 300).isActive = true
     }
     
-    @objc private func pressPost(){
-        let postViewController = PostViewController()
-        self.navigationController?.pushViewController(postViewController, animated: true)
-        postViewController.titleOfPost = postOne.title
-       
-        print("Open post")
-    }
-
-
 }
-
