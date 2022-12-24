@@ -27,7 +27,7 @@ class FeedViewController: UIViewController {
            button.backgroundColor = .systemGray
            button.setTitle("Пост 2", for: .normal)
            button.layer.cornerRadius = 12
-           button.setTitleColor(.systemCyan, for: .normal)
+           button.setTitleColor(.black, for: .normal)
            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
            button.addTarget(self, action: #selector(pressPost), for: .touchUpInside)
            button.translatesAutoresizingMaskIntoConstraints = false
@@ -38,26 +38,49 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        setupButtonPost()
-        
-        
-        
-        
+//        setupButtonPost()
+//        setupButtonPostTwo()
+//        setupStackView()
 
     }
     
     private func setupView() {
            self.view.backgroundColor = .systemMint
            self.navigationItem.title = "Лента"
+        
+        setupButtonPost()
+        setupButtonPostTwo()
+        setupStackView()
+
+        
        }
+    
+    private func setupStackView(){
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .equalCentering //TODO
+        stackView.alignment = .center
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(stackView)
+        stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        
+        stackView.addArrangedSubview(toPostButton)
+        stackView.addArrangedSubview(toPostButtonTwo)
+      //  stackView.widthAnchor.constraint(equalToConstant: 300)
+    }
     
     private func setupButtonPost(){
         self.view.addSubview(self.toPostButton)
-        self.toPostButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant:  -200).isActive = true
-        self.toPostButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
-        self.toPostButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
         self.toPostButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.toPostButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
        
+    }
+    private func setupButtonPostTwo(){
+        self.view.addSubview(self.toPostButton)
+        self.toPostButtonTwo.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        self.toPostButtonTwo.widthAnchor.constraint(equalToConstant: 300).isActive = true
     }
     
     @objc private func pressPost(){
