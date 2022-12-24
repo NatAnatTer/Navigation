@@ -22,32 +22,57 @@ class ProfileViewController: UIViewController {
         
         self.view.addSubview(profileHeaderView)
         
-        profileHeaderView.addSubview(profileIconView)
+      //  profileHeaderView.addSubview(profileIconView)
+        self.view.addSubview(profileIconView)
 
-        let nameView = ProfileHeaderView().getNameView
-        profileHeaderView.addSubview(nameView)
+        let nameView = ProfileHeaderView().fullNameLabel
+       // profileHeaderView.addSubview(nameView)
+        self.view.addSubview(nameView)
         
-        let descriptionView = ProfileHeaderView().getDescriptionView
-        profileHeaderView.addSubview(descriptionView)
+        let descriptionView = ProfileHeaderView().statusLabel
+        //profileHeaderView.addSubview(descriptionView)
+        self.view.addSubview(descriptionView)
         
-        profileHeaderView.addSubview(showStatusView)
+      //  profileHeaderView.addSubview(showStatusView)
+        self.view.addSubview(showStatusView)
         
         printedText = ProfileHeaderView().statusText
         showStatusView.addTarget(self, action: #selector(pressShowStatus), for: .touchUpInside)
 
+        let safeLayout = self.view.safeAreaLayoutGuide
+        
+        NSLayoutConstraint.activate([
+            profileHeaderView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 0),
+            profileHeaderView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
+            profileHeaderView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0),
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 600),
+            profileIconView.topAnchor.constraint(equalTo: profileHeaderView.topAnchor, constant: 16),
+            profileIconView.leadingAnchor.constraint(equalTo: profileHeaderView.leadingAnchor, constant: 16),
+            profileIconView.heightAnchor.constraint(equalToConstant: 100),
+            profileIconView.widthAnchor.constraint(equalToConstant: 100),
+            nameView.topAnchor.constraint(equalTo: profileHeaderView.topAnchor, constant: 27),
+            nameView.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
+            descriptionView.bottomAnchor.constraint(equalTo: showStatusView.topAnchor, constant: -34),
+            //descriptionView.topAnchor.constraint(equalTo: nameView.bottomAnchor, constant: 34),
+            descriptionView.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
+            descriptionView.trailingAnchor.constraint(equalTo: profileHeaderView.trailingAnchor, constant: -16),
+            showStatusView.topAnchor.constraint(equalTo: profileIconView.bottomAnchor, constant: 16),
+            showStatusView.leadingAnchor.constraint(equalTo: profileHeaderView.leadingAnchor, constant: 16),
+            showStatusView.trailingAnchor.constraint(equalTo: profileHeaderView.trailingAnchor, constant: -16),
+            showStatusView.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
     
     private let profileHeaderView: UIView = {
         let view = ProfileHeaderView()
        let rootView = view.getRootView
-        
         view.translatesAutoresizingMaskIntoConstraints = false
         return rootView
     }()
     
    
     private let profileIconView: UIImageView = {
-       let newIcon = ProfileHeaderView().getProfileImageView
+       let newIcon = ProfileHeaderView().avatarImageView
         newIcon.layer.cornerRadius = 50
         newIcon.layer.borderWidth = 3
         newIcon.layer.borderColor = UIColor.white.cgColor
@@ -57,7 +82,7 @@ class ProfileViewController: UIViewController {
     }()
     
     private let showStatusView:UIButton = {
-       let showStatusView = ProfileHeaderView().getShowStatusButton
+       let showStatusView = ProfileHeaderView().setStatusButton
         showStatusView.layer.cornerRadius = 10.0
         showStatusView.layer.borderWidth = 2.0
         showStatusView.layer.borderColor = UIColor.systemBlue.cgColor
