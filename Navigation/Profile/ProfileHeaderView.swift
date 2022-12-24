@@ -34,7 +34,7 @@ class ProfileHeaderView: UIView {
         //let viewFrame = CGRect(x: 0, y: 100, width: 500, height: 600)
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .lightGray
+        view.backgroundColor = .systemFill
         return view
     }()
     
@@ -85,6 +85,13 @@ class ProfileHeaderView: UIView {
        // button.frame.size.width = 360
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .systemBlue
+        return button
+    }()
+    
+    let somethingButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .systemCyan
         return button
     }()
     

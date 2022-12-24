@@ -36,6 +36,8 @@ class ProfileViewController: UIViewController {
       //  profileHeaderView.addSubview(showStatusView)
         self.view.addSubview(showStatusView)
         
+        self.view.addSubview(showSomethingButton)
+        
         printedText = ProfileHeaderView().statusText
         showStatusView.addTarget(self, action: #selector(pressShowStatus), for: .touchUpInside)
 
@@ -45,7 +47,7 @@ class ProfileViewController: UIViewController {
             profileHeaderView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 0),
             profileHeaderView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
             profileHeaderView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 600),
+            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
             profileIconView.topAnchor.constraint(equalTo: profileHeaderView.topAnchor, constant: 16),
             profileIconView.leadingAnchor.constraint(equalTo: profileHeaderView.leadingAnchor, constant: 16),
             profileIconView.heightAnchor.constraint(equalToConstant: 100),
@@ -59,7 +61,10 @@ class ProfileViewController: UIViewController {
             showStatusView.topAnchor.constraint(equalTo: profileIconView.bottomAnchor, constant: 16),
             showStatusView.leadingAnchor.constraint(equalTo: profileHeaderView.leadingAnchor, constant: 16),
             showStatusView.trailingAnchor.constraint(equalTo: profileHeaderView.trailingAnchor, constant: -16),
-            showStatusView.heightAnchor.constraint(equalToConstant: 50)
+            showStatusView.heightAnchor.constraint(equalToConstant: 50),
+            showSomethingButton.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
+            showSomethingButton.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0),
+            showSomethingButton.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor, constant: 0)
         ])
     }
     
@@ -94,7 +99,11 @@ class ProfileViewController: UIViewController {
         return showStatusView
     }()
     
-    
+    private let showSomethingButton:UIButton = {
+        let view = ProfileHeaderView().somethingButton
+        view.setTitle("Some text", for: .normal)
+        return view
+    }()
     
     
     override func viewWillLayoutSubviews() {
