@@ -12,72 +12,51 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        
     }
     
     var printedText = ""
     
+    
     private func setupView() {
-        view.backgroundColor = .white
+        self.view.backgroundColor = .white
         self.navigationItem.title = "Профиль"
         
-        self.view.addSubview(profileHeaderView)
-        
-      //  profileHeaderView.addSubview(profileIconView)
-        self.view.addSubview(profileIconView)
-
-        let nameView = ProfileHeaderView().fullNameLabel
-       // profileHeaderView.addSubview(nameView)
-        self.view.addSubview(nameView)
-        
-        let descriptionView = ProfileHeaderView().statusLabel
-        //profileHeaderView.addSubview(descriptionView)
-        self.view.addSubview(descriptionView)
-        
-      //  profileHeaderView.addSubview(showStatusView)
-        self.view.addSubview(showStatusView)
-        
-        self.view.addSubview(showSomethingButton)
+        let safeLayout = self.view.safeAreaLayoutGuide
+        setupProfileHeaderView(safeLayout)
+        setupProfileIcon()
+        setupNameView()
+        setupShowStatusView()
+        setupDescriptionView()
+        setupSomethingButton(safeLayout)
         
         printedText = ProfileHeaderView().statusText
         showStatusView.addTarget(self, action: #selector(pressShowStatus), for: .touchUpInside)
-
-        let safeLayout = self.view.safeAreaLayoutGuide
         
-        NSLayoutConstraint.activate([
-            profileHeaderView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 0),
-            profileHeaderView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
-            profileHeaderView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0),
-            profileHeaderView.heightAnchor.constraint(equalToConstant: 220),
-            profileIconView.topAnchor.constraint(equalTo: profileHeaderView.topAnchor, constant: 16),
-            profileIconView.leadingAnchor.constraint(equalTo: profileHeaderView.leadingAnchor, constant: 16),
-            profileIconView.heightAnchor.constraint(equalToConstant: 100),
-            profileIconView.widthAnchor.constraint(equalToConstant: 100),
-            nameView.topAnchor.constraint(equalTo: profileHeaderView.topAnchor, constant: 27),
-            nameView.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
-            descriptionView.bottomAnchor.constraint(equalTo: showStatusView.topAnchor, constant: -34),
-            //descriptionView.topAnchor.constraint(equalTo: nameView.bottomAnchor, constant: 34),
-            descriptionView.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
-            descriptionView.trailingAnchor.constraint(equalTo: profileHeaderView.trailingAnchor, constant: -16),
-            showStatusView.topAnchor.constraint(equalTo: profileIconView.bottomAnchor, constant: 16),
-            showStatusView.leadingAnchor.constraint(equalTo: profileHeaderView.leadingAnchor, constant: 16),
-            showStatusView.trailingAnchor.constraint(equalTo: profileHeaderView.trailingAnchor, constant: -16),
-            showStatusView.heightAnchor.constraint(equalToConstant: 50),
-            showSomethingButton.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
-            showSomethingButton.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0),
-            showSomethingButton.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor, constant: 0)
-        ])
     }
+    
+    
+    
+    private let nameView: UILabel = {
+        let view = ProfileHeaderView().fullNameLabel
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let descriptionView: UILabel = {
+        let view = ProfileHeaderView().statusLabel
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     private let profileHeaderView: UIView = {
         let view = ProfileHeaderView()
-       let rootView = view.getRootView
+        let rootView = view.getRootView
         view.translatesAutoresizingMaskIntoConstraints = false
         return rootView
     }()
-    
-   
     private let profileIconView: UIImageView = {
-       let newIcon = ProfileHeaderView().avatarImageView
+        let newIcon = ProfileHeaderView().avatarImageView
         newIcon.layer.cornerRadius = 50
         newIcon.layer.borderWidth = 3
         newIcon.layer.borderColor = UIColor.white.cgColor
@@ -85,9 +64,8 @@ class ProfileViewController: UIViewController {
         newIcon.layer.masksToBounds = true
         return newIcon
     }()
-    
     private let showStatusView:UIButton = {
-       let showStatusView = ProfileHeaderView().setStatusButton
+        let showStatusView = ProfileHeaderView().setStatusButton
         showStatusView.layer.cornerRadius = 10.0
         showStatusView.layer.borderWidth = 2.0
         showStatusView.layer.borderColor = UIColor.systemBlue.cgColor
@@ -104,7 +82,6 @@ class ProfileViewController: UIViewController {
         view.setTitle("Some text", for: .normal)
         return view
     }()
-    
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -125,7 +102,49 @@ extension UIResponder {
     }
 }
 
-
+extension ProfileViewController{
+    
+    func setupProfileHeaderView(_ safeLayout:UILayoutGuide){
+        self.view.addSubview(self.profileHeaderView)
+        profileHeaderView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 0).isActive = true
+        profileHeaderView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0).isActive = true
+        profileHeaderView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0).isActive = true
+        profileHeaderView.heightAnchor.constraint(equalToConstant: 220).isActive = true
+    }
+    func setupProfileIcon(){
+        self.view.addSubview(self.profileIconView)
+        profileIconView.topAnchor.constraint(equalTo: profileHeaderView.topAnchor, constant: 16).isActive = true
+        profileIconView.leadingAnchor.constraint(equalTo: profileHeaderView.leadingAnchor, constant: 16).isActive = true
+        profileIconView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        profileIconView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+    }
+    func setupNameView(){
+        self.view.addSubview(self.nameView)
+        nameView.topAnchor.constraint(equalTo: profileHeaderView.topAnchor, constant: 27).isActive = true
+        nameView.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15).isActive = true
+    }
+    func setupDescriptionView(){
+        self.view.addSubview(self.descriptionView)
+        descriptionView.bottomAnchor.constraint(equalTo: showStatusView.topAnchor, constant: -34).isActive = true
+        descriptionView.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15).isActive = true
+        descriptionView.trailingAnchor.constraint(equalTo: profileHeaderView.trailingAnchor, constant: -16).isActive = true
+    }
+    func setupShowStatusView(){
+        self.view.addSubview(self.showStatusView)
+        showStatusView.topAnchor.constraint(equalTo: profileIconView.bottomAnchor, constant: 16).isActive = true
+        showStatusView.leadingAnchor.constraint(equalTo: profileHeaderView.leadingAnchor, constant: 16).isActive = true
+        showStatusView.trailingAnchor.constraint(equalTo: profileHeaderView.trailingAnchor, constant: -16).isActive = true
+        showStatusView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+    }
+    
+    func setupSomethingButton(_ safeLayout:UILayoutGuide){
+        self.view.addSubview(self.showSomethingButton)
+        showSomethingButton.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0).isActive = true
+        showSomethingButton.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0).isActive = true
+        showSomethingButton.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor, constant: 0).isActive = true
+    }
+    
+}
 
 
 

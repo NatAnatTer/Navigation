@@ -22,12 +22,27 @@ class FeedViewController: UIViewController {
            button.translatesAutoresizingMaskIntoConstraints = false
            return button
        }()
+    private lazy var toPostButtonTwo: UIButton = {
+          let button = UIButton()
+           button.backgroundColor = .systemGray
+           button.setTitle("Пост 2", for: .normal)
+           button.layer.cornerRadius = 12
+           button.setTitleColor(.systemCyan, for: .normal)
+           button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+           button.addTarget(self, action: #selector(pressPost), for: .touchUpInside)
+           button.translatesAutoresizingMaskIntoConstraints = false
+           return button
+       }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupButtonPost()
+        
+        
+        
+        
 
     }
     
