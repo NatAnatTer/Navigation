@@ -14,6 +14,9 @@ class ProfileHeaderView: UIView {
     init(){
         super .init(frame: .zero)
         self.backgroundColor = .white
+        addAllSubwiew()
+        setupAllView()
+        
         
     }
     
@@ -29,10 +32,15 @@ class ProfileHeaderView: UIView {
         return view
     }()
     
-    let avatarImageView: UIImageView = {
+    let profileIconView: UIImageView = {
         let view = UIImageView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "profileIcon")
+        view.layer.cornerRadius = 50
+        view.layer.borderWidth = 3
+        view.layer.borderColor = UIColor.white.cgColor
+        view.contentMode = .scaleAspectFill
+        view.layer.masksToBounds = true
         return view
     }()
     
@@ -58,6 +66,14 @@ class ProfileHeaderView: UIView {
         let button = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 10.0
+        button.layer.borderWidth = 2.0
+        button.layer.borderColor = UIColor.systemBlue.cgColor
+        button.layer.shadowRadius = 4.0
+        button.layer.shadowOpacity = 0.7
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
+        button.setTitle("Show status", for: .normal)
         return button
     }()
     
@@ -65,7 +81,73 @@ class ProfileHeaderView: UIView {
         let button = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .systemCyan
+        button.setTitle("Some text", for: .normal)
         return button
     }()
     
+}
+extension ProfileHeaderView{
+    private func addAllSubwiew(){
+        getRootView.addSubview(self.profileIconView)
+        getRootView.addSubview(self.fullNameLabel)
+        getRootView.addSubview(self.statusLabel)
+        getRootView.addSubview(self.setStatusButton)
+     //   getRootView.addSubview(somethingButton)
+    }
+    private func setupAllView(){
+        setupProfileHeaderView()
+        setupProfileIcon()
+        setupNameView()
+        setupDescriptionView()
+        setupShowStatusView()
+     //   setupSomethingButton(safeLayout)
+    }
+    
+    
+    private func setupProfileHeaderView(){
+        NSLayoutConstraint.activate([
+          //  getRootView.topAnchor.constraint(equalTo: ),
+           // getRootView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
+           // getRootView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0),
+          //  getRootView.widthAnchor.constraint(equalToConstant: 600),
+        
+            getRootView.heightAnchor.constraint(equalToConstant: 220)
+        ])
+    }
+    
+    private func setupProfileIcon(){
+        NSLayoutConstraint.activate([
+            profileIconView.topAnchor.constraint(equalTo: getRootView.topAnchor, constant: 16),
+            profileIconView.leadingAnchor.constraint(equalTo: getRootView.leadingAnchor, constant: 16),
+            profileIconView.heightAnchor.constraint(equalToConstant: 100),
+            profileIconView.widthAnchor.constraint(equalToConstant: 100)])
+    }
+    
+    private func setupNameView(){
+        NSLayoutConstraint.activate([
+            fullNameLabel.topAnchor.constraint(equalTo: getRootView.topAnchor, constant: 27),
+            fullNameLabel.leadingAnchor.constraint(equalTo: getRootView.trailingAnchor, constant: 15)])
+    }
+    
+    func setupDescriptionView(){
+        NSLayoutConstraint.activate([
+            statusLabel.bottomAnchor.constraint(equalTo: getRootView.topAnchor, constant: -34),
+            statusLabel.leadingAnchor.constraint(equalTo: getRootView.trailingAnchor, constant: 15),
+            statusLabel.trailingAnchor.constraint(equalTo: getRootView.trailingAnchor, constant: -16)])
+    }
+    
+    func setupShowStatusView(){
+        NSLayoutConstraint.activate([
+            setStatusButton.topAnchor.constraint(equalTo: getRootView.bottomAnchor, constant: 16),
+            setStatusButton.leadingAnchor.constraint(equalTo: getRootView.leadingAnchor, constant: 16),
+            setStatusButton.trailingAnchor.constraint(equalTo: getRootView.trailingAnchor, constant: -16),
+            setStatusButton.heightAnchor.constraint(equalToConstant: 50)])
+    }
+    
+//    func setupSomethingButton(_ safeLayout:UILayoutGuide){
+//        NSLayoutConstraint.activate([
+//            somethingButton.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
+//            somethingButton.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0),
+//            somethingButton.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor, constant: 0)])
+//    }
 }
