@@ -13,18 +13,14 @@ class ProfileHeaderView: UIView {
     
     init(){
         super .init(frame: .zero)
-   //     self.translatesAutoresizingMaskIntoConstraints = false
         self.backgroundColor = .systemFill
         addAllSubwiew()
         setupAllView()
-        
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     let getRootView: UIView = {
         let view = UIView(frame: .zero)
@@ -89,12 +85,11 @@ class ProfileHeaderView: UIView {
 }
 extension ProfileHeaderView{
     private func addAllSubwiew(){
-       
+        
         getRootView.addSubview(self.profileIconView)
         getRootView.addSubview(self.fullNameLabel)
         getRootView.addSubview(self.statusLabel)
         getRootView.addSubview(self.setStatusButton)
-     //   getRootView.addSubview(somethingButton)
     }
     private func setupAllView(){
         setupProfileHeaderView()
@@ -102,14 +97,11 @@ extension ProfileHeaderView{
         setupNameView()
         setupDescriptionView()
         setupShowStatusView()
-     //   setupSomethingButton(safeLayout)
     }
-    
     
     private func setupProfileHeaderView(){
         NSLayoutConstraint.activate([
-            getRootView.heightAnchor.constraint(equalToConstant: 220)
-        ])
+            getRootView.heightAnchor.constraint(equalToConstant: 220)])
     }
     
     private func setupProfileIcon(){
@@ -140,11 +132,4 @@ extension ProfileHeaderView{
             setStatusButton.trailingAnchor.constraint(equalTo: getRootView.trailingAnchor, constant: -16),
             setStatusButton.heightAnchor.constraint(equalToConstant: 50)])
     }
-    
-//    func setupSomethingButton(_ safeLayout:UILayoutGuide){
-//        NSLayoutConstraint.activate([
-//            somethingButton.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
-//            somethingButton.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0),
-//            somethingButton.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor, constant: 0)])
-//    }
 }
