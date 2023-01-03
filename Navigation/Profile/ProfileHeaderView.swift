@@ -11,16 +11,7 @@ class ProfileHeaderView: UIView {
     
     lazy var statusText: String = "Waiting for something beautiful, pretty good"
     
-    init(){
-        super .init(frame: .zero)
-        self.backgroundColor = .systemFill
-        addAllSubwiew()
-        setupAllView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+   
     
     let getRootView: UIView = {
         let view = UIView(frame: .zero)
@@ -81,6 +72,18 @@ class ProfileHeaderView: UIView {
         button.setTitle("Some text", for: .normal)
         return button
     }()
+    
+    override init(frame: CGRect){
+        super .init(frame: frame)
+        self.backgroundColor = .systemFill
+        addAllSubwiew()
+        setupAllView()
+    }
+ 
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 }
 extension ProfileHeaderView{
