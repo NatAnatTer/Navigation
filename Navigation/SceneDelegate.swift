@@ -17,15 +17,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func createProfileController() -> UINavigationController{
-        let profileNC = UINavigationController(rootViewController: ProfileViewController())
+//        let profileNC = UINavigationController(rootViewController: ProfileViewController())
+        let profileNC = UINavigationController(rootViewController: LogInViewController())
         profileNC.tabBarItem = UITabBarItem(title: "SecondNC", image: UIImage(systemName: "person.circle"), tag: 1)
         profileNC.title = "Профиль"
+    
         return profileNC
     }
     
     func createTabBar() -> UITabBarController{
         let tabBar = UITabBarController()
         tabBar.viewControllers = [createFeedController(), createProfileController()]
+       // tabBar.tabBar.isHidden = true
         return tabBar
     }
     
