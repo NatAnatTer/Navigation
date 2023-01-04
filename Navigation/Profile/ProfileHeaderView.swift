@@ -11,8 +11,6 @@ class ProfileHeaderView: UIView {
     
     lazy var statusText: String = "Waiting for something beautiful, pretty good"
     
-   
-    
     let getRootView: UIView = {
         let view = UIView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -75,12 +73,10 @@ class ProfileHeaderView: UIView {
     
     override init(frame: CGRect){
         super .init(frame: frame)
-        self.backgroundColor = .systemFill
         addAllSubwiew()
         setupAllView()
     }
  
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -88,11 +84,12 @@ class ProfileHeaderView: UIView {
 }
 extension ProfileHeaderView{
     private func addAllSubwiew(){
-        
+        self.addSubview(getRootView)
         getRootView.addSubview(self.profileIconView)
         getRootView.addSubview(self.fullNameLabel)
         getRootView.addSubview(self.statusLabel)
         getRootView.addSubview(self.setStatusButton)
+        self.addSubview(self.somethingButton)
     }
     private func setupAllView(){
         setupProfileHeaderView()
@@ -102,9 +99,16 @@ extension ProfileHeaderView{
         setupShowStatusView()
     }
     
+//    private func setupRootView(){
+//        NSLayoutConstraint.activate([
+//        ])
+//    }
+    
     private func setupProfileHeaderView(){
         NSLayoutConstraint.activate([
-            getRootView.heightAnchor.constraint(equalToConstant: 220)])
+            getRootView.heightAnchor.constraint(equalToConstant: 220),
+            getRootView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
+            getRootView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0)])
     }
     
     private func setupProfileIcon(){
