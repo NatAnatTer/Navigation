@@ -12,6 +12,7 @@ class ProfileViewController: UIViewController {
     var printedText = ""
     let profileHeader = ProfileHeaderView(frame: .zero)
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -24,7 +25,7 @@ class ProfileViewController: UIViewController {
         let safeLayout = self.view.safeAreaLayoutGuide
         addAllSubwiew()
         setupAllView(safeLayout)
-     pressButtons()
+        pressButtons()
     }
     
     override func viewWillLayoutSubviews() {
@@ -33,7 +34,6 @@ class ProfileViewController: UIViewController {
     
     @objc private func pressShowStatus(){
         print(printedText)
-        print("some")
     }
 }
 
@@ -47,9 +47,10 @@ extension UIResponder {
 }
 
 extension ProfileViewController{
-    
+
     private func addAllSubwiew(){
-        self.view.addSubview(self.profileHeader)
+        self.view.addSubview(profileHeader.rootView)
+        self.view.addSubview(profileHeader.somethingButton)
     }
     private func setupAllView(_ safeLayout:UILayoutGuide){
         setupProfileHeaderView(safeLayout)
@@ -58,26 +59,25 @@ extension ProfileViewController{
     
     private func setupProfileHeaderView(_ safeLayout:UILayoutGuide){
         
-        profileHeader.translatesAutoresizingMaskIntoConstraints = false
+        profileHeader.rootView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            profileHeader.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 0),
-            profileHeader.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
-            profileHeader.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0)])
+            profileHeader.rootView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 0),
+            profileHeader.rootView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
+            profileHeader.rootView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0)])
     }
     
     private func setupSomethingButton(_ safeLayout:UILayoutGuide){
-        
+        profileHeader.somethingButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            profileHeader.somethingButton.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
-            profileHeader.somethingButton.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0),
-            profileHeader.somethingButton.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor, constant: 0)])
+            profileHeader.somethingButton.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 10),
+            profileHeader.somethingButton.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: -10),
+            profileHeader.somethingButton.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor, constant: -5)])
     }
     
     private func pressButtons(){
-        profileHeader.setStatusButton.addTarget(self, action: #selector(pressShowStatus), for: .touchUpInside)
+        profileHeader.statusButton.addTarget(self, action: #selector(pressShowStatus), for: .touchUpInside)
         profileHeader.somethingButton.addTarget(self, action: #selector(pressShowStatus), for: .touchUpInside)
     }
-    
     
 }
 
