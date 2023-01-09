@@ -34,6 +34,7 @@ class ProfileViewController: UIViewController {
     
     @objc private func pressShowStatus(){
         print(printedText)
+        
     }
 }
 
@@ -49,7 +50,7 @@ extension UIResponder {
 extension ProfileViewController{
 
     private func addAllSubwiew(){
-        self.view.addSubview(profileHeader.rootView)
+        self.view.addSubview(self.profileHeader.rootView)
         self.view.addSubview(profileHeader.somethingButton)
     }
     private func setupAllView(_ safeLayout:UILayoutGuide){
