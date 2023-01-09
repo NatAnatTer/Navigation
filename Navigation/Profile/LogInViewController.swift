@@ -25,7 +25,7 @@ class LogInViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 setupView()
-        scrollView.scrollView.delegate = self
+     //   scrollView.scrollView.delegate = self
         loginView.loginPasswordView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
         loginView.loginPasswordView.dataSource = self
     }
@@ -33,10 +33,16 @@ setupView()
     
     private func setupView() {
         self.view.backgroundColor = .white
+    //    self.view.backgroundColor = .systemBlue
         let safeLayout = self.view.safeAreaLayoutGuide
         addAllSubwiew()
         setupAllView(safeLayout)
     
+    }
+    
+    @objc private func pressLogIn(){
+        let profileViewController = ProfileViewController()
+        self.navigationController?.pushViewController(profileViewController, animated: true)
     }
 
 }
@@ -66,24 +72,29 @@ extension LogInViewController: UITableViewDataSource{
     
     
     private func addAllSubwiew(){
-     //   self.view.addSubview(loginView)
-        self.view.addSubview(scrollView.scrollView)
-        self.scrollView.scrollView.addSubview(loginView)
+        self.view.addSubview(loginView)
+    
+//        self.view.addSubview(scrollView.scrollView)
+//        self.scrollView.scrollView.addSubview(loginView)
     }
     
     private func setupAllView(_ safeLayout:UILayoutGuide){
         
         loginView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            scrollView.scrollView.heightAnchor.constraint(equalTo: safeLayout.heightAnchor),
-            scrollView.scrollView.widthAnchor.constraint(equalTo: safeLayout.widthAnchor),
-            scrollView.scrollView.centerXAnchor.constraint(equalTo: safeLayout.centerXAnchor),
-            scrollView.scrollView.centerYAnchor.constraint(equalTo: safeLayout.centerYAnchor),
+//            scrollView.scrollView.heightAnchor.constraint(equalTo: safeLayout.heightAnchor),
+//            scrollView.scrollView.widthAnchor.constraint(equalTo: safeLayout.widthAnchor),
+//            scrollView.scrollView.centerXAnchor.constraint(equalTo: safeLayout.centerXAnchor),
+//            scrollView.scrollView.centerYAnchor.constraint(equalTo: safeLayout.centerYAnchor),
             
             loginView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 0),
             loginView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
             loginView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0)])
         
+    }
+    
+    private func pressButton(){
+        loginView.logInButtonView.addTarget(self, action: #selector(pressLogIn), for: .touchUpInside)
     }
 }
 
