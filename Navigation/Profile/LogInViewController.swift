@@ -15,7 +15,7 @@ class LogInViewController: UIViewController, UIScrollViewDelegate {
     let scrollView: UIScrollView = {
         let view = UIScrollView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .darkGray
+      //  view.backgroundColor = .darkGray
         view.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 1000)
        // view.frame = self.view.bounds
         //view.contentSize = contentSize
@@ -33,13 +33,23 @@ class LogInViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         setupView()
      
-        scrollView.keyboardDismissMode = .interactive
+     //   scrollView.keyboardDismissMode = .interactive
         
      //   scrollView.scrollView.delegate = self
 //        loginView.loginPasswordView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
 //        loginView.loginPasswordView.dataSource = self
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        subscrabeKeyboardEvents()
+//    }
+//
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        NotificationCenter.default.removeObserver(self)
+//    }
+//
     
     private func setupView() {
         self.view.backgroundColor = .white
@@ -93,6 +103,7 @@ extension LogInViewController{
             loginView.rootView.widthAnchor.constraint(equalToConstant: self.view.bounds.width),
             //loginView.rootView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: 0),
             loginView.rootView.heightAnchor.constraint(equalToConstant: loginView.rootView.bounds.height)
+           
            // loginView.rootView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: 0)])
         ])
     }
@@ -101,20 +112,20 @@ extension LogInViewController{
         loginView.logInButtonView.addTarget(self, action: #selector(pressLogIn), for: .touchUpInside)
     }
     
-    func subscrabeKeyboardEvents(){
-        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-    
-    @objc func KeyboardWillShow(_ notification: NSNotification){
-        guard let ks = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
-        self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: ks.height - self.view.safeAreaInsets.bottom + 20, right: 0)
-    }
-    
-    @objc func keyboardWillHide(_ notification: NSNotification){
-        self.scrollView.contentInset = .zero
-    }
+//    func subscrabeKeyboardEvents(){
+//        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+//
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+//    }
+//
+//    @objc func KeyboardWillShow(_ notification: NSNotification){
+//        guard let ks = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
+//        self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: ks.height - self.view.safeAreaInsets.bottom + 20, right: 0)
+//    }
+//
+//    @objc func keyboardWillHide(_ notification: NSNotification){
+//        self.scrollView.contentInset = .zero
+//    }
     
 }
 
