@@ -28,9 +28,7 @@ class ProfileViewController: UIViewController {
         pressButtons()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-    }
+   
     
     @objc private func pressShowStatus(){
         print(printedText)

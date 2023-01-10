@@ -58,20 +58,19 @@ class LogInViewController: UIViewController {
 
 extension LogInViewController{
     
-    
     private func addAllSubwiew(){
-        self.view.addSubview(scrollView)
-        self.scrollView.addSubview(loginView.rootView)
+        self.view.addSubview(self.scrollView)
+        self.scrollView.addSubview(self.loginView.rootView)
     }
     
     private func setupAllView(_ safeLayout:UILayoutGuide){
         
         loginView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            self.scrollView.heightAnchor.constraint(equalTo: safeLayout.heightAnchor),
-            self.scrollView.widthAnchor.constraint(equalTo: safeLayout.widthAnchor),
-            self.scrollView.centerXAnchor.constraint(equalTo: safeLayout.centerXAnchor),
-            self.scrollView.centerYAnchor.constraint(equalTo: safeLayout.centerYAnchor),
+            self.scrollView.heightAnchor.constraint(equalTo: safeLayout.heightAnchor, constant: 0),
+            self.scrollView.widthAnchor.constraint(equalTo: safeLayout.widthAnchor, constant: 0),
+            self.scrollView.centerXAnchor.constraint(equalTo: safeLayout.centerXAnchor, constant: 0),
+            self.scrollView.centerYAnchor.constraint(equalTo: safeLayout.centerYAnchor, constant: 0),
             
             
             loginView.rootView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 0),

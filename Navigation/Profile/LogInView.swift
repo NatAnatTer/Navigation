@@ -54,6 +54,7 @@ class LogInView: UIView {
         view.layer.borderWidth = 0.5
         view.layer.borderColor = UIColor.lightGray.cgColor
         view.isSecureTextEntry = true
+       
         view.backgroundColor = .systemGray6
         view.autocapitalizationType = .none
         return view
@@ -102,14 +103,10 @@ extension LogInView{
     
     private func addAllSubview(){
         self.addSubview(rootView)
-
         rootView.addSubview(self.logoView)
         rootView.addSubview(self.loginEnterView)
         rootView.addSubview(self.passwordEnterView)
         rootView.addSubview(self.logInButtonView)
-        
-    
-
     }
     
     
@@ -121,25 +118,25 @@ extension LogInView{
 //            rootView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
 
 
-            logoView.topAnchor.constraint(equalTo: rootView.topAnchor, constant: 120),
-            logoView.centerXAnchor.constraint(equalTo: rootView.centerXAnchor),
-            logoView.heightAnchor.constraint(equalToConstant: 100),
-            logoView.widthAnchor.constraint(equalToConstant: 100),
+            self.logoView.topAnchor.constraint(equalTo: self.rootView.topAnchor, constant: 120),
+            self.logoView.centerXAnchor.constraint(equalTo: self.rootView.centerXAnchor),
+            self.logoView.heightAnchor.constraint(equalToConstant: 100),
+            self.logoView.widthAnchor.constraint(equalToConstant: 100),
 
-            loginEnterView.topAnchor.constraint(equalTo: logoView.bottomAnchor, constant: 120),
-            loginEnterView.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
-            loginEnterView.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
-            loginEnterView.heightAnchor.constraint(equalToConstant: 50),
+            self.loginEnterView.topAnchor.constraint(equalTo: self.logoView.bottomAnchor, constant: 120),
+            self.loginEnterView.leadingAnchor.constraint(equalTo: self.rootView.leadingAnchor, constant: 20),
+            self.loginEnterView.trailingAnchor.constraint(equalTo: self.rootView.trailingAnchor, constant: -20),
+            self.loginEnterView.heightAnchor.constraint(equalToConstant: 50),
 
-            passwordEnterView.topAnchor.constraint(equalTo: loginEnterView.bottomAnchor, constant: 0),
-            passwordEnterView.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 20),
-            passwordEnterView.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -20),
-            passwordEnterView.heightAnchor.constraint(equalToConstant: 50),
+            self.passwordEnterView.topAnchor.constraint(equalTo: self.loginEnterView.bottomAnchor, constant: 0),
+            self.passwordEnterView.leadingAnchor.constraint(equalTo: self.rootView.leadingAnchor, constant: 20),
+            self.passwordEnterView.trailingAnchor.constraint(equalTo: self.rootView.trailingAnchor, constant: -20),
+            self.passwordEnterView.heightAnchor.constraint(equalToConstant: 50),
 
-            logInButtonView.topAnchor.constraint(equalTo: passwordEnterView.bottomAnchor, constant: 16),
-            logInButtonView.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 16),
-            logInButtonView.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -16),
-            logInButtonView.heightAnchor.constraint(equalToConstant: 50)
+            self.logInButtonView.topAnchor.constraint(equalTo: self.passwordEnterView.bottomAnchor, constant: 16),
+            self.logInButtonView.leadingAnchor.constraint(equalTo: self.rootView.leadingAnchor, constant: 16),
+            self.logInButtonView.trailingAnchor.constraint(equalTo: self.rootView.trailingAnchor, constant: -16),
+            self.logInButtonView.heightAnchor.constraint(equalToConstant: 50)
 
         ])
     }
