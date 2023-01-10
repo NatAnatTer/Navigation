@@ -10,24 +10,34 @@ import UIKit
 class LogInViewController: UIViewController, UIScrollViewDelegate {
 
     let loginView = LogInView(frame: .zero)
-    let scrollView = ScrollViewController()
+  //  let scrollView = ScrollViewController()
     
-//    let scrollView: UIScrollView = {
-//        let view = UIScrollView(frame: .zero)
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 1000000)
-//        return view
-//    }()
-//    
-
+    let scrollView: UIScrollView = {
+        let view = UIScrollView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .darkGray
+        view.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 1000)
+       // view.frame = self.view.bounds
+        //view.contentSize = contentSize
+        return view
+    }()
+    
+  //  self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 1000000)
+    
+//    private var contentSize: CGSize {
+//        CGSize(width: view.frame.width, height: view.frame.height + 400)
+//    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-setupView()
+        setupView()
+     
+        scrollView.keyboardDismissMode = .interactive
+        
      //   scrollView.scrollView.delegate = self
-        loginView.loginPasswordView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
-        loginView.loginPasswordView.dataSource = self
+//        loginView.loginPasswordView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
+//        loginView.loginPasswordView.dataSource = self
     }
     
     
@@ -37,6 +47,7 @@ setupView()
         let safeLayout = self.view.safeAreaLayoutGuide
         addAllSubwiew()
         setupAllView(safeLayout)
+        pressButtons()
     
     }
     
@@ -49,53 +60,62 @@ setupView()
 
 
 
-extension LogInViewController: UITableViewDataSource{
+extension LogInViewController{
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch tableView{
-        case loginView.loginPasswordView:
-            return 2
-        default:
-            return 0
-        }
-      
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = loginView.loginPasswordView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as! TableViewCell
 
-       // cell.textLabel?.text = "1234"
-        cell.backgroundColor = .systemGray6
-        
-        return cell
-    }
-    
-    
     private func addAllSubwiew(){
-        self.view.addSubview(loginView)
+        self.view.addSubview(scrollView)
+        
+      //  self.view.addSubview(loginView.rootView)
+        self.scrollView.addSubview(loginView.rootView)
     
 //        self.view.addSubview(scrollView.scrollView)
-//        self.scrollView.scrollView.addSubview(loginView)
+//        self.scrollView.scrollView.addSubview(loginView.rootView)
     }
     
     private func setupAllView(_ safeLayout:UILayoutGuide){
         
+  //      self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 1000000)
+        
         loginView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-//            scrollView.scrollView.heightAnchor.constraint(equalTo: safeLayout.heightAnchor),
-//            scrollView.scrollView.widthAnchor.constraint(equalTo: safeLayout.widthAnchor),
-//            scrollView.scrollView.centerXAnchor.constraint(equalTo: safeLayout.centerXAnchor),
-//            scrollView.scrollView.centerYAnchor.constraint(equalTo: safeLayout.centerYAnchor),
+            self.scrollView.heightAnchor.constraint(equalTo: safeLayout.heightAnchor),
+            self.scrollView.widthAnchor.constraint(equalTo: safeLayout.widthAnchor),
+            self.scrollView.centerXAnchor.constraint(equalTo: safeLayout.centerXAnchor),
+            self.scrollView.centerYAnchor.constraint(equalTo: safeLayout.centerYAnchor),
             
-            loginView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 0),
-            loginView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
-            loginView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0)])
-        
+//            loginView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 0),
+//            loginView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
+//            loginView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0)
+//
+            loginView.rootView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 0),
+            loginView.rootView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 0),
+            loginView.rootView.widthAnchor.constraint(equalToConstant: self.view.bounds.width),
+            //loginView.rootView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: 0),
+            loginView.rootView.heightAnchor.constraint(equalToConstant: loginView.rootView.bounds.height)
+           // loginView.rootView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor, constant: 0)])
+        ])
     }
     
-    private func pressButton(){
+    private func pressButtons(){
         loginView.logInButtonView.addTarget(self, action: #selector(pressLogIn), for: .touchUpInside)
     }
+    
+    func subscrabeKeyboardEvents(){
+        NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func KeyboardWillShow(_ notification: NSNotification){
+        guard let ks = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
+        self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: ks.height - self.view.safeAreaInsets.bottom + 20, right: 0)
+    }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification){
+        self.scrollView.contentInset = .zero
+    }
+    
 }
 
 
