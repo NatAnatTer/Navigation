@@ -14,7 +14,6 @@
 		E123015429491DCF00882766 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E123015329491DCF00882766 /* ProfileHeaderView.swift */; };
 		E13482722966172800A0E597 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13482712966172800A0E597 /* LogInViewController.swift */; };
 		E134827429661CE400A0E597 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E134827329661CE400A0E597 /* LogInView.swift */; };
-		E1348276296B716A00A0E597 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1348275296B716A00A0E597 /* ScrollViewController.swift */; };
 		E18BF8CB293E8F650073521D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18BF8CA293E8F650073521D /* AppDelegate.swift */; };
 		E18BF8CD293E8F650073521D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18BF8CC293E8F650073521D /* SceneDelegate.swift */; };
 		E18BF8CF293E8F650073521D /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18BF8CE293E8F650073521D /* FeedViewController.swift */; };
@@ -31,7 +30,6 @@
 		E1230155294F9FD500882766 /* ProfileCard.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ProfileCard.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		E13482712966172800A0E597 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		E134827329661CE400A0E597 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
-		E1348275296B716A00A0E597 /* ScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
 		E18BF8C7293E8F650073521D /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E18BF8CA293E8F650073521D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E18BF8CC293E8F650073521D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,7 +57,6 @@
 				E123015329491DCF00882766 /* ProfileHeaderView.swift */,
 				E13482712966172800A0E597 /* LogInViewController.swift */,
 				E134827329661CE400A0E597 /* LogInView.swift */,
-				E1348275296B716A00A0E597 /* ScrollViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -175,7 +172,6 @@
 				E12301492942721C00882766 /* ProfileViewController.swift in Sources */,
 				E123014F2943DB7A00882766 /* InfoViewController.swift in Sources */,
 				E123014D2943D5E500882766 /* Post.swift in Sources */,
-				E1348276296B716A00A0E597 /* ScrollViewController.swift in Sources */,
 				E18BF8CD293E8F650073521D /* SceneDelegate.swift in Sources */,
 				E123014B2942837F00882766 /* PostViewController.swift in Sources */,
 				E123015429491DCF00882766 /* ProfileHeaderView.swift in Sources */,
