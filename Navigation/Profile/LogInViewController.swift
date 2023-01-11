@@ -65,11 +65,24 @@ class LogInViewController: UIViewController {
 extension LogInViewController{
     
     private func addAllSubwiew(){
+//        self.view.addSubview(scrollView)
+//        scrollView.addSubview(loginView.logoView)
+//        self.view.addSubview(loginView.loginEnterView)
+//        self.view.addSubview(loginView.passwordEnterView)
+//        self.view.addSubview(loginView.logInButtonView)
+        
+        
         self.view.addSubview(scrollView)
-        scrollView.addSubview(loginView.logoView)
-        self.view.addSubview(loginView.loginEnterView)
-        self.view.addSubview(loginView.passwordEnterView)
-        self.view.addSubview(loginView.logInButtonView)
+        scrollView.addSubview(loginView)
+        
+//        scrollView.addSubview(loginView.logoView)
+//
+//
+//        scrollView.addSubview(loginView.loginEnterView)
+////        self.view.addSubview(loginView.loginEnterView)
+//        scrollView.addSubview(loginView.passwordEnterView)
+//        scrollView.addSubview(loginView.logInButtonView)
+//
         
      //   self.scrollView.addSubview(self.loginView.rootView)
      //   self.scrollView.addSubview(loginView.passwordTwoEnterView)
@@ -84,41 +97,43 @@ extension LogInViewController{
             self.scrollView.centerXAnchor.constraint(equalTo: safeLayout.centerXAnchor, constant: 0),
             self.scrollView.centerYAnchor.constraint(equalTo: safeLayout.centerYAnchor, constant: 0),
             
+            loginView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 0),
+            loginView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 0),
+            loginView.widthAnchor.constraint(equalToConstant: self.view.bounds.width),
+            loginView.heightAnchor.constraint(equalToConstant: 1000)
+            
+            
             
 //            loginView.rootView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 0),
 //            loginView.rootView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 0),
 //            loginView.rootView.widthAnchor.constraint(equalToConstant: self.view.bounds.width),
 //            loginView.rootView.heightAnchor.constraint(equalToConstant: loginView.rootView.bounds.height),
-            
-            
-            
-            
-            loginView.logoView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 120),
-            loginView.logoView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
-            loginView.logoView.heightAnchor.constraint(equalToConstant: 100),
-            loginView.logoView.widthAnchor.constraint(equalToConstant: 100),
-
-            loginView.loginEnterView.topAnchor.constraint(equalTo: loginView.logoView.bottomAnchor, constant: 300), //120
-            loginView.loginEnterView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 20),
-            loginView.loginEnterView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -20),
-            loginView.loginEnterView.heightAnchor.constraint(equalToConstant: 50),
-
-            loginView.passwordEnterView.topAnchor.constraint(equalTo: loginView.loginEnterView.bottomAnchor, constant: 0),
-            loginView.passwordEnterView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 20),
-            loginView.passwordEnterView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -20),
-            loginView.passwordEnterView.heightAnchor.constraint(equalToConstant: 50),
-
-            loginView.logInButtonView.topAnchor.constraint(equalTo: loginView.passwordEnterView.bottomAnchor, constant: 16),
-            loginView.logInButtonView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 16),
-            loginView.logInButtonView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -16),
-            loginView.logInButtonView.heightAnchor.constraint(equalToConstant: 50),
-            
-            
-//            loginView.passwordTwoEnterView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10),
-//            loginView.passwordTwoEnterView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 5),
-//            loginView.passwordTwoEnterView.heightAnchor.constraint(equalToConstant: 50),
-//            loginView.passwordTwoEnterView.widthAnchor.constraint(equalToConstant: 400)
 //
+//
+//
+//
+//            loginView.logoView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 120),
+//            loginView.logoView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
+//            loginView.logoView.heightAnchor.constraint(equalToConstant: 100),
+//            loginView.logoView.widthAnchor.constraint(equalToConstant: 100),
+//
+//            loginView.loginEnterView.topAnchor.constraint(equalTo: loginView.logoView.bottomAnchor, constant: 300), //120
+//            loginView.loginEnterView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 20),
+//            loginView.loginEnterView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -20),
+//            loginView.loginEnterView.heightAnchor.constraint(equalToConstant: 50),
+//
+//            loginView.passwordEnterView.topAnchor.constraint(equalTo: loginView.loginEnterView.bottomAnchor, constant: 0),
+//            loginView.passwordEnterView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 20),
+//            loginView.passwordEnterView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -20),
+//            loginView.passwordEnterView.heightAnchor.constraint(equalToConstant: 50),
+//
+//            loginView.logInButtonView.topAnchor.constraint(equalTo: loginView.passwordEnterView.bottomAnchor, constant: 16),
+//            loginView.logInButtonView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 16),
+//            loginView.logInButtonView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -16),
+//            loginView.logInButtonView.heightAnchor.constraint(equalToConstant: 50),
+//
+            
+
         ])
     }
     

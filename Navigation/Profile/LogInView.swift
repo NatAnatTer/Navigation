@@ -38,12 +38,7 @@ class LogInView: UIView {
         view.textContentType = .username
         view.keyboardType = .emailAddress
         view.placeholder = "Email or phone"
-       // view.contentVerticalAlignment = .fill
                 view.contentHorizontalAlignment = .fill
-        //  view.text.foregroundStyle(UIColor.accentColor)
-        view.tintColor = UIColor.systemGray6 //TODO не нашла что за цвет
-        //    view.textColor = UIColor.lightGray
-      // view.contentScaleFactor = CG //contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
         view.autocapitalizationType = .none
         return view
     }()
@@ -59,7 +54,6 @@ class LogInView: UIView {
         view.layer.borderWidth = 0.5
         view.layer.borderColor = UIColor.lightGray.cgColor
         view.isSecureTextEntry = true
-       //-- view.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
         view.textContentType = .password
         view.backgroundColor = .systemGray6
         view.autocapitalizationType = .none
@@ -68,7 +62,7 @@ class LogInView: UIView {
     
     
     let logInButtonView: UIButton = {
-        var button = UIButton(frame: .zero)//CGRect(origin: CGPoint.zero, size: CGSize(width: 500, height: 50)))
+        var button = UIButton(frame: .zero)
         button.setTitle("LogIn", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setBackgroundImage(UIImage(named: "BluePixel"), for: .normal)
@@ -100,12 +94,12 @@ class LogInView: UIView {
 extension LogInView{
     
     private func addAllSubview(){
-        self.addSubview(rootView)
+        //self.addSubview(rootView)
 //        rootView.addSubview(self.logoView)
 //        rootView.addSubview(self.loginEnterView)
 //        rootView.addSubview(self.passwordEnterView)
 //        rootView.addSubview(self.logInButtonView)
-        
+//        
         self.addSubview(self.logoView)
         self.addSubview(self.loginEnterView)
         self.addSubview(self.passwordEnterView)
@@ -143,6 +137,26 @@ extension LogInView{
 //            self.logInButtonView.trailingAnchor.constraint(equalTo: self.rootView.trailingAnchor, constant: -16),
 //            self.logInButtonView.heightAnchor.constraint(equalToConstant: 50)
 
+            
+            self.logoView.topAnchor.constraint(equalTo: self.topAnchor, constant: 300),
+            self.logoView.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            self.logoView.heightAnchor.constraint(equalToConstant: 100),
+            self.logoView.widthAnchor.constraint(equalToConstant: 100),
+
+            self.loginEnterView.topAnchor.constraint(equalTo: self.logoView.bottomAnchor, constant: 120),
+            self.loginEnterView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            self.loginEnterView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            self.loginEnterView.heightAnchor.constraint(equalToConstant: 50),
+
+            self.passwordEnterView.topAnchor.constraint(equalTo: self.loginEnterView.bottomAnchor, constant: 0),
+            self.passwordEnterView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
+            self.passwordEnterView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
+            self.passwordEnterView.heightAnchor.constraint(equalToConstant: 50),
+
+            self.logInButtonView.topAnchor.constraint(equalTo: self.passwordEnterView.bottomAnchor, constant: 16),
+            self.logInButtonView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            self.logInButtonView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            self.logInButtonView.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
