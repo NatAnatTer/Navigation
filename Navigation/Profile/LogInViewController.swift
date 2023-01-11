@@ -18,31 +18,27 @@ class LogInViewController: UIViewController {
         return view
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        
         self.scrollView.keyboardDismissMode = .interactive
         
     }
-
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-           navigationController?.setNavigationBarHidden(true, animated: animated)
-               self.navigationController?.isNavigationBarHidden = true
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = true
         subscrabeKeyboardEvents()
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
         self.tabBarController?.tabBar.isHidden = false
         NotificationCenter.default.removeObserver(self)
     }
-
     
     private func setupView() {
         self.view.backgroundColor = .white
@@ -60,32 +56,12 @@ class LogInViewController: UIViewController {
     
 }
 
-
-
 extension LogInViewController{
     
     private func addAllSubwiew(){
-//        self.view.addSubview(scrollView)
-//        scrollView.addSubview(loginView.logoView)
-//        self.view.addSubview(loginView.loginEnterView)
-//        self.view.addSubview(loginView.passwordEnterView)
-//        self.view.addSubview(loginView.logInButtonView)
-        
         
         self.view.addSubview(scrollView)
         scrollView.addSubview(loginView)
-        
-//        scrollView.addSubview(loginView.logoView)
-//
-//
-//        scrollView.addSubview(loginView.loginEnterView)
-////        self.view.addSubview(loginView.loginEnterView)
-//        scrollView.addSubview(loginView.passwordEnterView)
-//        scrollView.addSubview(loginView.logInButtonView)
-//
-        
-     //   self.scrollView.addSubview(self.loginView.rootView)
-     //   self.scrollView.addSubview(loginView.passwordTwoEnterView)
     }
     
     private func setupAllView(_ safeLayout:UILayoutGuide){
@@ -101,39 +77,6 @@ extension LogInViewController{
             loginView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 0),
             loginView.widthAnchor.constraint(equalToConstant: self.view.bounds.width),
             loginView.heightAnchor.constraint(equalToConstant: 1000)
-            
-            
-            
-//            loginView.rootView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 0),
-//            loginView.rootView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 0),
-//            loginView.rootView.widthAnchor.constraint(equalToConstant: self.view.bounds.width),
-//            loginView.rootView.heightAnchor.constraint(equalToConstant: loginView.rootView.bounds.height),
-//
-//
-//
-//
-//            loginView.logoView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 120),
-//            loginView.logoView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
-//            loginView.logoView.heightAnchor.constraint(equalToConstant: 100),
-//            loginView.logoView.widthAnchor.constraint(equalToConstant: 100),
-//
-//            loginView.loginEnterView.topAnchor.constraint(equalTo: loginView.logoView.bottomAnchor, constant: 300), //120
-//            loginView.loginEnterView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 20),
-//            loginView.loginEnterView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -20),
-//            loginView.loginEnterView.heightAnchor.constraint(equalToConstant: 50),
-//
-//            loginView.passwordEnterView.topAnchor.constraint(equalTo: loginView.loginEnterView.bottomAnchor, constant: 0),
-//            loginView.passwordEnterView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 20),
-//            loginView.passwordEnterView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -20),
-//            loginView.passwordEnterView.heightAnchor.constraint(equalToConstant: 50),
-//
-//            loginView.logInButtonView.topAnchor.constraint(equalTo: loginView.passwordEnterView.bottomAnchor, constant: 16),
-//            loginView.logInButtonView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 16),
-//            loginView.logInButtonView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -16),
-//            loginView.logInButtonView.heightAnchor.constraint(equalToConstant: 50),
-//
-            
-
         ])
     }
     
@@ -143,55 +86,17 @@ extension LogInViewController{
     
     func subscrabeKeyboardEvents(){
         NotificationCenter.default.addObserver(self, selector: #selector(KeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
+    
     @objc func KeyboardWillShow(_ notification: NSNotification){
         guard let ks = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
         self.scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: ks.height - self.view.safeAreaInsets.bottom + 20, right: 0)
     }
-
+    
     @objc func keyboardWillHide(_ notification: NSNotification){
         self.scrollView.contentInset = .zero
     }
     
 }
-
-
-
-
-
-
-
-//override func viewDidAppear(_ animated: Bool) {
-//    super.viewDidAppear(animated)
-// //   self.navigationController?.navigationBar.isHidden = true
-////            navigationController?.setNavigationBarHidden(true, animated: true)
-////            self.navigationController?.isNavigationBarHidden = true
-////            navigationBar.isHidden = true
-////           navigationController?.hidesBarsWhenKeyboardAppears = true
-//}
-
-
-
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//     //   navigationController?.setNavigationBarHidden(true, animated: animated)
-//        self.navigationController?.isNavigationBarHidden = true
-//    }
-//TODO не скрылся таб бар
-
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//     //   navigationController?.setNavigationBarHidden(true, animated: true)
-//       // self.navigationController?.isNavigationBarHidden = true
-//       // navigationBar.isHidden = true
-//      // navigationController?.hidesBarsWhenKeyboardAppears = true
-//    }
-
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        navigationController?.setNavigationBarHidden(false, animated: animated)
-//    }
-//
