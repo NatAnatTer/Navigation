@@ -25,8 +25,8 @@ class LogInView: UIView {
         return view
     }()
     
-    let loginEnterView: UITextView = {
-        let view = UITextView(frame: .zero)
+    let loginEnterView: UITextField = {
+        let view = UITextField(frame: .zero)
         view.textColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
         view.font = .systemFont(ofSize: 16)
@@ -35,26 +35,32 @@ class LogInView: UIView {
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
         view.layer.borderWidth = 0.5
         view.layer.borderColor = UIColor.lightGray.cgColor
+        view.textContentType = .username
+        view.keyboardType = .emailAddress
+        view.placeholder = "Email or phone"
+       // view.contentVerticalAlignment = .fill
+                view.contentHorizontalAlignment = .fill
         //  view.text.foregroundStyle(UIColor.accentColor)
-        //  view.tintColor //TODO не нашла что за цвет
-        view.text = "Email or phone"
+        view.tintColor = UIColor.systemGray6 //TODO не нашла что за цвет
         //    view.textColor = UIColor.lightGray
+      // view.contentScaleFactor = CG //contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
         view.autocapitalizationType = .none
         return view
     }()
     
-    let passwordEnterView: UITextView = {
-        let view = UITextView(frame: .zero)
+    let passwordEnterView: UITextField = {
+        let view = UITextField(frame: .zero)
         view.textColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
         view.font = .systemFont(ofSize: 16)
-        view.text = "Password"
+        view.placeholder = "Password"
         view.layer.cornerRadius = 10
         view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
         view.layer.borderWidth = 0.5
         view.layer.borderColor = UIColor.lightGray.cgColor
         view.isSecureTextEntry = true
-       
+       //-- view.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
+        view.textContentType = .password
         view.backgroundColor = .systemGray6
         view.autocapitalizationType = .none
         return view
@@ -62,48 +68,23 @@ class LogInView: UIView {
     
     
     let logInButtonView: UIButton = {
-        let button = UIButton(frame: .zero)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemBlue
-        //button.setImage(UIImage(named: "BluePixel"), for: .normal)
-        //  button.alpha = 0.8
-        // CGFloat  (0.8, strategy: .selected)
-        // CGFloat(value: 0.8, for: .selected)
-        
-        // 0.8 for: .selected
-        //        button.contentVerticalAlignment = .fill
-        //        button.contentHorizontalAlignment = .fill
-        
-        
-        
-        //  button.imageView?.contentMode = .scaleAspectFit
-        //  button.imageEdgeInsets = UIEdgeInsets(top: 1, left: 1, bottom: 3, right: 1)
-        //   button.imageEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
-        button.layer.cornerRadius = 10.0
-        
+        var button = UIButton(frame: .zero)//CGRect(origin: CGPoint.zero, size: CGSize(width: 500, height: 50)))
         button.setTitle("LogIn", for: .normal)
-        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setBackgroundImage(UIImage(named: "BluePixel"), for: .normal)
+        button.layer.cornerRadius = 10.0
+        switch button.state{
+        case .normal: button.alpha = 1
+        case .selected: button.alpha = 0.8
+        case .highlighted: button.alpha = 0.8
+        case .disabled: button.alpha = 0.8
+        default: button.alpha = 1
+        }
         return button
         
     }()
     
-//    let passwordTwoEnterView: UITextView = {
-//        let view = UITextView(frame: .zero)
-//        view.textColor = .black
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.font = .systemFont(ofSize: 16)
-//        view.text = "Password"
-//        view.layer.cornerRadius = 10
-//        view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-//        view.layer.borderWidth = 0.5
-//        view.layer.borderColor = UIColor.lightGray.cgColor
-//        view.isSecureTextEntry = true
-//       
-//        view.backgroundColor = .systemGray6
-//        view.autocapitalizationType = .none
-//        return view
-//    }()
-//    
+
     
     override init(frame: CGRect){
         super .init(frame: frame)

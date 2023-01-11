@@ -26,14 +26,20 @@ class LogInViewController: UIViewController {
         self.scrollView.keyboardDismissMode = .interactive
         
     }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+           navigationController?.setNavigationBarHidden(true, animated: animated)
+               self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
         subscrabeKeyboardEvents()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.tabBarController?.tabBar.isHidden = false
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -92,7 +98,7 @@ extension LogInViewController{
             loginView.logoView.heightAnchor.constraint(equalToConstant: 100),
             loginView.logoView.widthAnchor.constraint(equalToConstant: 100),
 
-            loginView.loginEnterView.topAnchor.constraint(equalTo: loginView.logoView.bottomAnchor, constant: 120), //120
+            loginView.loginEnterView.topAnchor.constraint(equalTo: loginView.logoView.bottomAnchor, constant: 300), //120
             loginView.loginEnterView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 20),
             loginView.loginEnterView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -20),
             loginView.loginEnterView.heightAnchor.constraint(equalToConstant: 50),
@@ -105,7 +111,8 @@ extension LogInViewController{
             loginView.logInButtonView.topAnchor.constraint(equalTo: loginView.passwordEnterView.bottomAnchor, constant: 16),
             loginView.logInButtonView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 16),
             loginView.logInButtonView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor, constant: -16),
-            loginView.logInButtonView.heightAnchor.constraint(equalToConstant: 50)
+            loginView.logInButtonView.heightAnchor.constraint(equalToConstant: 50),
+            
             
 //            loginView.passwordTwoEnterView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10),
 //            loginView.passwordTwoEnterView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 5),
