@@ -28,14 +28,14 @@ class LogInViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        self.navigationController?.isNavigationBarHidden = true
+       // self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = true
         subscrabeKeyboardEvents()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+     //   navigationController?.setNavigationBarHidden(false, animated: animated)
         self.tabBarController?.tabBar.isHidden = false
         NotificationCenter.default.removeObserver(self)
     }

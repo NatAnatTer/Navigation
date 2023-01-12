@@ -28,11 +28,12 @@ class ProfileViewController: UIViewController {
         pressButtons()
     }
     
-   
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
     
     @objc private func pressShowStatus(){
         print(printedText)
-        
     }
 }
 
@@ -46,39 +47,32 @@ extension UIResponder {
 }
 
 extension ProfileViewController{
-
+    
     private func addAllSubwiew(){
-        self.view.addSubview(self.profileHeader.rootView)
+        self.view.addSubview(profileHeader)
         self.view.addSubview(profileHeader.somethingButton)
     }
+    
     private func setupAllView(_ safeLayout:UILayoutGuide){
-        setupProfileHeaderView(safeLayout)
-        setupSomethingButton(safeLayout)
-    }
-    
-    private func setupProfileHeaderView(_ safeLayout:UILayoutGuide){
         
-        profileHeader.rootView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            profileHeader.rootView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 0),
-            profileHeader.rootView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
-            profileHeader.rootView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0)])
-    }
-    
-    private func setupSomethingButton(_ safeLayout:UILayoutGuide){
+        profileHeader.translatesAutoresizingMaskIntoConstraints = false
         profileHeader.somethingButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            profileHeader.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 0),
+            profileHeader.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
+            profileHeader.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0),
+            profileHeader.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor, constant: -50),
+            
             profileHeader.somethingButton.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 10),
             profileHeader.somethingButton.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: -10),
-            profileHeader.somethingButton.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor, constant: -5)])
+            profileHeader.somethingButton.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor, constant: -5)
+        ])
     }
     
     private func pressButtons(){
         profileHeader.statusButton.addTarget(self, action: #selector(pressShowStatus), for: .touchUpInside)
         profileHeader.somethingButton.addTarget(self, action: #selector(pressShowStatus), for: .touchUpInside)
     }
-    
 }
-
 
 
