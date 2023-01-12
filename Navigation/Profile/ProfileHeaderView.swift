@@ -11,13 +11,6 @@ class ProfileHeaderView: UIView {
     
     lazy var statusText: String = "Waiting for something beautiful, pretty good"
     
-    let rootView: UIView = {
-        let view = UIView(frame: .zero)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemFill
-        return view
-    }()
-    
     let profileIconView: UIImageView = {
         let view = UIImageView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -92,54 +85,31 @@ class ProfileHeaderView: UIView {
 extension ProfileHeaderView{
     
     private func addAllSubwiew(){
-        self.addSubview(rootView)
-        rootView.addSubview(self.profileIconView)
-        rootView.addSubview(self.fullNameLabel)
-        rootView.addSubview(self.statusLabel)
-        rootView.addSubview(self.statusButton)
+        self.addSubview(self.profileIconView)
+        self.addSubview(self.fullNameLabel)
+        self.addSubview(self.statusLabel)
+        self.addSubview(self.statusButton)
     }
     
     private func setupAllView(){
-        setupRootView()
-        setupProfileIcon()
-        setupNameView()
-        setupDescriptionView()
-        setupShowStatusView()
-    }
-    
-    private func setupRootView(){
+        
         NSLayoutConstraint.activate([
-            rootView.heightAnchor.constraint(equalToConstant: 220),
-            rootView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0),
-            rootView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0)])
-    }
-    
-    private func setupProfileIcon(){
-        NSLayoutConstraint.activate([
-            profileIconView.topAnchor.constraint(equalTo: rootView.topAnchor, constant: 16),
-            profileIconView.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 16),
+            profileIconView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            profileIconView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             profileIconView.heightAnchor.constraint(equalToConstant: 100),
-            profileIconView.widthAnchor.constraint(equalToConstant: 100)])
-    }
-    
-    private func setupNameView(){
-        NSLayoutConstraint.activate([
-            fullNameLabel.topAnchor.constraint(equalTo: rootView.topAnchor, constant: 27),
-            fullNameLabel.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15)])
-    }
-    
-    private func setupDescriptionView(){
-        NSLayoutConstraint.activate([
+            profileIconView.widthAnchor.constraint(equalToConstant: 100),
+            
+            fullNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
+            fullNameLabel.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
+            
             statusLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
             statusLabel.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
-            statusLabel.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -16)])
-    }
-    
-    private func setupShowStatusView(){
-        NSLayoutConstraint.activate([
+            statusLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            
             statusButton.topAnchor.constraint(equalTo: profileIconView.bottomAnchor, constant: 16),
-            statusButton.leadingAnchor.constraint(equalTo: rootView.leadingAnchor, constant: 16),
-            statusButton.trailingAnchor.constraint(equalTo: rootView.trailingAnchor, constant: -16),
-            statusButton.heightAnchor.constraint(equalToConstant: 50)])
+            statusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            statusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            statusButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
 }
