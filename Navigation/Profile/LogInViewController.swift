@@ -9,12 +9,10 @@ import UIKit
 
 class LogInViewController: UIViewController {
     
-  //  let loginView = LogInView(frame: .zero)
-    
     let scrollView: UIScrollView = {
         let view = UIScrollView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 1000)
+        view.contentSize = CGSize(width: UIScreen.main.bounds.width, height: 800)
         return view
     }()
     
@@ -27,18 +25,18 @@ class LogInViewController: UIViewController {
         return view
     }()
     
-       let stackView:UIStackView = {
-           let stackView = UIStackView()
-           stackView.axis = .vertical
-           stackView.distribution = .equalCentering //TODO
-           stackView.alignment = .center
-           stackView.spacing = 0
-           stackView.layer.cornerRadius = 10
-           stackView.layer.borderWidth = 0.5
-           stackView.layer.borderColor = UIColor.lightGray.cgColor
-           stackView.translatesAutoresizingMaskIntoConstraints = false
-           return stackView
-       }()
+    let stackView:UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .equalCentering
+        stackView.alignment = .center
+        stackView.spacing = 0
+        stackView.layer.cornerRadius = 10
+        stackView.layer.borderWidth = 0.5
+        stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
     
     let loginEnterView: UITextField = {
         let view = UITextField(frame: .zero)
@@ -46,10 +44,6 @@ class LogInViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.font = .systemFont(ofSize: 16)
         view.backgroundColor = .systemGray6
-//        view.layer.cornerRadius = 10
-//        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
-//        view.layer.borderWidth = 0.5
-//        view.layer.borderColor = UIColor.lightGray.cgColor
         view.textContentType = .username
         view.keyboardType = .emailAddress
         view.placeholder = "Email or phone"
@@ -72,10 +66,6 @@ class LogInViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.font = .systemFont(ofSize: 16)
         view.placeholder = "Password"
-//        view.layer.cornerRadius = 10
-//        view.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
-//        view.layer.borderWidth = 0.5
-//        view.layer.borderColor = UIColor.lightGray.cgColor
         view.isSecureTextEntry = true
         view.textContentType = .password
         view.backgroundColor = .systemGray6
@@ -105,21 +95,19 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-       self.scrollView.keyboardDismissMode = .interactive
+        self.scrollView.keyboardDismissMode = .interactive
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-       self.navigationController?.isNavigationBarHidden = true
-        //self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         subscrabeKeyboardEvents()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-     //   navigationController?.setNavigationBarHidden(false, animated: animated)
         self.tabBarController?.tabBar.isHidden = false
         NotificationCenter.default.removeObserver(self)
     }
@@ -130,7 +118,6 @@ class LogInViewController: UIViewController {
         addAllSubwiew()
         setupAllView(safeLayout)
         pressButtons()
-        
     }
     
     @objc private func pressLogIn(){
@@ -144,15 +131,6 @@ extension LogInViewController{
     
     private func addAllSubwiew(){
         
-//        self.view.addSubview(scrollView)
-//        scrollView.addSubview(self.logoView)
-//        scrollView.addSubview(stackView)
-//        stackView.addArrangedSubview(loginEnterView)
-//        stackView.addArrangedSubview(passwordEnterView)
-// //       scrollView.addSubview(self.loginEnterView)
-//     //   scrollView.addSubview(self.passwordEnterView)
-//        scrollView.addSubview(self.logInButtonView)
-  
         self.view.addSubview(scrollView)
         scrollView.addSubview(self.logoView)
         scrollView.addSubview(stackView)
@@ -160,51 +138,15 @@ extension LogInViewController{
         stackView.addArrangedSubview(delimeter)
         stackView.addArrangedSubview(passwordEnterView)
         scrollView.addSubview(self.logInButtonView)
-        
-        
-//        self.view.addSubview(self.logoView)
-//        self.view.addSubview(stackView)
-//        stackView.addArrangedSubview(loginEnterView)
-//        stackView.addArrangedSubview(delimeter)
-//        stackView.addArrangedSubview(passwordEnterView)
-//        self.view.addSubview(self.logInButtonView)
-//
-        
     }
     
-
-    
     private func setupAllView(_ safeLayout:UILayoutGuide){
-        
-    //    loginView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-//            self.scrollView.heightAnchor.constraint(equalTo: safeLayout.heightAnchor, constant: 0),
-//           self.scrollView.widthAnchor.constraint(equalTo: safeLayout.widthAnchor, constant: 0),
-//            self.scrollView.centerXAnchor.constraint(equalTo: safeLayout.centerXAnchor, constant: 0),
-//    //        self.scrollView.centerYAnchor.constraint(equalTo: safeLayout.centerYAnchor, constant: 0),
-
             self.scrollView.heightAnchor.constraint(equalTo: safeLayout.heightAnchor, constant: 0),
             self.scrollView.widthAnchor.constraint(equalTo: safeLayout.widthAnchor, constant: 0),
             self.scrollView.centerXAnchor.constraint(equalTo: safeLayout.centerXAnchor, constant: 0),
             self.scrollView.centerYAnchor.constraint(equalTo: safeLayout.centerYAnchor, constant: 0),
             
-            
-//            self.scrollView.heightAnchor.constraint(equalToConstant: 1000),
-//            self.scrollView.widthAnchor.constraint(equalTo: safeLayout.widthAnchor, constant: 0),
-////            self.scrollView.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 0),
-////            self.scrollView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
-////            self.scrollView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0),
-//          self.scrollView.centerXAnchor.constraint(equalTo: safeLayout.centerXAnchor, constant: 0),
-//           self.scrollView.centerYAnchor.constraint(equalTo: safeLayout.centerYAnchor, constant: 0),
-            
-            
-            
-//            loginView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 0),
-//            loginView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor, constant: 0),
-//            loginView.widthAnchor.constraint(equalToConstant: self.view.bounds.width),
-//            loginView.heightAnchor.constraint(equalToConstant: 1000)
-            
-//
             self.logoView.topAnchor.constraint(equalTo: self.scrollView.topAnchor, constant: 120),
             self.logoView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             self.logoView.heightAnchor.constraint(equalToConstant: 100),
@@ -222,7 +164,6 @@ extension LogInViewController{
             
             self.passwordEnterView.heightAnchor.constraint(equalToConstant: 50),
             self.passwordEnterView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -15),
-            
             
             self.logInButtonView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
             self.logInButtonView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
@@ -247,7 +188,7 @@ extension LogInViewController{
     }
     
     @objc func keyboardWillHide(_ notification: NSNotification){
-       self.scrollView.contentInset = .zero
+        self.scrollView.contentInset = .zero
     }
     
 }
