@@ -9,7 +9,7 @@ import UIKit
 
 class InfoViewController: UIViewController {
 
-    var postDetail = Post(title: "Default")
+    var postDetail = PostFirst(title: "Default")
     
     private lazy var allertButton: UIButton = {
           let button = UIButton()
