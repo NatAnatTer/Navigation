@@ -9,52 +9,83 @@ import UIKit
 
 class ProfileViewController: UIViewController{
     
-    let tableView: UITableView = {
-        let view = UITableView(frame: .zero)
+    var printedText = ""
+    
+    let postLine: UITableView = {
+        let view = UITableView(frame: .zero, style: .plain)
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .white
         return view
     }()
+    
+    let identifire  = "PostTableViewCell"
+ 
+    let arrayOfPost:[Post] = [postOne, postTwo, postThree, postFour]
+    
     
         override func viewDidLoad() {
             super.viewDidLoad()
             setupView()
         }
         private func setupView() {
-            self.view.backgroundColor = .white
+            self.view.backgroundColor = .systemGray6
             self.navigationItem.title = "Профиль"
-            //printedText = ProfileHeaderView().statusText
+            printedText = ProfileHeaderView().statusText
             let safeLayout = self.view.safeAreaLayoutGuide
             addAllSubviews()
             setupAllViews(safeLayout)
+            createTable()
+          
            // pressButtons()
         }
+    private func createTable(){
+        
+        self.postLine.register(UITableViewCell.self, forCellReuseIdentifier: identifire)
+        self.postLine.delegate = self
+        self.postLine.dataSource = self
+                // self.loginPasswordView.delegate = UITableViewDelegate()
+        
+        
+    }
     
 
 }
 extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
   
     private func addAllSubviews(){
-        self.view.addSubview(tableView)
+      //  self.view.addSubview(postLine)
     }
     
     private func setupAllViews(_ safeLayout: UILayoutGuide){
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10),
-            tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 5),
-            tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -5),
-            tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10)
+//            postLine.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10),
+//            postLine.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 5),
+//            postLine.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -5),
+//            postLine.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10)
         ])
     }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return arrayOfPost.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifire, for: indexPath)
+        let postList = arrayOfPost[indexPath.row]
+       // cell.text
+        cell.accessoryType = .detailButton //add accessory type
+      //  return arrayOfPost[section].count
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         <#code#>
     }
     
+    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        <#code#>
+    }
     
 }
 
