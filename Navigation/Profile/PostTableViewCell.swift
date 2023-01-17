@@ -23,6 +23,7 @@ class PostTableViewCell: UITableViewCell {
         view.backgroundColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
         view.contentMode = .scaleAspectFit
+        return view
     }()
 
     let descriptionOfPost: UILabel = {
@@ -51,25 +52,8 @@ class PostTableViewCell: UITableViewCell {
     }()
     
     
-//    let postLine: UITableView = {
-//        let view = UITableView(frame: .zero)
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .white
-//        return view
-//    }()
-    
-//    let loginPasswordView: UITableView = {
-//            let view = UITableView(frame: .zero)
-//            view.translatesAutoresizingMaskIntoConstraints = false
-//            view.backgroundColor = .systemGray6
-//             view.layer.cornerRadius = 10
-//             view.layer.borderWidth = 0.5
-//             view.layer.borderColor = UIColor.lightGray.cgColor
-//            return view
-//        }()
-    
-    init(frame: CGRect) {
-        
+ override   init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super .init(style: style, reuseIdentifier: reuseIdentifier)
         setupAllView()
         
     }
@@ -91,23 +75,26 @@ class PostTableViewCell: UITableViewCell {
 }
 
 extension PostTableViewCell{
-    private func addAllSubview(){
-    }
+//    private func addAllSubview(){
+//    }
     
     private func setupAllView(){
         NSLayoutConstraint.activate([
             self.authorOfPost.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
             self.authorOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             self.authorOfPost.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+            self.authorOfPost.bottomAnchor.constraint(equalTo: self.contentOfPost.topAnchor),
             
             self.contentOfPost.topAnchor.constraint(equalTo: self.authorOfPost.bottomAnchor, constant: 12),
             self.contentOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
           //  self.contentOfPost.widthAnchor.constraint(equalTo: self.screen.bounds.width),
           //  self.contentOfPost.heightAnchor.constraint(equalTo: self.screen.bounds.width),
+            self.contentOfPost.bottomAnchor.constraint(equalTo: self.descriptionOfPost.topAnchor),
     
             self.descriptionOfPost.topAnchor.constraint(equalTo: contentOfPost.bottomAnchor, constant: 16),
             self.descriptionOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             self.descriptionOfPost.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+            self.descriptionOfPost.bottomAnchor.constraint(equalTo: self.likesOfPost.topAnchor),
             
             self.likesOfPost.topAnchor.constraint(equalTo: descriptionOfPost.bottomAnchor, constant: 16),
             self.likesOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),

@@ -43,6 +43,7 @@ class ProfileViewController: UIViewController{
         self.postLine.register(UITableViewCell.self, forCellReuseIdentifier: identifire)
         self.postLine.delegate = self
         self.postLine.dataSource = self
+        self.postLine.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.id)
                 // self.loginPasswordView.delegate = UITableViewDelegate()
         
         
@@ -53,15 +54,15 @@ class ProfileViewController: UIViewController{
 extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
   
     private func addAllSubviews(){
-      //  self.view.addSubview(postLine)
+        self.view.addSubview(postLine)
     }
     
     private func setupAllViews(_ safeLayout: UILayoutGuide){
         NSLayoutConstraint.activate([
-//            postLine.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10),
-//            postLine.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 5),
-//            postLine.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -5),
-//            postLine.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10)
+            postLine.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10),
+            postLine.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 5),
+            postLine.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -5),
+            postLine.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10)
         ])
     }
     
@@ -74,18 +75,26 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: identifire, for: indexPath)
         let postList = arrayOfPost[indexPath.row]
        // cell.text
-        cell.accessoryType = .detailButton //add accessory type
+        cell.accessoryType = .detailButton //add accessory type change
       //  return arrayOfPost[section].count
         return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        <#code#>
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        postLine.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.id)
     }
     
-    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        <#code#>
-    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        postLine.dequeueReusableHeaderFooterView(withIdentifier: HeaderView.id)!.intrinsicContentSize.height
+//    }
+    
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        
+//    }
+//    
+//    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+//        
+//    }
     
 }
 
