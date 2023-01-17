@@ -8,6 +8,8 @@
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
+  
+    static let identifire  = "PostTableViewCell"
     
     let authorOfPost: UILabel = {
         let view = UILabel(frame: .zero)
@@ -87,6 +89,8 @@ extension PostTableViewCell{
             
             self.contentOfPost.topAnchor.constraint(equalTo: self.authorOfPost.bottomAnchor, constant: 12),
             self.contentOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            self.contentOfPost.widthAnchor.constraint(equalToConstant: 300),
+            self.contentOfPost.heightAnchor.constraint(equalToConstant: 300),
           //  self.contentOfPost.widthAnchor.constraint(equalTo: self.screen.bounds.width),
           //  self.contentOfPost.heightAnchor.constraint(equalTo: self.screen.bounds.width),
             self.contentOfPost.bottomAnchor.constraint(equalTo: self.descriptionOfPost.topAnchor),

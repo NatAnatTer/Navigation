@@ -18,7 +18,7 @@ class ProfileViewController: UIViewController{
         return view
     }()
     
-    let identifire  = "PostTableViewCell"
+  //  let identifire  = "PostTableViewCell"
  
     let arrayOfPost:[Post] = [postOne, postTwo, postThree, postFour]
     
@@ -40,13 +40,11 @@ class ProfileViewController: UIViewController{
         }
     private func createTable(){
         
-        self.postLine.register(UITableViewCell.self, forCellReuseIdentifier: identifire)
+     //   self.postLine.register(UITableViewCell.self, forCellReuseIdentifier: identifire)
+        self.postLine.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifire)
         self.postLine.delegate = self
         self.postLine.dataSource = self
         self.postLine.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.id)
-                // self.loginPasswordView.delegate = UITableViewDelegate()
-        
-        
     }
     
 
@@ -72,11 +70,16 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifire, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifire, for: indexPath) as! PostTableViewCell
         let postList = arrayOfPost[indexPath.row]
-       // cell.text
-        cell.accessoryType = .detailButton //add accessory type change
-      //  return arrayOfPost[section].count
+        cell.authorOfPost.text = postList.author
+        cell.contentOfPost.image = UIImage(named: postList.imageOfPost) //postList.imageOfPost
+        cell.descriptionOfPost.text = postList.descriptionOfPost
+        cell.likesOfPost.text = "Likes: \(postList.likes)"
+        cell.viewsOfPost.text = "Views: \(postList.views)"
+        
+      //  cell.accessoryType = .none //add accessory type change
+    
         return cell
     }
     
