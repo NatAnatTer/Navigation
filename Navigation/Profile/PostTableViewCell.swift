@@ -36,7 +36,7 @@ class PostTableViewCell: UITableViewCell {
         view.numberOfLines = 0
         return view
     }()
-    
+
     let likesOfPost: UILabel = {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -44,7 +44,7 @@ class PostTableViewCell: UITableViewCell {
         view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         return view
     }()
-    
+
     let viewsOfPost: UILabel = {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -52,12 +52,12 @@ class PostTableViewCell: UITableViewCell {
         view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         return view
     }()
-    
+
     
  override   init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super .init(style: style, reuseIdentifier: reuseIdentifier)
         setupAllView()
-        
+        addAllSubview()
     }
     
     required init?(coder: NSCoder) {
@@ -77,36 +77,54 @@ class PostTableViewCell: UITableViewCell {
 }
 
 extension PostTableViewCell{
-//    private func addAllSubview(){
-//    }
+    private func addAllSubview(){
+        self.contentView.addSubview(authorOfPost)
+        self.contentView.addSubview(contentOfPost)
+        self.contentView.addSubview(descriptionOfPost)
+        self.contentView.addSubview(likesOfPost)
+        self.contentView.addSubview(viewsOfPost)
+        
+    }
     
     private func setupAllView(){
         NSLayoutConstraint.activate([
-            self.authorOfPost.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
-            self.authorOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
-            self.authorOfPost.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
-            self.authorOfPost.bottomAnchor.constraint(equalTo: self.contentOfPost.topAnchor),
             
-            self.contentOfPost.topAnchor.constraint(equalTo: self.authorOfPost.bottomAnchor, constant: 12),
-            self.contentOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            self.contentOfPost.widthAnchor.constraint(equalToConstant: 300),
-            self.contentOfPost.heightAnchor.constraint(equalToConstant: 300),
-          //  self.contentOfPost.widthAnchor.constraint(equalTo: self.screen.bounds.width),
-          //  self.contentOfPost.heightAnchor.constraint(equalTo: self.screen.bounds.width),
-            self.contentOfPost.bottomAnchor.constraint(equalTo: self.descriptionOfPost.topAnchor),
-    
-            self.descriptionOfPost.topAnchor.constraint(equalTo: contentOfPost.bottomAnchor, constant: 16),
-            self.descriptionOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
-            self.descriptionOfPost.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
-            self.descriptionOfPost.bottomAnchor.constraint(equalTo: self.likesOfPost.topAnchor),
             
-            self.likesOfPost.topAnchor.constraint(equalTo: descriptionOfPost.bottomAnchor, constant: 16),
-            self.likesOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
-            self.likesOfPost.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16),
             
-            self.viewsOfPost.topAnchor.constraint(equalTo: descriptionOfPost.bottomAnchor, constant: 16),
-            self.viewsOfPost.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
-            self.viewsOfPost.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16)
+            
+            
+//            self.authorOfPost.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
+//            self.authorOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
+//            self.authorOfPost.heightAnchor.constraint(equalToConstant: 200),
+//           // self.authorOfPost.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+//
+//           // self.authorOfPost.bottomAnchor.constraint(equalTo: self.contentOfPost.topAnchor),
+//            self.authorOfPost.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
+            
+            
+            
+            
+            
+//            self.contentOfPost.topAnchor.constraint(equalTo: self.authorOfPost.bottomAnchor, constant: 12),
+//            self.contentOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+//            self.contentOfPost.widthAnchor.constraint(equalToConstant: 300),
+//            self.contentOfPost.heightAnchor.constraint(equalToConstant: 300),
+//          //  self.contentOfPost.widthAnchor.constraint(equalTo: self.screen.bounds.width),
+//          //  self.contentOfPost.heightAnchor.constraint(equalTo: self.screen.bounds.width),
+//            self.contentOfPost.bottomAnchor.constraint(equalTo: self.descriptionOfPost.topAnchor),
+//
+//            self.descriptionOfPost.topAnchor.constraint(equalTo: contentOfPost.bottomAnchor, constant: 16),
+//            self.descriptionOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
+//            self.descriptionOfPost.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+//            self.descriptionOfPost.bottomAnchor.constraint(equalTo: self.likesOfPost.topAnchor),
+//
+//            self.likesOfPost.topAnchor.constraint(equalTo: descriptionOfPost.bottomAnchor, constant: 16),
+//            self.likesOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
+//            self.likesOfPost.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16),
+//
+//            self.viewsOfPost.topAnchor.constraint(equalTo: descriptionOfPost.bottomAnchor, constant: 16),
+//            self.viewsOfPost.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+//            self.viewsOfPost.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -16)
                                           
             ])
     }

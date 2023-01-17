@@ -70,15 +70,13 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifire, for: indexPath) as! PostTableViewCell
+        let cell = postLine.dequeueReusableCell(withIdentifier: PostTableViewCell.identifire, for: indexPath) as! PostTableViewCell
         let postList = arrayOfPost[indexPath.row]
         cell.authorOfPost.text = postList.author
-        cell.contentOfPost.image = UIImage(named: postList.imageOfPost) //postList.imageOfPost
+       cell.contentOfPost.image = UIImage(named: postList.imageOfPost) //postList.imageOfPost
         cell.descriptionOfPost.text = postList.descriptionOfPost
         cell.likesOfPost.text = "Likes: \(postList.likes)"
         cell.viewsOfPost.text = "Views: \(postList.views)"
-        
-      //  cell.accessoryType = .none //add accessory type change
     
         return cell
     }
@@ -87,84 +85,9 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         postLine.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.id)
     }
     
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        postLine.dequeueReusableHeaderFooterView(withIdentifier: HeaderView.id)!.intrinsicContentSize.height
-//    }
-    
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        
-//    }
-//    
+
 //    func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
 //        
 //    }
     
 }
-
-//    var printedText = ""
-//    let profileHeader = ProfileHeaderView(frame: .zero)
-//
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        setupView()
-//    }
-//
-//    private func setupView() {
-//        self.view.backgroundColor = .white
-//        self.navigationItem.title = "Профиль"
-//        printedText = ProfileHeaderView().statusText
-//        let safeLayout = self.view.safeAreaLayoutGuide
-//        addAllSubwiew()
-//        setupAllView(safeLayout)
-//        pressButtons()
-//    }
-//
-//    override func viewWillLayoutSubviews() {
-//        super.viewWillLayoutSubviews()
-//    }
-//
-//    @objc private func pressShowStatus(){
-//        print(printedText)
-//    }
-//}
-//
-//extension UIResponder {
-//    func responderChain() -> String{
-//        guard let next = next else {
-//            return String(describing: Self.self)
-//        }
-//        return String(describing: Self.self) + " -> " + next.responderChain()
-//    }
-//}
-//
-//extension ProfileViewController{
-//
-//    private func addAllSubwiew(){
-//        self.view.addSubview(profileHeader)
-//        self.view.addSubview(profileHeader.somethingButton)
-//    }
-//
-//    private func setupAllView(_ safeLayout:UILayoutGuide){
-//
-//        profileHeader.translatesAutoresizingMaskIntoConstraints = false
-//        profileHeader.somethingButton.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            profileHeader.topAnchor.constraint(equalTo: safeLayout.topAnchor, constant: 0),
-//            profileHeader.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 0),
-//            profileHeader.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: 0),
-//            profileHeader.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor, constant: -50),
-//
-//            profileHeader.somethingButton.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor, constant: 10),
-//            profileHeader.somethingButton.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor, constant: -10),
-//            profileHeader.somethingButton.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor, constant: -5)
-//        ])
-//    }
-//
-//    private func pressButtons(){
-//        profileHeader.statusButton.addTarget(self, action: #selector(pressShowStatus), for: .touchUpInside)
-//        profileHeader.somethingButton.addTarget(self, action: #selector(pressShowStatus), for: .touchUpInside)
-//    }
-//}
-
-
