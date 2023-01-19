@@ -9,19 +9,17 @@ import UIKit
 
 class ProfileViewController: UIViewController{
     
-    var printedText = ""
+   // var printedText = ""
     
+    let arrayOfPost:[Post] = [postOne, postTwo, postThree, postFour]
+       
     let postLine: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         return view
     }()
-    
-  //  let identifire  = "PostTableViewCell"
  
-    let arrayOfPost:[Post] = [postOne, postTwo, postThree, postFour]
-    
     
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -30,7 +28,7 @@ class ProfileViewController: UIViewController{
         private func setupView() {
             self.view.backgroundColor = .systemGray6
             self.navigationItem.title = "Профиль"
-            printedText = ProfileHeaderView().statusText
+         //   printedText = ProfileHeaderView().statusText
             let safeLayout = self.view.safeAreaLayoutGuide
             addAllSubviews()
             setupAllViews(safeLayout)
@@ -39,12 +37,11 @@ class ProfileViewController: UIViewController{
            // pressButtons()
         }
     private func createTable(){
-        
-     //   self.postLine.register(UITableViewCell.self, forCellReuseIdentifier: identifire)
-        self.postLine.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifire)
+       
         self.postLine.delegate = self
         self.postLine.dataSource = self
         self.postLine.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.id)
+        self.postLine.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifire)
     }
     
 
@@ -57,7 +54,7 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
     
     private func setupAllViews(_ safeLayout: UILayoutGuide){
         NSLayoutConstraint.activate([
-            postLine.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10),
+            postLine.topAnchor.constraint(equalTo: safeLayout.topAnchor),
             postLine.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 5),
             postLine.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -5),
             postLine.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10)
@@ -73,7 +70,7 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         let cell = postLine.dequeueReusableCell(withIdentifier: PostTableViewCell.identifire, for: indexPath) as! PostTableViewCell
         let postList = arrayOfPost[indexPath.row]
         cell.authorOfPost.text = postList.author
-       cell.contentOfPost.image = UIImage(named: postList.imageOfPost) //postList.imageOfPost
+        cell.contentOfPost.image = UIImage(named: postList.imageOfPost) //postList.imageOfPost
         cell.descriptionOfPost.text = postList.descriptionOfPost
         cell.likesOfPost.text = "Likes: \(postList.likes)"
         cell.viewsOfPost.text = "Views: \(postList.views)"
