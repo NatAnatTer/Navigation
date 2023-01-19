@@ -141,16 +141,20 @@ extension PostTableViewCell{
             self.authorOfPost.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
             self.authorOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             self.authorOfPost.bottomAnchor.constraint(equalTo: self.contentOfPost.topAnchor, constant:  -12),
+            self.authorOfPost.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
 
             self.contentOfPost.topAnchor.constraint(equalTo: self.authorOfPost.bottomAnchor, constant: 12),
-            self.contentOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            self.contentOfPost.widthAnchor.constraint(equalToConstant: 300),
-                     self.contentOfPost.heightAnchor.constraint(equalToConstant: 300),
-            self.contentOfPost.bottomAnchor.constraint(equalTo: self.descriptionOfPost.topAnchor),
+           // self.contentOfPost.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
+           // self.contentOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            self.contentOfPost.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+            self.contentOfPost.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width),
+           // self.contentOfPost.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            self.contentOfPost.bottomAnchor.constraint(equalTo: self.descriptionOfPost.topAnchor, constant: -16),
 
             self.descriptionOfPost.topAnchor.constraint(equalTo: contentOfPost.bottomAnchor, constant: 16),
             self.descriptionOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
-            self.descriptionOfPost.bottomAnchor.constraint(equalTo: self.likesOfPost.topAnchor),
+            self.descriptionOfPost.bottomAnchor.constraint(equalTo: self.likesOfPost.topAnchor, constant: -16),
+            self.descriptionOfPost.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
 
 
             self.likesOfPost.topAnchor.constraint(equalTo: descriptionOfPost.bottomAnchor, constant: 16),

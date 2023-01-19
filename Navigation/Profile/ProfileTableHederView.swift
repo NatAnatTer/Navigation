@@ -106,6 +106,7 @@ extension ProfileHeaderView{
             
             fullNameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 27),
             fullNameLabel.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
+            fullNameLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             
             statusLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
             statusLabel.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
