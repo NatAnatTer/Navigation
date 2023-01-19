@@ -26,7 +26,7 @@ class PostViewController: UIViewController {
     @objc private func openInfo(){
         let infoViewController = InfoViewController()
         self.present(infoViewController, animated: true, completion: nil)
-        infoViewController.postDetail = Post(title: titleOfPost)
+        infoViewController.postDetail = PostFirst(title: titleOfPost)
     }
     
 }

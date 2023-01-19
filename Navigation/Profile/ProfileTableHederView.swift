@@ -7,9 +7,10 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+class ProfileHeaderView: UITableViewHeaderFooterView {
     
     lazy var statusText: String = "Waiting for something beautiful, pretty good"
+    static let id = "ProfileHeaderView"
     
     let profileIconView: UIImageView = {
         let view = UIImageView(frame: .zero)
@@ -71,8 +72,11 @@ class ProfileHeaderView: UIView {
         return button
     }()
     
-    override init(frame: CGRect){
-        super .init(frame: frame)
+    
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        self.contentView.backgroundColor = .systemGray6
         addAllSubwiew()
         setupAllView()
     }
@@ -81,35 +85,39 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
 }
 extension ProfileHeaderView{
     
     private func addAllSubwiew(){
-        self.addSubview(self.profileIconView)
-        self.addSubview(self.fullNameLabel)
-        self.addSubview(self.statusLabel)
-        self.addSubview(self.statusButton)
+        self.contentView.addSubview(self.profileIconView)
+        self.contentView.addSubview(self.fullNameLabel)
+        self.contentView.addSubview(self.statusButton)
+        self.contentView.addSubview(self.statusLabel)
+        
     }
     
     private func setupAllView(){
         
         NSLayoutConstraint.activate([
-            profileIconView.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-            profileIconView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
+            profileIconView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
+            profileIconView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             profileIconView.heightAnchor.constraint(equalToConstant: 100),
             profileIconView.widthAnchor.constraint(equalToConstant: 100),
             
-            fullNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
+            fullNameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 27),
             fullNameLabel.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
+            fullNameLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             
             statusLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
             statusLabel.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
-            statusLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
+            statusLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             
             statusButton.topAnchor.constraint(equalTo: profileIconView.bottomAnchor, constant: 16),
-            statusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-            statusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-            statusButton.heightAnchor.constraint(equalToConstant: 50)
+            statusButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
+            statusButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+            statusButton.heightAnchor.constraint(equalToConstant: 50),
+            statusButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -20)
         ])
     }
 }

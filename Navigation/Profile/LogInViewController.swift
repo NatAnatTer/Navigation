@@ -34,6 +34,7 @@ class LogInViewController: UIViewController {
         stackView.layer.cornerRadius = 10
         stackView.layer.borderWidth = 0.5
         stackView.layer.borderColor = UIColor.lightGray.cgColor
+        stackView.backgroundColor = .systemGray6
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
@@ -43,7 +44,7 @@ class LogInViewController: UIViewController {
         view.textColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
         view.font = .systemFont(ofSize: 16)
-        view.backgroundColor = .systemGray6
+      //  view.backgroundColor = .systemGray6
         view.textContentType = .username
         view.keyboardType = .emailAddress
         view.placeholder = "Email or phone"
@@ -68,7 +69,7 @@ class LogInViewController: UIViewController {
         view.placeholder = "Password"
         view.isSecureTextEntry = true
         view.textContentType = .password
-        view.backgroundColor = .systemGray6
+      //  view.backgroundColor = .systemGray6
         view.autocapitalizationType = .none
         return view
     }()
@@ -153,17 +154,21 @@ extension LogInViewController{
             self.logoView.widthAnchor.constraint(equalToConstant: 100),
             
             self.stackView.topAnchor.constraint(equalTo: self.logoView.bottomAnchor, constant: 120),
-            self.stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 0),
+            self.stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 10),
             self.stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            self.stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -10),
             
+            self.loginEnterView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 5),
             self.loginEnterView.heightAnchor.constraint(equalToConstant: 50),
-            self.loginEnterView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -15),
+            self.loginEnterView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -5),
             
-            self.delimeter.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -15),
+            self.delimeter.leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
             self.delimeter.heightAnchor.constraint(equalToConstant: 0.5),
+            self.delimeter.trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
             
+            self.passwordEnterView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 5),
             self.passwordEnterView.heightAnchor.constraint(equalToConstant: 50),
-            self.passwordEnterView.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: -15),
+            self.passwordEnterView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -5),
             
             self.logInButtonView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
             self.logInButtonView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
