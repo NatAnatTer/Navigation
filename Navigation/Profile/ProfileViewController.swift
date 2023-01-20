@@ -35,8 +35,10 @@ class ProfileViewController: UIViewController{
     private func createTable(){
         self.postLine.delegate = self
         self.postLine.dataSource = self
-        self.postLine.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.id)
+       // self.postLine.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.id)
         self.postLine.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifire)
+        
+        self.postLine.tableHeaderView = ProfileHeaderView()
     }
 }
 extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
