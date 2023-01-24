@@ -39,6 +39,22 @@ class PhotosViewController: UICollectionView {
 
 
 extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        arrayOfPhoto.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifire, for: indexPath) as! PhotosCollectionViewCell
+        let currentPhoto = arrayOfPhoto[indexPath.item]
+        cell.photosInCollection.image = UIImage(named: currentPhoto)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let item = arrayOfPhoto.remove(at: sourceIndexPath.item)
+        arrayOfPhoto.insert(item, at: destinationIndexPath.item)
+    }
+    
     
 }
 

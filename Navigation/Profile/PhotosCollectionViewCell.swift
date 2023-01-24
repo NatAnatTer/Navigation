@@ -11,4 +11,14 @@ class PhotosCollectionViewCell: UICollectionViewCell {
     
     static let identifire = "PhotosCollectionViewCell"
     
+    let photosInCollection: UIImageView = {
+        let view = UIImageView(frame: .zero)
+        view.backgroundColor = .black
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 6
+        view.contentMode = .scaleAspectFit
+        view.clipsToBounds = true
+        return view
+    }()
+    
 }
