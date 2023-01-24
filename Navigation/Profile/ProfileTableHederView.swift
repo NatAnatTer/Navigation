@@ -109,15 +109,17 @@ extension ProfileHeaderView{
             fullNameLabel.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
             fullNameLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             
-            statusLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
-            statusLabel.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
-            statusLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+            
             
             statusButton.topAnchor.constraint(equalTo: profileIconView.bottomAnchor, constant: 16),
             statusButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             statusButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             statusButton.heightAnchor.constraint(equalToConstant: 50),
-            statusButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -20)
+           // statusButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -20),
+            
+            statusLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
+            statusLabel.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
+            statusLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16)
         ])
     }
 }

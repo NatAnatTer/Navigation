@@ -36,10 +36,12 @@ class ProfileViewController: UIViewController{
     private func createTable(){
         self.postLine.delegate = self
         self.postLine.dataSource = self
-       // self.postLine.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.id)
         self.postLine.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifire)
         self.postLine.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifire)
-        self.postLine.tableHeaderView = ProfileHeaderView()
+    
+        let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+        
+        self.postLine.tableHeaderView = headerView
     }
 }
 extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
@@ -69,9 +71,9 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 200
-    }
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 10
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
