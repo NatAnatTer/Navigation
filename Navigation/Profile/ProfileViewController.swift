@@ -10,7 +10,7 @@ import UIKit
 class ProfileViewController: UIViewController{
     
     let arrayOfPost:[Post] = [postOne, postTwo, postThree, postFour]
-    let arrayOfPhoto:[String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+   // let arrayOfPhoto:[String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
     
     let postLine: UITableView = {
         let view = UITableView(frame: .zero, style: .plain)
@@ -80,7 +80,7 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         if indexPath.section == 0{
             let cell = postLine.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifire, for: indexPath) as! PhotosTableViewCell
             let photoList = arrayOfPhoto[indexPath.row]
-            cell.contentOfPost.image = UIImage(named: photoList)
+            cell.currentPhoto.image = UIImage(named: photoList)
             return cell
             
         } else {
