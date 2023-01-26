@@ -10,10 +10,10 @@ import UIKit
 class ProfileViewController: UIViewController{
     
     let arrayOfPost:[Post] = [postOne, postTwo, postThree, postFour]
-   // let arrayOfPhoto:[String] = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+   
     
     let postLine: UITableView = {
-        let view = UITableView(frame: .zero, style: .plain)
+        let view = UITableView(frame: .zero, style: .grouped)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         return view
@@ -42,6 +42,9 @@ class ProfileViewController: UIViewController{
         let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         
         self.postLine.tableHeaderView = headerView
+        
+       // self.postLine.contentSize = CGSizeMake(self.postLine.frame.size.width, self.postLine.contentSize.height)
+        
     }
 }
 extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
@@ -63,9 +66,11 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         2
     }
     
+
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0{
-            return arrayOfPhoto.count
+            return 1 //arrayOfPhoto.count
         } else{
             return arrayOfPost.count
         }
@@ -75,12 +80,37 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
 //        return 10
 //    }
     
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        let transform: CGAffineTransform = CGAffineTransformMakeRotation(3.1432/2)
+//                cell.transform = transform
+//    }
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0{
             let cell = postLine.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifire, for: indexPath) as! PhotosTableViewCell
-            let photoList = arrayOfPhoto[indexPath.row]
-            cell.currentPhoto.image = UIImage(named: photoList)
+            
+            cell.selectionStyle = .none
+//            let photoList = arrayOfPhoto[indexPath.row]
+//            cell.currentPhoto.image = UIImage(named: photoList)
+            
+          //  cell.photoCollectionView
+            
+            
+            
+            
+            
+            
+//            for i in 0 ..< arrayOfPhoto.count {
+//                cell.currentPhoto.image = UIImage(named: arrayOfPhoto[i])
+//            }
+            
+            
+            //cell.accessibilityScroll(.left)
+//            let transform: CGAffineTransform = CGAffineTransformMakeRotation(3.1432)
+//                    cell.transform = transform
+            
             return cell
             
         } else {
@@ -97,6 +127,12 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         }
     }
     
+    
+//    private func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView {
+//        if section == 0{
+//            postLine.dequeueReusableHeaderFooterView(withIdentifier: <#T##String#>)
+//        }
+//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         postLine.deselectRow(at: indexPath, animated: true)
     }
