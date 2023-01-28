@@ -12,68 +12,37 @@ class PhotosTableViewCell: UITableViewCell {
     static let identifire  = "PhotosTableViewCell"
     var rowWithPhotos: String = ""
 
-    let  photoCollectionView: UICollectionView! = {
-        let view = UICollectionView(frame: .zero)
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.itemSize = CGSize(width: 150, height: 180)
-        flowLayout.minimumLineSpacing = 2.0
-        flowLayout.minimumInteritemSpacing = 5.0
-        view.collectionViewLayout = flowLayout
-        view.showsHorizontalScrollIndicator = false
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
     
-//    let currentPhoto: UIImageView = {
-//        let view = UIImageView(frame: .zero)
-//        view.backgroundColor = .black
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.layer.cornerRadius = 6
-//        view.contentMode = .scaleAspectFit
-//        view.clipsToBounds = true
-//        return view
-//    }()
+    let  photoCollectionView: UICollectionView!
     
 
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-
+        let flowLayout = UICollectionViewFlowLayout()
+                flowLayout.scrollDirection = .horizontal
+                flowLayout.itemSize = CGSize(width: 150, height: 180)
+                flowLayout.minimumLineSpacing = 2.0
+                flowLayout.minimumInteritemSpacing = 5.0
+        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 0)
+        photoCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+            //   self.photoCollectionView.collectionViewLayout = flowLayout
+        self.photoCollectionView.showsHorizontalScrollIndicator = false
+        self.photoCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        
+     
+        
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
         self.photoCollectionView.delegate = self
         self.photoCollectionView.dataSource = self
         self.photoCollectionView.register(PhotoProfileCollectionViewCell.self, forCellWithReuseIdentifier: PhotoProfileCollectionViewCell.identifire)
+       
         
         addAllSubview()
                setupAllView()
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-//        let flowLayout = UICollectionViewFlowLayout()
-//        flowLayout.scrollDirection = .horizontal
-//        flowLayout.itemSize = CGSize(width: 150, height: 180)
-//        flowLayout.minimumLineSpacing = 2.0
-//        flowLayout.minimumInteritemSpacing = 5.0
-//        self.photoCollectionView.collectionViewLayout = flowLayout
-//        self.photoCollectionView.showsHorizontalScrollIndicator = false
-        
-        self.photoCollectionView.delegate = self
-        self.photoCollectionView.dataSource = self
-        self.photoCollectionView.register(PhotoProfileCollectionViewCell.self, forCellWithReuseIdentifier: PhotoProfileCollectionViewCell.identifire)
-       // addAllSubview()
-       // setupAllView()
-    }
-    
- 
-    
-//    override   init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-//        super .init(style: style, reuseIdentifier: reuseIdentifier)
-//
-//        addAllSubview()
-//        setupAllView()
-//    }
+
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -84,6 +53,7 @@ class PhotosTableViewCell: UITableViewCell {
 //    }
     
     override func layoutSubviews() {
+    //    (self.flowLayout ).itemSize = CGSize(width: (UIScreen.main.bounds.width - 32)/3, height: 100)
             super.layoutSubviews()
             self.layer.cornerRadius = 10
     }
@@ -91,11 +61,7 @@ class PhotosTableViewCell: UITableViewCell {
 }
 
 extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
-//    func updateCellWith(row: String) {
-//        self.rowWithPhotos = row
-//        self.collectionView.reloadData()
-//    }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return arrayOfPhoto.count
     }
@@ -115,6 +81,7 @@ extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
     }
+    
     
     private func addAllSubview(){
         self.contentView.addSubview(photoCollectionView)
