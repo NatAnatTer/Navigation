@@ -11,8 +11,6 @@ class PhotoProfileCollectionViewCell: UICollectionViewCell {
     
     static let identifire  = "PhotoProfileCollectionViewCell"
     
-    
-    
     let currentPhoto: UIImageView = {
         let view = UIImageView(frame: .zero)
         view.backgroundColor = .black
@@ -49,12 +47,17 @@ class PhotoProfileCollectionViewCell: UICollectionViewCell {
 
         private func setupAllView(){
             NSLayoutConstraint.activate([
-                self.currentPhoto.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
-                self.currentPhoto.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
-                self.currentPhoto.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12),
-                self.currentPhoto.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
-                self.currentPhoto.heightAnchor.constraint(equalToConstant: 200),
-                self.currentPhoto.widthAnchor.constraint(equalToConstant: 200)
+                self.currentPhoto.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+                self.currentPhoto.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+                self.currentPhoto.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+                self.currentPhoto.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor)
+                
+//                self.currentPhoto.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
+//                self.currentPhoto.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
+//                self.currentPhoto.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12),
+//                self.currentPhoto.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
+//                self.currentPhoto.heightAnchor.constraint(equalToConstant: 200),
+//                self.currentPhoto.widthAnchor.constraint(equalToConstant: 200)
             ])
         }
     }

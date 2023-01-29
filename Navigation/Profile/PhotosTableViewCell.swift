@@ -13,17 +13,50 @@ class PhotosTableViewCell: UITableViewCell {
     var rowWithPhotos: String = ""
 
     
-    let  photoCollectionView: UICollectionView!
+    var  photoCollectionView: UICollectionView!
     
+//    let nameOfCell: UILabel = {
+//        let view = UILabel(frame: .zero)
+//        view.textColor = .black
+//        view.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+//        view.text = "Photos"
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        return view
+//    }()
+    
+    var nameOfCell: UILabel!
+    
+    
+//    let arrowToDetail: UIImageView = {
+//        let view = UIImageView(frame: .zero)
+//       // view.image = UIImage(systemName: "arrow.forward")
+////        view.translatesAutoresizingMaskIntoConstraints = false
+//        return view
+//    }()
+    
+    var arrowToDetail: UIImageView!
 
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        self.nameOfCell = UILabel(frame: .zero)
+        self.nameOfCell.textColor = .black
+        self.nameOfCell.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        self.nameOfCell.translatesAutoresizingMaskIntoConstraints = false
+        self.nameOfCell.text = "Photos"
+        
+        self.arrowToDetail = UIImageView(frame: .zero)
+//        self.arrowToDetail = UIImageView(frame: CGRect(x: 0, y: 0, width: 12, height: 12))
+        
+        self.arrowToDetail.translatesAutoresizingMaskIntoConstraints = false
+        self.arrowToDetail.image = UIImage(systemName: "arrow.forward")
+        
         let flowLayout = UICollectionViewFlowLayout()
                 flowLayout.scrollDirection = .horizontal
-                flowLayout.itemSize = CGSize(width: 150, height: 180)
-                flowLayout.minimumLineSpacing = 2.0
-                flowLayout.minimumInteritemSpacing = 5.0
-        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 0)
+             //   flowLayout.itemSize = CGSize(width: 150, height: 180)
+               // flowLayout.minimumLineSpacing = 2.0
+                flowLayout.minimumInteritemSpacing = 8.0
+        flowLayout.sectionInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 0)
+       // flowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 40)/4, height: (UIScreen.main.bounds.width - 40)/4)
         photoCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
             //   self.photoCollectionView.collectionViewLayout = flowLayout
         self.photoCollectionView.showsHorizontalScrollIndicator = false
@@ -54,8 +87,9 @@ class PhotosTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
     //    (self.flowLayout ).itemSize = CGSize(width: (UIScreen.main.bounds.width - 32)/3, height: 100)
+//        (self.flowLayout ).itemSize = CGSize(width: (UIScreen.main.bounds.width - 32)/4, height: (UIScreen.main.bounds.width - 32)/4)
             super.layoutSubviews()
-            self.layer.cornerRadius = 10
+            self.layer.cornerRadius = 6
     }
 
 }
@@ -78,145 +112,47 @@ extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
             return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        CGSize(width: (UIScreen.main.bounds.width - 40)/4, height: (UIScreen.main.bounds.width - 40)/4)
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 0)
+    }
+
     
     private func addAllSubview(){
+//        self.contentView.addSubview(nameOfCell)
+//        self.contentView.addSubview(arrowToDetail)
         self.contentView.addSubview(photoCollectionView)
+        self.contentView.addSubview(nameOfCell)
+        self.contentView.addSubview(arrowToDetail)
 
     }
 
     private func setupAllView(){
         NSLayoutConstraint.activate([
-            self.photoCollectionView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
-            self.photoCollectionView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
+            
+            self.nameOfCell.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
+            self.nameOfCell.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
+            self.nameOfCell.bottomAnchor.constraint(equalTo: self.photoCollectionView.topAnchor, constant: -12),
+            self.nameOfCell.heightAnchor.constraint(equalToConstant: 100),
+            
+            self.arrowToDetail.centerYAnchor.constraint(equalTo: self.nameOfCell.centerYAnchor),
+            self.arrowToDetail.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12),
+            self.arrowToDetail.heightAnchor.constraint(equalToConstant: 12),
+            self.arrowToDetail.widthAnchor.constraint(equalToConstant: 12),
+            
+            
+            self.photoCollectionView.topAnchor.constraint(equalTo: self.nameOfCell.topAnchor),
+            self.photoCollectionView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
             self.photoCollectionView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12),
             self.photoCollectionView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
-            self.photoCollectionView.heightAnchor.constraint(equalToConstant: 200),
-            self.photoCollectionView.widthAnchor.constraint(equalToConstant: 200)
+           self.photoCollectionView.heightAnchor.constraint(equalToConstant: (UIScreen.main.bounds.width - 40)/4),
+          //  self.photoCollectionView.widthAnchor.constraint(equalToConstant: 200)
         ])
     }
 }
 
 
 
-
-
-
-
-//class PhotosTableViewCell: UITableViewCell {
-//
-//    static let identifire  = "PhotosTableViewCell"
-//
-//    let currentPhoto: UIImageView = {
-//        let view = UIImageView(frame: .zero)
-//        view.backgroundColor = .black
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.layer.cornerRadius = 6
-//        view.contentMode = .scaleAspectFit
-//        view.clipsToBounds = true
-//        return view
-//    }()
-//
-//   // let collectionPhotoView: UICollectionView
-//
-////    override   init(frame: CGRect) {
-////           super .init(frame: frame)
-//
-//    override   init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-//        super .init(style: style, reuseIdentifier: reuseIdentifier)
-//
-//        addAllSubview()
-//        setupAllView()
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//
-////    override func setSelected(_ selected: Bool, animated: Bool) {
-////        super.setSelected(selected, animated: animated)
-////    }
-//
-//    override func layoutSubviews() {
-//            super.layoutSubviews()
-//            self.layer.cornerRadius = 10
-//    }
-//
-//}
-//
-//extension PhotosTableViewCell{
-//    private func addAllSubview(){
-//        self.contentView.addSubview(currentPhoto)
-//
-//    }
-//
-//    private func setupAllView(){
-//        NSLayoutConstraint.activate([
-//            self.currentPhoto.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
-//            self.currentPhoto.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
-//            self.currentPhoto.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12),
-//            self.currentPhoto.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
-//            self.currentPhoto.heightAnchor.constraint(equalToConstant: 200),
-//            self.currentPhoto.widthAnchor.constraint(equalToConstant: 200)
-//        ])
-//    }
-//}
-
-
-
-
-
-
-
-//class PhotosTableViewCell: UITableViewCell {
-//
-//    static let identifire  = "PhotosTableViewCell"
-//
-//    let contentOfPost: UIImageView = {
-//        let view = UIImageView(frame: .zero)
-//        view.backgroundColor = .black
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.layer.cornerRadius = 6
-//        view.contentMode = .scaleAspectFit
-//        view.clipsToBounds = true
-//        return view
-//    }()
-//
-//
-//    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-//        super.init(style: style, reuseIdentifier: reuseIdentifier)
-//
-//        addAllSubview()
-//        setupAllView()
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//    }
-//
-//}
-//
-//extension PhotosTableViewCell{
-//    private func addAllSubview(){
-//        self.contentView.addSubview(contentOfPost)
-//
-//    }
-//
-//    private func setupAllView(){
-//        NSLayoutConstraint.activate([
-//            self.contentOfPost.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
-//            self.contentOfPost.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
-//            self.contentOfPost.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12),
-//            self.contentOfPost.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
-//            self.contentOfPost.heightAnchor.constraint(equalToConstant: 200),
-//            self.contentOfPost.widthAnchor.constraint(equalToConstant: 200)
-//        ])
-//    }
-//}

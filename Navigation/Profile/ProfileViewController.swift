@@ -76,9 +76,9 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         }
     }
     
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 10
-//    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
+    }
     
 //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
 //        let transform: CGAffineTransform = CGAffineTransformMakeRotation(3.1432/2)
@@ -89,28 +89,12 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0{
+            
             let cell = postLine.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifire, for: indexPath) as! PhotosTableViewCell
             
             cell.selectionStyle = .none
-//            let photoList = arrayOfPhoto[indexPath.row]
-//            cell.currentPhoto.image = UIImage(named: photoList)
             
-          //  cell.photoCollectionView
-            
-            
-            
-            
-            
-            
-//            for i in 0 ..< arrayOfPhoto.count {
-//                cell.currentPhoto.image = UIImage(named: arrayOfPhoto[i])
-//            }
-            
-            
-            //cell.accessibilityScroll(.left)
-//            let transform: CGAffineTransform = CGAffineTransformMakeRotation(3.1432)
-//                    cell.transform = transform
-            
+            cell.nameOfCell.text = "Photos"
             return cell
             
         } else {
