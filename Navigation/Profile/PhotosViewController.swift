@@ -13,6 +13,7 @@ class PhotosViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Photo Gallery"
         photoView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(photoView)
         let safeLayout = self.view.safeAreaLayoutGuide

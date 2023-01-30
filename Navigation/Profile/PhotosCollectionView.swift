@@ -64,28 +64,3 @@ extension PhotosCollectionView: UICollectionViewDataSource, UICollectionViewDele
     }
     
 }
-
-
-//let postLine: UICollectionView = {
-//        let view = UICollectionView(frame: .zero, style: .plain)
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .white
-//        return view
-//    }()
-//
-//
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        setupView()
-//
-//    }
-//
-//    private func setupView() {
-//        self.view.backgroundColor = .systemGray6
-//        self.navigationItem.title = "Профиль"
-//        let safeLayout = self.view.safeAreaLayoutGuide
-////        addAllSubviews()
-////        setupAllViews(safeLayout)
-////        createTable()
-//    }
-//

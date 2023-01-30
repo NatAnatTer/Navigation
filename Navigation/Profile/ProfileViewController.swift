@@ -121,6 +121,18 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         postLine.deselectRow(at: indexPath, animated: true)
     }
     
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let vc = PhotosViewController()
+//        self.navigationController?.pushViewController(vc, animated: true)
+//    }
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        let vc = PhotosViewController()
+        if  indexPath.row == 0{
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        return indexPath
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         postLine.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.id)
     }
