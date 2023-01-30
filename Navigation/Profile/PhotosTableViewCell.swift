@@ -136,15 +136,15 @@ extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
             self.nameOfCell.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
             self.nameOfCell.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 12),
             self.nameOfCell.bottomAnchor.constraint(equalTo: self.photoCollectionView.topAnchor, constant: -12),
-            self.nameOfCell.heightAnchor.constraint(equalToConstant: 100),
+            self.nameOfCell.heightAnchor.constraint(equalToConstant: 20),
             
             self.arrowToDetail.centerYAnchor.constraint(equalTo: self.nameOfCell.centerYAnchor),
             self.arrowToDetail.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12),
-            self.arrowToDetail.heightAnchor.constraint(equalToConstant: 12),
-            self.arrowToDetail.widthAnchor.constraint(equalToConstant: 12),
+            self.arrowToDetail.heightAnchor.constraint(equalToConstant: 20),
+            self.arrowToDetail.widthAnchor.constraint(equalToConstant: 20),
             
             
-            self.photoCollectionView.topAnchor.constraint(equalTo: self.nameOfCell.topAnchor),
+            self.photoCollectionView.topAnchor.constraint(equalTo: self.nameOfCell.bottomAnchor),
             self.photoCollectionView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
             self.photoCollectionView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -12),
             self.photoCollectionView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
