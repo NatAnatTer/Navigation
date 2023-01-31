@@ -26,20 +26,15 @@ class PhotosTableViewCell: UITableViewCell {
         self.nameOfCell.text = "Photos"
         
         self.arrowToDetail = UIImageView(frame: .zero)
-        //        self.arrowToDetail = UIImageView(frame: CGRect(x: 0, y: 0, width: 12, height: 12))
-        
         self.arrowToDetail.translatesAutoresizingMaskIntoConstraints = false
         self.arrowToDetail.image = UIImage(systemName: "arrow.forward")
         
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal
-        //   flowLayout.itemSize = CGSize(width: 150, height: 180)
-        // flowLayout.minimumLineSpacing = 2.0
         flowLayout.minimumInteritemSpacing = 8.0
         flowLayout.sectionInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 0)
-        // flowLayout.itemSize = CGSize(width: (UIScreen.main.bounds.width - 40)/4, height: (UIScreen.main.bounds.width - 40)/4)
-        photoCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        //   self.photoCollectionView.collectionViewLayout = flowLayout
+        
+        self.photoCollectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
         self.photoCollectionView.showsHorizontalScrollIndicator = false
         self.photoCollectionView.translatesAutoresizingMaskIntoConstraints = false
         

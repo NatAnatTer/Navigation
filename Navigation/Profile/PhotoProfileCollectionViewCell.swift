@@ -35,14 +35,12 @@ class PhotoProfileCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.layer.cornerRadius = 10
-        //      (self.collectionViewLayout as! UICollectionViewFlowLayout).itemSize = CGSize(width: (UIScreen.main.bounds.width - 32)/3, height: 100)
     }
     
 }
 extension PhotoProfileCollectionViewCell{
     private func addAllSubview(){
         self.contentView.addSubview(currentPhoto)
-        
     }
     
     private func setupAllView(){

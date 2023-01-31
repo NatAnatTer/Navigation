@@ -10,7 +10,7 @@ import UIKit
 class ProfileViewController: UIViewController{
     
     let arrayOfPost:[Post] = [postOne, postTwo, postThree, postFour]
-   
+    
     
     let postLine: UITableView = {
         let view = UITableView(frame: .zero, style: .grouped)
@@ -38,13 +38,17 @@ class ProfileViewController: UIViewController{
         self.postLine.dataSource = self
         self.postLine.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifire)
         self.postLine.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifire)
-    
+        
         let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         
         self.postLine.tableHeaderView = headerView
         
-       // self.postLine.contentSize = CGSizeMake(self.postLine.frame.size.width, self.postLine.contentSize.height)
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.isNavigationBarHidden = true
     }
 }
 extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
@@ -66,8 +70,6 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         2
     }
     
-
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0{
             return 1 //arrayOfPhoto.count
@@ -80,20 +82,12 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         return 10
     }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let transform: CGAffineTransform = CGAffineTransformMakeRotation(3.1432/2)
-//                cell.transform = transform
-//    }
-    
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0{
             
             let cell = postLine.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifire, for: indexPath) as! PhotosTableViewCell
-            
             cell.selectionStyle = .none
-            
             cell.nameOfCell.text = "Photos"
             return cell
             
@@ -111,20 +105,10 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         }
     }
     
-    
-//    private func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView {
-//        if section == 0{
-//            postLine.dequeueReusableHeaderFooterView(withIdentifier: <#T##String#>)
-//        }
-//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         postLine.deselectRow(at: indexPath, animated: true)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let vc = PhotosViewController()
-//        self.navigationController?.pushViewController(vc, animated: true)
-//    }
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let vc = PhotosViewController()
         if  indexPath.row == 0{
@@ -136,10 +120,4 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         postLine.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.id)
     }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 50
-//    }
-    
-    
 }

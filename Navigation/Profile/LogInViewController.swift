@@ -44,7 +44,7 @@ class LogInViewController: UIViewController {
         view.textColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
         view.font = .systemFont(ofSize: 16)
-      //  view.backgroundColor = .systemGray6
+        //  view.backgroundColor = .systemGray6
         view.textContentType = .username
         view.keyboardType = .emailAddress
         view.placeholder = "Email or phone"
@@ -69,7 +69,7 @@ class LogInViewController: UIViewController {
         view.placeholder = "Password"
         view.isSecureTextEntry = true
         view.textContentType = .password
-      //  view.backgroundColor = .systemGray6
+        //  view.backgroundColor = .systemGray6
         view.autocapitalizationType = .none
         return view
     }()
