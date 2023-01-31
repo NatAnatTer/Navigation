@@ -11,8 +11,9 @@ class ProfileViewController: UIViewController{
     
     let arrayOfPost:[Post] = [postOne, postTwo, postThree, postFour]
     
+    
     let postLine: UITableView = {
-        let view = UITableView(frame: .zero, style: .plain)
+        let view = UITableView(frame: .zero, style: .grouped)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .white
         return view
@@ -35,8 +36,19 @@ class ProfileViewController: UIViewController{
     private func createTable(){
         self.postLine.delegate = self
         self.postLine.dataSource = self
-        self.postLine.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.id)
         self.postLine.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifire)
+        self.postLine.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifire)
+        
+        let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+        
+        self.postLine.tableHeaderView = headerView
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.navigationController?.isNavigationBarHidden = true
     }
 }
 extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
@@ -54,21 +66,55 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         ])
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayOfPost.count
+        if section == 0{
+            return 1 //arrayOfPhoto.count
+        } else{
+            return arrayOfPost.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = postLine.dequeueReusableCell(withIdentifier: PostTableViewCell.identifire, for: indexPath) as! PostTableViewCell
-        let postList = arrayOfPost[indexPath.row]
-        cell.authorOfPost.text = postList.author
-        cell.contentOfPost.image = UIImage(named: postList.imageOfPost)
-        cell.descriptionOfPost.text = postList.descriptionOfPost
-        cell.likesOfPost.text = "Likes: \(postList.likes)"
-        cell.viewsOfPost.text = "Views: \(postList.views)"
         
-        return cell
+        if indexPath.section == 0{
+            
+            let cell = postLine.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifire, for: indexPath) as! PhotosTableViewCell
+            cell.selectionStyle = .none
+            cell.nameOfCell.text = "Photos"
+            return cell
+            
+        } else {
+            
+            let cell = postLine.dequeueReusableCell(withIdentifier: PostTableViewCell.identifire, for: indexPath) as! PostTableViewCell
+            let postList = arrayOfPost[indexPath.row]
+            cell.authorOfPost.text = postList.author
+            cell.contentOfPost.image = UIImage(named: postList.imageOfPost)
+            cell.descriptionOfPost.text = postList.descriptionOfPost
+            cell.likesOfPost.text = "Likes: \(postList.likes)"
+            cell.viewsOfPost.text = "Views: \(postList.views)"
+            
+            return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        postLine.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        let vc = PhotosViewController()
+        if  indexPath.row == 0{
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        return indexPath
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
