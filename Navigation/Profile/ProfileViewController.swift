@@ -160,6 +160,23 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
         
         self.closeButtonView.addTarget(self, action: #selector(pressCloseAvatar), for: .touchUpInside)
         
+//        if isBig{
+//            self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: 100)
+//            self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: 100)
+//        } else{
+//            self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+//            self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+//        }
+//        isBig.toggle()
+        
+        
+        UIImageView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn]){ //for avatar
+           
+            self.backgroundView.addSubview(self.headerView.profileIconView)
+            self.headerView.profileIconView.center.x = self.view.center.x
+           // self.headerView.profileIconView.layoutIfNeeded()
+        }
+        
         UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn]){ //delay сколько нужно подождать прежде чем выводиться
             self.view.addSubview(self.backgroundView)
             self.backgroundView.isHidden = false
@@ -184,28 +201,7 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
                 self.closeButtonView.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -8)
             ])
         }
-        
-        if isBig{
-            self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: 100)
-            self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: 100)
-        } else{
-            self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-            self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width) 
-        }
-        isBig.toggle()
-        
-        
-        UIImageView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn]){ //for avatar
-            self.backgroundView.addSubview(self.headerView.profileIconView)
-            self.headerView.profileIconView.layoutIfNeeded()
-           // self.backgroundView.addSubview(self.headerView.profileIconView)
-            //  self.headerView.profileIconView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-     //       self.headerView.profileIconView.center.x = self.view.center.x
-            
-            //  self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-            //  self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-            
-        }
+
     }
     
     
