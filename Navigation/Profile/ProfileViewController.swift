@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController{
+class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
     
     let arrayOfPost:[Post] = [postOne, postTwo, postThree, postFour]
     
@@ -19,19 +19,91 @@ class ProfileViewController: UIViewController{
         return view
     }()
     
+    var backgroundView: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .clear
+        view.isOpaque = false
+        view.alpha = 0.5
+        return view
+    }()
+    var closeButtonView:UIButton = {
+        let view = UIButton(frame: CGRect(x: 0, y: 0, width: 15, height: 15))
+        view.setBackgroundImage(UIImage(systemName: "xmark"), for: .normal)
+        view.tintColor = .clear//.white
+        view.isHidden = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        
+        
     }
     private func setupView() {
         self.view.backgroundColor = .systemGray6
         self.navigationItem.title = "Профиль"
         let safeLayout = self.view.safeAreaLayoutGuide
+        
+        self.backgroundView.isHidden = true
         addAllSubviews()
         setupAllViews(safeLayout)
         createTable()
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileIconTapped(tapGestureRecognizer:)))
+        headerView.profileIconView.isUserInteractionEnabled = true
+        headerView.profileIconView.addGestureRecognizer(tapGestureRecognizer)
+        
+        
     }
+    @objc private func profileIconTapped(tapGestureRecognizer: UITapGestureRecognizer){
+        
+        self.closeButtonView.addTarget(self, action: #selector(pressCloseAvatar), for: .touchUpInside)
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn]){ //delay сколько нужно подождать прежде чем выводиться
+            self.view.addSubview(self.backgroundView)
+            self.backgroundView.isHidden = false
+            self.backgroundView.backgroundColor = .black
+            let safeLayout = self.view.safeAreaLayoutGuide
+            
+            NSLayoutConstraint.activate([
+                self.backgroundView.topAnchor.constraint(equalTo: safeLayout.topAnchor),
+                self.backgroundView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor),
+                self.backgroundView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor),
+                self.backgroundView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor),
+                
+            ])
+        }
+        UIView.animate(withDuration: 0.7, delay: 0, options: [.curveEaseIn]){ //delay сколько нужно подождать прежде чем выводиться
+            
+            self.backgroundView.addSubview(self.closeButtonView)
+            self.closeButtonView.isHidden = false
+            self.closeButtonView.tintColor = .white
+            NSLayoutConstraint.activate([
+                self.closeButtonView.topAnchor.constraint(equalTo: self.backgroundView.topAnchor, constant: 8),
+                self.closeButtonView.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -8)
+            ])
+        }
+    }
+    
+    
+    @objc private func pressCloseAvatar(){
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn]){
+            self.backgroundView.isHidden = true
+            self.backgroundView.backgroundColor = .clear
+        }
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn]){
+            self.closeButtonView.isHidden = true
+            self.closeButtonView.tintColor = .clear
+        }
+        
+    }
+    
     
     private func createTable(){
         self.postLine.delegate = self
@@ -39,22 +111,97 @@ class ProfileViewController: UIViewController{
         self.postLine.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifire)
         self.postLine.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifire)
         
-        let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+        //    let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
         
         self.postLine.tableHeaderView = headerView
         
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         self.navigationController?.isNavigationBarHidden = true
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        //
+        //        self.closeButtonView.addTarget(self, action: #selector(pressCloseAvatar), for: .touchUpInside)
+        //
+        //        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn]){ //delay сколько нужно подождать прежде чем выводиться
+        //            self.view.addSubview(self.backgroundView)
+        //            self.backgroundView.isHidden = false
+        //            self.backgroundView.backgroundColor = .black
+        //            let safeLayout = self.view.safeAreaLayoutGuide
+        //
+        //            NSLayoutConstraint.activate([
+        //                self.backgroundView.topAnchor.constraint(equalTo: safeLayout.topAnchor),
+        //                self.backgroundView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor),
+        //                self.backgroundView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor),
+        //                self.backgroundView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor),
+        //
+        //            ])
+        //        }
+        //        UIView.animate(withDuration: 0.7, delay: 0, options: [.curveEaseIn]){ //delay сколько нужно подождать прежде чем выводиться
+        //
+        //            self.backgroundView.addSubview(self.closeButtonView)
+        //           self.closeButtonView.isHidden = false
+        //            self.closeButtonView.tintColor = .white
+        //            NSLayoutConstraint.activate([
+        //                self.closeButtonView.topAnchor.constraint(equalTo: self.backgroundView.topAnchor, constant: 8),
+        //                self.closeButtonView.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -8)
+        //            ])
+    }
+    
+    @objc private func pressIcon(){
+        
+        self.closeButtonView.addTarget(self, action: #selector(pressCloseAvatar), for: .touchUpInside)
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn]){ //delay сколько нужно подождать прежде чем выводиться
+            self.view.addSubview(self.backgroundView)
+            self.backgroundView.isHidden = false
+            self.backgroundView.backgroundColor = .black
+            let safeLayout = self.view.safeAreaLayoutGuide
+            
+            NSLayoutConstraint.activate([
+                self.backgroundView.topAnchor.constraint(equalTo: safeLayout.topAnchor),
+                self.backgroundView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor),
+                self.backgroundView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor),
+                self.backgroundView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor),
+                
+            ])
+        }
+        UIView.animate(withDuration: 0.7, delay: 0, options: [.curveEaseIn]){ //delay сколько нужно подождать прежде чем выводиться
+            
+            self.backgroundView.addSubview(self.closeButtonView)
+            self.closeButtonView.isHidden = false
+            self.closeButtonView.tintColor = .white
+            NSLayoutConstraint.activate([
+                self.closeButtonView.topAnchor.constraint(equalTo: self.backgroundView.topAnchor, constant: 8),
+                self.closeButtonView.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -8)
+            ])
+        }
+        
+        
+                UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn]){ //for avatar
+
+                    self.backgroundView.addSubview(self.headerView.profileIconView)
+                  //  self.headerView.profileIconView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+                    self.headerView.profileIconView.center.x = self.view.center.x
+        
+                  //  self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+                  //  self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+        
+                }
+    }
+    
+    
 }
 extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
     
     private func addAllSubviews(){
         self.view.addSubview(postLine)
+        //  self.view.addSubview(backgroundView)
     }
     
     private func setupAllViews(_ safeLayout: UILayoutGuide){
@@ -63,6 +210,16 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
             postLine.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 5),
             postLine.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -5),
             postLine.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10)
+            
+            //            backgroundView.topAnchor.constraint(equalTo: safeLayout.topAnchor),
+            //            backgroundView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor),
+            //            backgroundView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor),
+            //            backgroundView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor),
+            //
+            //            closeButtonView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: -8),
+            //            closeButtonView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -8)
+            
+            
         ])
     }
     
@@ -72,7 +229,7 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0{
-            return 1 //arrayOfPhoto.count
+            return 1
         } else{
             return arrayOfPost.count
         }

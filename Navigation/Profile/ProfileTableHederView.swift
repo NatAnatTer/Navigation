@@ -106,16 +106,20 @@ extension ProfileHeaderView{
             profileIconView.widthAnchor.constraint(equalToConstant: 100),
             
             fullNameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 27),
-            fullNameLabel.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
+//            fullNameLabel.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
+            fullNameLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 132),
+
             fullNameLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             
-            statusButton.topAnchor.constraint(equalTo: profileIconView.bottomAnchor, constant: 16),
+         //   statusButton.topAnchor.constraint(equalTo: profileIconView.bottomAnchor, constant: 16),
+            statusButton.topAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -66),
             statusButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             statusButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             statusButton.heightAnchor.constraint(equalToConstant: 50),
             
             statusLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
-            statusLabel.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
+           // statusLabel.leadingAnchor.constraint(equalTo: profileIconView.trailingAnchor, constant: 15),
+            statusLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 132),
             statusLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16)
         ])
     }
