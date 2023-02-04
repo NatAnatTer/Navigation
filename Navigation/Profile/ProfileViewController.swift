@@ -37,6 +37,7 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
     }()
     
     let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+    var isBig = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -123,6 +124,8 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
         navigationController?.setNavigationBarHidden(true, animated: animated)
         self.navigationController?.isNavigationBarHidden = true
     }
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //
@@ -171,7 +174,7 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
                 
             ])
         }
-        UIView.animate(withDuration: 0.7, delay: 0, options: [.curveEaseIn]){ //delay сколько нужно подождать прежде чем выводиться
+        UIView.animate(withDuration: 0.3, delay: 0.5, options: [.curveEaseIn]){ //delay сколько нужно подождать прежде чем выводиться
             
             self.backgroundView.addSubview(self.closeButtonView)
             self.closeButtonView.isHidden = false
@@ -182,17 +185,27 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
             ])
         }
         
+        if isBig{
+            self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: 100)
+            self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: 100)
+        } else{
+            self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+            self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width) 
+        }
+        isBig.toggle()
         
-                UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn]){ //for avatar
-
-                    self.backgroundView.addSubview(self.headerView.profileIconView)
-                  //  self.headerView.profileIconView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-                    self.headerView.profileIconView.center.x = self.view.center.x
         
-                  //  self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-                  //  self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-        
-                }
+        UIImageView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn]){ //for avatar
+            self.backgroundView.addSubview(self.headerView.profileIconView)
+            self.headerView.profileIconView.layoutIfNeeded()
+           // self.backgroundView.addSubview(self.headerView.profileIconView)
+            //  self.headerView.profileIconView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+     //       self.headerView.profileIconView.center.x = self.view.center.x
+            
+            //  self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+            //  self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
+            
+        }
     }
     
     
@@ -210,16 +223,7 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
             postLine.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 5),
             postLine.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -5),
             postLine.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10)
-            
-            //            backgroundView.topAnchor.constraint(equalTo: safeLayout.topAnchor),
-            //            backgroundView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor),
-            //            backgroundView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor),
-            //            backgroundView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor),
-            //
-            //            closeButtonView.topAnchor.constraint(equalTo: backgroundView.topAnchor, constant: -8),
-            //            closeButtonView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor, constant: -8)
-            
-            
+          
         ])
     }
     

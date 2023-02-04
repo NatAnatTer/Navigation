@@ -13,7 +13,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     static let id = "ProfileHeaderView"
     
     let profileIconView: UIImageView = {
-        let view = UIImageView(frame: .zero)
+        let view = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         view.translatesAutoresizingMaskIntoConstraints = false
         view.image = UIImage(named: "profileIcon")
         view.layer.cornerRadius = 50
