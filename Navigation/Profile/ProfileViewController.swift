@@ -63,36 +63,27 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
     @objc private func profileIconTapped(tapGestureRecognizer: UITapGestureRecognizer){
         
         self.closeButtonView.addTarget(self, action: #selector(pressCloseAvatar), for: .touchUpInside)
- 
-                
-                UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn]){ //for avatar
-                  
-                    
-                   
-                    self.backgroundView.addSubview(self.headerView.profileIconView)
-                 
-                    self.headerView.profileIconView.alpha = 1
-                    self.headerView.profileIconView.layer.cornerRadius = 0
-                    self.headerView.profileIconView.layer.borderWidth = 0
-//                    self.headerView.profileIconView.contentMode = .scaleAspectFill
-//                    self.headerView.profileIconView.layer.masksToBounds = true
-
-                    
-                    
-                    NSLayoutConstraint.activate([
-                    self.headerView.profileIconView.topAnchor.constraint(equalTo: self.backgroundView.topAnchor, constant: 100),
-                    self.headerView.profileIconView.leadingAnchor.constraint(equalTo: self.backgroundView.leadingAnchor, constant: 15),
-                    self.headerView.profileIconView.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -15),
-                    self.headerView.profileIconView.bottomAnchor.constraint(equalTo: self.backgroundView.bottomAnchor, constant: (100 + self.dimension) - UIScreen.main.bounds.height),
-                    ])
-                    self.headerView.profileIconView.center.x = self.backgroundView.center.x
-                    self.headerView.profileIconView.center.y = self.backgroundView.center.y
-
-   //                 self.headerView.profileIconView.layoutIfNeeded()
-                }
-
         
-        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn]){ //delay сколько нужно подождать прежде чем выводиться
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn]){ //for avatar
+            self.backgroundView.addSubview(self.headerView.profileIconView)
+            
+            self.headerView.profileIconView.alpha = 1
+            self.headerView.profileIconView.layer.cornerRadius = 0
+            self.headerView.profileIconView.layer.borderWidth = 0
+            NSLayoutConstraint.activate([
+                self.headerView.profileIconView.topAnchor.constraint(equalTo: self.backgroundView.topAnchor, constant: 100),
+                self.headerView.profileIconView.leadingAnchor.constraint(equalTo: self.backgroundView.leadingAnchor, constant: 15),
+                self.headerView.profileIconView.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -15),
+                self.headerView.profileIconView.bottomAnchor.constraint(equalTo: self.backgroundView.bottomAnchor, constant: (100 + self.dimension) - UIScreen.main.bounds.height),
+            ])
+            self.headerView.profileIconView.center.x = self.backgroundView.center.x
+            self.headerView.profileIconView.center.y = self.backgroundView.center.y
+            
+        }
+        
+        
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn]){
             self.view.addSubview(self.backgroundView)
             self.backgroundView.isHidden = false
             self.backgroundView.backgroundColor = .black
@@ -135,9 +126,9 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
             self.headerView.profileIconView.alpha = 1
             self.headerView.profileIconView.layer.cornerRadius = 50
             self.headerView.profileIconView.layer.borderWidth = 3
-
+            
         }
-
+        
         
     }
     
@@ -161,91 +152,6 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
         self.navigationController?.isNavigationBarHidden = true
     }
     
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-        //
-        //        self.closeButtonView.addTarget(self, action: #selector(pressCloseAvatar), for: .touchUpInside)
-        //
-        //        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn]){ //delay сколько нужно подождать прежде чем выводиться
-        //            self.view.addSubview(self.backgroundView)
-        //            self.backgroundView.isHidden = false
-        //            self.backgroundView.backgroundColor = .black
-        //            let safeLayout = self.view.safeAreaLayoutGuide
-        //
-        //            NSLayoutConstraint.activate([
-        //                self.backgroundView.topAnchor.constraint(equalTo: safeLayout.topAnchor),
-        //                self.backgroundView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor),
-        //                self.backgroundView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor),
-        //                self.backgroundView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor),
-        //
-        //            ])
-        //        }
-        //        UIView.animate(withDuration: 0.7, delay: 0, options: [.curveEaseIn]){ //delay сколько нужно подождать прежде чем выводиться
-        //
-        //            self.backgroundView.addSubview(self.closeButtonView)
-        //           self.closeButtonView.isHidden = false
-        //            self.closeButtonView.tintColor = .white
-        //            NSLayoutConstraint.activate([
-        //                self.closeButtonView.topAnchor.constraint(equalTo: self.backgroundView.topAnchor, constant: 8),
-        //                self.closeButtonView.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -8)
-        //            ])
- //   }
-    
-//    @objc private func pressIcon(){
-//
-//        self.closeButtonView.addTarget(self, action: #selector(pressCloseAvatar), for: .touchUpInside)
-//
-//////        if isBig{
-//////            self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: 100)
-//////            self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: 100)
-//////        } else{
-//////            self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-//////            self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-//////        }
-//////        isBig.toggle()
-////
-////
-////        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn]){ //for avatar
-////
-////            self.view.addSubview(self.headerView.profileIconView)
-////            NSLayoutConstraint.activate([
-////            self.headerView.profileIconView.topAnchor.constraint(equalTo: self.backgroundView.topAnchor),
-////            self.headerView.profileIconView.leadingAnchor.constraint(equalTo: self.backgroundView.leadingAnchor),
-////            self.headerView.profileIconView.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor),
-////            ])
-////            self.headerView.profileIconView.center.x = self.view.center.x
-////           // self.headerView.profileIconView.layoutIfNeeded()
-////        }
-//
-//        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn]){ //delay сколько нужно подождать прежде чем выводиться
-//            self.view.addSubview(self.backgroundView)
-//            self.backgroundView.isHidden = false
-//            self.backgroundView.backgroundColor = .black
-//            let safeLayout = self.view.safeAreaLayoutGuide
-//
-//            NSLayoutConstraint.activate([
-//                self.backgroundView.topAnchor.constraint(equalTo: safeLayout.topAnchor),
-//                self.backgroundView.leadingAnchor.constraint(equalTo: safeLayout.leadingAnchor),
-//                self.backgroundView.trailingAnchor.constraint(equalTo: safeLayout.trailingAnchor),
-//                self.backgroundView.bottomAnchor.constraint(equalTo: safeLayout.bottomAnchor),
-//
-//            ])
-//        }
-//        UIView.animate(withDuration: 0.3, delay: 0.5, options: [.curveEaseIn]){ //delay сколько нужно подождать прежде чем выводиться
-//
-//            self.backgroundView.addSubview(self.closeButtonView)
-//            self.closeButtonView.isHidden = false
-//            self.closeButtonView.tintColor = .white
-//            NSLayoutConstraint.activate([
-//                self.closeButtonView.topAnchor.constraint(equalTo: self.backgroundView.topAnchor, constant: 8),
-//                self.closeButtonView.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -8)
-//            ])
-//        }
-//
-//    }
-    
-    
 }
 extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
     
@@ -260,7 +166,7 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
             postLine.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 5),
             postLine.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -5),
             postLine.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -10)
-          
+            
         ])
     }
     
