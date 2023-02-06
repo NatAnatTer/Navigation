@@ -24,7 +24,7 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .clear
         view.isOpaque = false
-        view.alpha = 0.9
+        view.alpha = 0.5
         return view
     }()
     var closeButtonView:UIButton = {
@@ -38,6 +38,7 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
     
     let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
     var isBig = false
+    let dimension =  UIScreen.main.bounds.width - 30
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,28 +60,12 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
         
         
     }
-    let dimension =  UIScreen.main.bounds.width - 30
+    
     @objc private func profileIconTapped(tapGestureRecognizer: UITapGestureRecognizer){
         
         self.closeButtonView.addTarget(self, action: #selector(pressCloseAvatar), for: .touchUpInside)
         
         
-        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn]){ //for avatar
-            self.backgroundView.addSubview(self.headerView.profileIconView)
-            
-            self.headerView.profileIconView.alpha = 1
-            self.headerView.profileIconView.layer.cornerRadius = 0
-            self.headerView.profileIconView.layer.borderWidth = 0
-            NSLayoutConstraint.activate([
-                self.headerView.profileIconView.topAnchor.constraint(equalTo: self.backgroundView.topAnchor, constant: 100),
-                self.headerView.profileIconView.leadingAnchor.constraint(equalTo: self.backgroundView.leadingAnchor, constant: 15),
-                self.headerView.profileIconView.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -15),
-                self.headerView.profileIconView.bottomAnchor.constraint(equalTo: self.backgroundView.bottomAnchor, constant: (100 + self.dimension) - UIScreen.main.bounds.height),
-            ])
-            self.headerView.profileIconView.center.x = self.backgroundView.center.x
-            self.headerView.profileIconView.center.y = self.backgroundView.center.y
-            
-        }
         
         
         UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn]){
@@ -107,6 +92,30 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
                 self.closeButtonView.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -8)
             ])
         }
+        
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn]){ //for avatar
+            
+            
+            self.headerView.profileIconView.layer.cornerRadius = 0
+            self.headerView.profileIconView.layer.borderWidth = 0
+            self.headerView.profileIconView.isOpaque = true
+            self.headerView.profileIconView.alpha = 1
+            
+            self.backgroundView.addSubview(self.headerView.profileIconView)
+            
+            
+            NSLayoutConstraint.activate([
+                self.headerView.profileIconView.topAnchor.constraint(equalTo: self.backgroundView.topAnchor, constant: 100),
+                self.headerView.profileIconView.leadingAnchor.constraint(equalTo: self.backgroundView.leadingAnchor, constant: 15),
+                self.headerView.profileIconView.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -15),
+                self.headerView.profileIconView.bottomAnchor.constraint(equalTo: self.backgroundView.bottomAnchor, constant: (100 + self.dimension) - UIScreen.main.bounds.height),
+            ])
+            self.headerView.profileIconView.center.x = self.backgroundView.center.x
+            self.headerView.profileIconView.center.y = self.backgroundView.center.y
+            
+            
+        }
     }
     
     
@@ -123,7 +132,7 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
         
         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn]){
             self.headerView.contentView.addSubview(self.headerView.profileIconView)
-            self.headerView.profileIconView.alpha = 1
+            
             self.headerView.profileIconView.layer.cornerRadius = 50
             self.headerView.profileIconView.layer.borderWidth = 3
             
@@ -138,9 +147,6 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
         self.postLine.dataSource = self
         self.postLine.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifire)
         self.postLine.register(PhotosTableViewCell.self, forCellReuseIdentifier: PhotosTableViewCell.identifire)
-        
-        //    let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-        
         self.postLine.tableHeaderView = headerView
         
     }
@@ -157,7 +163,6 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
     
     private func addAllSubviews(){
         self.view.addSubview(postLine)
-        //  self.view.addSubview(backgroundView)
     }
     
     private func setupAllViews(_ safeLayout: UILayoutGuide){
