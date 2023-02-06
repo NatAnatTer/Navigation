@@ -59,41 +59,36 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
         
         
     }
+    let dimension =  UIScreen.main.bounds.width - 30
     @objc private func profileIconTapped(tapGestureRecognizer: UITapGestureRecognizer){
         
         self.closeButtonView.addTarget(self, action: #selector(pressCloseAvatar), for: .touchUpInside)
-        
-//                if isBig{
-//                    self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: 100)
-//                    self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: 100)
-//                } else{
-//                    self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-//                    self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width)
-//                }
-//                isBig.toggle()
-//
+ 
                 
                 UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn]){ //for avatar
+                  
+                    
                    
                     self.backgroundView.addSubview(self.headerView.profileIconView)
+                 
                     self.headerView.profileIconView.alpha = 1
                     self.headerView.profileIconView.layer.cornerRadius = 0
+                    self.headerView.profileIconView.layer.borderWidth = 0
+//                    self.headerView.profileIconView.contentMode = .scaleAspectFill
+//                    self.headerView.profileIconView.layer.masksToBounds = true
+
                     
                     
-                    let dimension =  UIScreen.main.bounds.width-30
                     NSLayoutConstraint.activate([
                     self.headerView.profileIconView.topAnchor.constraint(equalTo: self.backgroundView.topAnchor, constant: 100),
                     self.headerView.profileIconView.leadingAnchor.constraint(equalTo: self.backgroundView.leadingAnchor, constant: 15),
-                 //   self.headerView.profileIconView.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -15),
-                   
-                   
-                    self.headerView.profileIconView.widthAnchor.constraint(equalToConstant: dimension),
-                    self.headerView.profileIconView.heightAnchor.constraint(equalToConstant: 500)
+                    self.headerView.profileIconView.trailingAnchor.constraint(equalTo: self.backgroundView.trailingAnchor, constant: -15),
+                    self.headerView.profileIconView.bottomAnchor.constraint(equalTo: self.backgroundView.bottomAnchor, constant: (100 + self.dimension) - UIScreen.main.bounds.height),
                     ])
                     self.headerView.profileIconView.center.x = self.backgroundView.center.x
                     self.headerView.profileIconView.center.y = self.backgroundView.center.y
-//
-             //       self.headerView.profileIconView.layoutIfNeeded()
+
+   //                 self.headerView.profileIconView.layoutIfNeeded()
                 }
 
         
@@ -134,10 +129,15 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
             self.closeButtonView.isHidden = true
             self.closeButtonView.tintColor = .clear
         }
-//        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseIn]){
-//            self.headerView.profileIconView.isHidden = true
-//            self.headerView.profileIconView.tintColor = .clear
-//        }
+        
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseIn]){
+            self.headerView.contentView.addSubview(self.headerView.profileIconView)
+            self.headerView.profileIconView.alpha = 1
+            self.headerView.profileIconView.layer.cornerRadius = 50
+            self.headerView.profileIconView.layer.borderWidth = 3
+
+        }
+
         
     }
     
