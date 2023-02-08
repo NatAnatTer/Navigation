@@ -91,15 +91,28 @@ class LogInViewController: UIViewController {
         return button
         
     }()
-    private var flagLP = true
+    let promptPW: UILabel = {
+        let view = UILabel(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.textColor = .systemRed
+        view.text = "Длина пароля должна быть не менее 4 символов"
+        view.font = UIFont.systemFont(ofSize: 11, weight: .regular)
+        view.isHidden = true
+        view.lineBreakMode = .byClipping
+        view.numberOfLines = 2
+        return view
+    }()
+    
+   // private var flagLP = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         self.scrollView.keyboardDismissMode = .interactive
-        
         self.loginEnterView.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
         self.passwordEnterView.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
+        self.passwordEnterView.addTarget(self, action: #selector(checkLength(_:)), for: .editingChanged)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,6 +136,21 @@ class LogInViewController: UIViewController {
         pressButtons()
     }
     
+    private func checkPasswordLength(_ passwordText: String) -> Bool{
+        let count = passwordText.count
+        return  count > 3
+        
+    }
+    
+    @objc func checkLength(_ textField: UITextField) {
+       
+        let text: String = textField.text ?? ""
+        if checkPasswordLength(text){
+            promptPW.isHidden = true
+        } else {
+            promptPW.isHidden = false
+        }
+      }
 
     @objc func editingChanged(_ textField: UITextField) {
         self.stackView.layer.borderColor = UIColor.lightGray.cgColor
@@ -136,8 +164,25 @@ class LogInViewController: UIViewController {
             self.stackView.layer.borderColor = UIColor.systemRed.cgColor
         }
        else {
-            let profileViewController = ProfileViewController()
-            self.navigationController?.pushViewController(profileViewController, animated: true)
+           if checkPasswordLength(passwordEnterView.text ?? ""){
+               let login = loginEnterView.text ?? ""
+               let password = passwordEnterView.text ?? ""
+               
+               if login == defaultAuthorization.login && password == defaultAuthorization.password{
+                   let profileViewController = ProfileViewController()
+                   self.navigationController?.pushViewController(profileViewController, animated: true)
+               } else{
+                   let alert = UIAlertController(title: "Не верный логин или пароль", message: "Проверьте правильность ввода логина и пароля", preferredStyle: .alert)
+                   alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                   NSLog("The \"OK\" alert occured.")
+                   }))
+                   self.present(alert, animated: true, completion: nil)
+               }
+               
+           } else {
+               promptPW.isHidden = false
+           }
+           
         }
 
     }
@@ -156,6 +201,7 @@ extension LogInViewController{
         stackView.addArrangedSubview(loginEnterView)
         stackView.addArrangedSubview(delimeter)
         stackView.addArrangedSubview(passwordEnterView)
+        scrollView.addSubview(promptPW)
         scrollView.addSubview(self.logInButtonView)
     }
     
@@ -188,7 +234,12 @@ extension LogInViewController{
             self.passwordEnterView.heightAnchor.constraint(equalToConstant: 50),
             self.passwordEnterView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -5),
             
-            self.logInButtonView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 16),
+            self.promptPW.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 10),
+            self.promptPW.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -10),
+            self.promptPW.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 5),
+            
+            
+            self.logInButtonView.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 30),
             self.logInButtonView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
             self.logInButtonView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
             self.logInButtonView.heightAnchor.constraint(equalToConstant: 50)
@@ -213,5 +264,7 @@ extension LogInViewController{
     @objc func keyboardWillHide(_ notification: NSNotification){
         self.scrollView.contentInset = .zero
     }
+    
+
     
 }

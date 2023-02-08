@@ -7,10 +7,6 @@
 
 import Foundation
 
-//enum CellModel{
-//    case postCell(models: [Post])
-//    case photoCell(models: [PhotoList])
-//}
 
 struct Post{
     let author: String
@@ -20,9 +16,7 @@ struct Post{
     let views: Int
 }
 
-//struct PhotoList{
-//    let nameOfContent: String
-//}
+
 
 let postOne = Post(author: "Asynchronously Loading Images into Table and Collection Views", descriptionOfPost: "Сложнее всего начать действовать, все остальное зависит только от упорства.", imageOfPost: "postOne", likes: 400, views: 100)
 let postTwo = Post(author: "Funny animals", descriptionOfPost: "Логика может привести Вас от пункта А к пункту Б, а воображение — куда угодно.", imageOfPost: "postTwo", likes: 500, views: 200)
