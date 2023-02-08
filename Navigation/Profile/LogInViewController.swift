@@ -69,7 +69,6 @@ class LogInViewController: UIViewController {
         view.placeholder = "Password"
         view.isSecureTextEntry = true
         view.textContentType = .password
-        //  view.backgroundColor = .systemGray6
         view.autocapitalizationType = .none
         return view
     }()
@@ -92,12 +91,15 @@ class LogInViewController: UIViewController {
         return button
         
     }()
+    private var flagLP = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         self.scrollView.keyboardDismissMode = .interactive
         
+        self.loginEnterView.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
+        self.passwordEnterView.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -121,10 +123,26 @@ class LogInViewController: UIViewController {
         pressButtons()
     }
     
+
+    @objc func editingChanged(_ textField: UITextField) {
+        self.stackView.layer.borderColor = UIColor.lightGray.cgColor
+      }
+    
+    
     @objc private func pressLogIn(){
-        let profileViewController = ProfileViewController()
-        self.navigationController?.pushViewController(profileViewController, animated: true)
+        
+    
+        if self.loginEnterView.text == "" || self.passwordEnterView.text == ""{
+            self.stackView.layer.borderColor = UIColor.systemRed.cgColor
+        }
+       else {
+            let profileViewController = ProfileViewController()
+            self.navigationController?.pushViewController(profileViewController, animated: true)
+        }
+
     }
+    
+
     
 }
 
