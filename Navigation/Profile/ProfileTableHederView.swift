@@ -25,6 +25,21 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return view
     }()
     
+    let profileIconViewForAnimation: UIImageView = {
+        let view = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.image = UIImage(named: "profileIcon")
+        view.layer.cornerRadius = 50
+        view.layer.borderWidth = 3
+        view.layer.borderColor = UIColor.white.cgColor
+        view.contentMode = .scaleAspectFill
+        view.isHidden = true
+        view.layer.masksToBounds = true
+        return view
+    }()
+    
+    
+    
     let fullNameLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -73,28 +88,47 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return button
     }()
     
-    
+    let blackView: UIView = {
+        let view = UIView(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .black
+        view.isOpaque = false
+        view.alpha = 0.0
+        return view
+    }()
+    let closeButtonView:UIButton = {
+        let view = UIButton(frame: CGRect(x: 0, y: 0, width: 15, height: 15))
+        view.setBackgroundImage(UIImage(systemName: "xmark"), for: .normal)
+        view.tintColor = .white
+        view.layer.opacity = 0.0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         self.contentView.backgroundColor = .systemGray6
         addAllSubwiew()
         setupAllView()
+        pressButtons()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
 }
 extension ProfileHeaderView{
     
     private func addAllSubwiew(){
-        self.contentView.addSubview(self.profileIconView)
+        
+        self.contentView.addSubview(self.profileIconViewForAnimation)
         self.contentView.addSubview(self.fullNameLabel)
         self.contentView.addSubview(self.statusButton)
         self.contentView.addSubview(self.statusLabel)
+        self.contentView.addSubview(self.blackView)
+        self.contentView.addSubview(self.closeButtonView)
+        self.contentView.addSubview(self.profileIconView)
         
     }
     
@@ -106,9 +140,13 @@ extension ProfileHeaderView{
             profileIconView.heightAnchor.constraint(equalToConstant: 100),
             profileIconView.widthAnchor.constraint(equalToConstant: 100),
             
+            profileIconViewForAnimation.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 16),
+            profileIconViewForAnimation.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
+            profileIconViewForAnimation.heightAnchor.constraint(equalToConstant: 100),
+            profileIconViewForAnimation.widthAnchor.constraint(equalToConstant: 100),
+            
             fullNameLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 27),
             fullNameLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 132),
-            
             fullNameLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             
             statusButton.topAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -66),
@@ -118,7 +156,62 @@ extension ProfileHeaderView{
             
             statusLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
             statusLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 132),
-            statusLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16)
+            statusLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+            
+            blackView.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            blackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            blackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
+            blackView.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.height),
+            closeButtonView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 8),
+            closeButtonView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -8),
         ])
     }
+    
+    private func pressButtons(){
+        self.closeButtonView.addTarget(self, action: #selector(pressCloseAvatar), for: .touchUpInside)
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileIconTapped(tapGestureRecognizer:)))
+        self.profileIconView.isUserInteractionEnabled = true
+        self.profileIconView.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    
+    @objc private func profileIconTapped(tapGestureRecognizer: UITapGestureRecognizer){
+        
+        UIImageView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut){
+            self.blackView.alpha = 0.7
+            
+            self.profileIconView.layer.bounds = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width)
+            self.profileIconView.center = CGPoint(x: self.blackView.center.x, y: self.blackView.center.y - 55)
+            
+            self.profileIconView.layer.cornerRadius = 0
+            self.profileIconView.layer.borderWidth = 0
+            
+            self.layoutIfNeeded()
+        } completion:{ _ in
+            UIImageView.animate(withDuration: 0.3, delay: 0){
+                self.closeButtonView.layer.opacity = 1
+            }
+            
+        }
+        
+    }
+    
+    
+    @objc private func pressCloseAvatar(){
+        
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1.0, initialSpringVelocity: 0.0, options: [.curveEaseOut]){
+            self.closeButtonView.alpha = 0.0
+        } completion: { _ in
+            self.blackView.alpha = 0.0
+            self.profileIconView.layer.borderWidth = 3
+            self.profileIconView.layer.position = self.profileIconViewForAnimation.layer.position
+            self.profileIconView.layer.bounds = CGRect(x: 0, y: 0, width: 100, height: 100)
+            self.profileIconView.layer.cornerRadius = self.profileIconView.bounds.width / 2
+            self.layoutIfNeeded()
+        }
+        
+    }
 }
+
+
