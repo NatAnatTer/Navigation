@@ -89,20 +89,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return button
     }()
     
-//    let somethingButton: UIButton = {
-//        let button = UIButton(frame: .zero)
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.backgroundColor = .systemCyan
-//        button.layer.cornerRadius = 10.0
-//        button.layer.borderWidth = 2.0
-//        button.layer.borderColor = UIColor.systemCyan.cgColor
-//        button.layer.shadowRadius = 4.0
-//        button.layer.shadowOpacity = 0.7
-//        button.layer.shadowColor = UIColor.black.cgColor
-//        button.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
-//        button.setTitle("Some text", for: .normal)
-//        return button
-//    }()
     
     let blackView: UIView = {
         let view = UIView(frame: .zero)
@@ -198,6 +184,24 @@ extension ProfileHeaderView{
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileIconTapped(tapGestureRecognizer:)))
         self.profileIconView.isUserInteractionEnabled = true
         self.profileIconView.addGestureRecognizer(tapGestureRecognizer)
+        
+        self.statusButton.addTarget(self, action: #selector(changeStatus), for: .touchUpInside)
+        self.statusEnterField.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
+    }
+    
+    @objc func editingChanged(_ textField: UITextField) {
+        self.statusEnterField.layer.borderColor = UIColor.black.cgColor
+      }
+    
+    @objc private func changeStatus(){
+        let text = statusEnterField.text ?? ""
+        if text.count == 0 {
+            statusEnterField.layer.borderColor = UIColor.red.cgColor
+            statusEnterField.placeholder = "Enter text"
+        } else {
+            statusLabel.text = text
+            statusEnterField.text = ""
+        }
     }
     
     
