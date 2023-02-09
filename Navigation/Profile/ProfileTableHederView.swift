@@ -58,6 +58,22 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return view
     }()
     
+    let statusEnterField: UITextField = {
+        let view = UITextField(frame: .zero)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.textColor = .black
+        view.font = .systemFont(ofSize: 15, weight: .regular)
+        view.placeholder = "Set your status"
+        view.layer.cornerRadius = 12.0
+        view.layer.borderWidth = 1.0
+        view.layer.borderColor = UIColor.black.cgColor
+        view.autocapitalizationType = .none
+        view.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: view.frame.height))
+        view.leftViewMode = .always
+        return view
+    }()
+    
+    
     let statusButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -73,20 +89,20 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return button
     }()
     
-    let somethingButton: UIButton = {
-        let button = UIButton(frame: .zero)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = .systemCyan
-        button.layer.cornerRadius = 10.0
-        button.layer.borderWidth = 2.0
-        button.layer.borderColor = UIColor.systemCyan.cgColor
-        button.layer.shadowRadius = 4.0
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
-        button.setTitle("Some text", for: .normal)
-        return button
-    }()
+//    let somethingButton: UIButton = {
+//        let button = UIButton(frame: .zero)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.backgroundColor = .systemCyan
+//        button.layer.cornerRadius = 10.0
+//        button.layer.borderWidth = 2.0
+//        button.layer.borderColor = UIColor.systemCyan.cgColor
+//        button.layer.shadowRadius = 4.0
+//        button.layer.shadowOpacity = 0.7
+//        button.layer.shadowColor = UIColor.black.cgColor
+//        button.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
+//        button.setTitle("Some text", for: .normal)
+//        return button
+//    }()
     
     let blackView: UIView = {
         let view = UIView(frame: .zero)
@@ -126,6 +142,7 @@ extension ProfileHeaderView{
         self.contentView.addSubview(self.fullNameLabel)
         self.contentView.addSubview(self.statusButton)
         self.contentView.addSubview(self.statusLabel)
+        self.contentView.addSubview(self.statusEnterField)
         self.contentView.addSubview(self.blackView)
         self.contentView.addSubview(self.closeButtonView)
         self.contentView.addSubview(self.profileIconView)
@@ -149,12 +166,20 @@ extension ProfileHeaderView{
             fullNameLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 132),
             fullNameLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             
+            statusEnterField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
+            statusEnterField.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -10),
+            statusEnterField.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 132),
+            statusEnterField.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+            statusEnterField.heightAnchor.constraint(equalToConstant: 40),
+            
+            
+            
             statusButton.topAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -66),
             statusButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             statusButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             statusButton.heightAnchor.constraint(equalToConstant: 50),
             
-            statusLabel.bottomAnchor.constraint(equalTo: statusButton.topAnchor, constant: -34),
+            statusLabel.bottomAnchor.constraint(equalTo: statusEnterField.topAnchor, constant: -10), //34
             statusLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 132),
             statusLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             

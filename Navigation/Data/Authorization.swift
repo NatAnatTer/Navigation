@@ -12,4 +12,4 @@ struct Authorization{
     let password: String
 }
 
-let defaultAuthorization = Authorization(login: "user", password: "1234")
+let defaultAuthorization = Authorization(login: "1", password: "1111") //(login: "user", password: "1234")
