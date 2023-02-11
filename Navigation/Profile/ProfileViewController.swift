@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
     
-    let arrayOfPost:[Post] = [postOne, postTwo, postThree, postFour]
+    var arrayOfPost:[Post] = [postOne, postTwo, postThree, postFour]
     
     
     let postLine: UITableView = {
@@ -108,6 +108,10 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         postLine.deselectRow(at: indexPath, animated: true)
+        arrayOfPost[indexPath.row].likes = arrayOfPost[indexPath.row].likes + 1
+        //let post
+        
+        
     }
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
@@ -121,4 +125,15 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         postLine.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.id)
     }
+    
+  // -----------  Остановилась тут
+//    private func pressButtons(){
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(likesTapped(tapGestureRecognizer:)))
+//        self.postLine.isUserInteractionEnabled = true
+//        self.postLine.addGestureRecognizer(tapGestureRecognizer)
+//    }
+//
+//    @objc private func likesTapped(tapGestureRecognizer: UITapGestureRecognizer){
+//        let currentPost = postLine.
+//    }
 }

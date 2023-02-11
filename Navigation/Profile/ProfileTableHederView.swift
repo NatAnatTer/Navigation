@@ -12,6 +12,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     lazy var statusText: String = "Waiting for something beautiful, pretty good"
     static let id = "ProfileHeaderView"
     
+   
+    
     let profileIconView: UIImageView = {
         let view = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         view.translatesAutoresizingMaskIntoConstraints = false

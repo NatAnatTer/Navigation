@@ -11,6 +11,8 @@ class PostTableViewCell: UITableViewCell {
     
     static let identifire  = "PostTableViewCell"
     
+
+    
     let authorOfPost: UILabel = {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -59,6 +61,7 @@ class PostTableViewCell: UITableViewCell {
         
         addAllSubview()
         setupAllView()
+    //    pressButtons()
     }
     
     required init?(coder: NSCoder) {
@@ -80,6 +83,15 @@ extension PostTableViewCell{
         self.contentView.addSubview(viewsOfPost)
         
     }
+//    private func pressButtons(){
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(likesTapped(tapGestureRecognizer:)))
+//        self.likesOfPost.isUserInteractionEnabled = true
+//        self.likesOfPost.addGestureRecognizer(tapGestureRecognizer)
+//    }
+//
+//    @objc private func likesTapped(tapGestureRecognizer: UITapGestureRecognizer){
+//
+//    }
     
     private func setupAllView(){
         NSLayoutConstraint.activate([
