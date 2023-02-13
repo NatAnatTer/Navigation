@@ -11,6 +11,7 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
     
     var arrayOfPost:[Post] = [postOne, postTwo, postThree, postFour]
     
+    let gestRecognizer = UIGestureRecognizer()
     
     let postLine: UITableView = {
         let view = UITableView(frame: .zero, style: .grouped)
@@ -30,7 +31,7 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
         self.view.backgroundColor = .systemGray6
         self.navigationItem.title = "Профиль"
         let safeLayout = self.view.safeAreaLayoutGuide
-        
+        gestRecognizer.delegate = self
         addAllSubviews()
         setupAllViews(safeLayout)
         createTable()
@@ -102,22 +103,38 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
             cell.likesOfPost.text = "Likes: \(postList.likes)"
             cell.viewsOfPost.text = "Views: \(postList.views)"
             
+            
+            let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(labelTap(tapGesture:)))
+            tapGesture.delegate = self
+            tapGesture.numberOfTapsRequired = 1
+            cell.likesOfPost.isUserInteractionEnabled = true
+            cell.likesOfPost.tag = indexPath.row
+            cell.likesOfPost.addGestureRecognizer(tapGesture)
+            
             return cell
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        postLine.deselectRow(at: indexPath, animated: true)
-        arrayOfPost[indexPath.row].likes = arrayOfPost[indexPath.row].likes + 1
-        //let post
-        
-        
+    @objc func labelTap(tapGesture:UITapGestureRecognizer){
+        let countLikes = arrayOfPost[tapGesture.view!.tag].likes
+        arrayOfPost[tapGesture.view!.tag].likes = countLikes + 1
+        self.postLine.reloadData()
+       // print("Label tag is:\(tapGesture.view!.tag)")
     }
     
+  
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        postLine.deselectRow(at: indexPath, animated: true)
+       
+    }
+ 
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let vc = PhotosViewController()
-        if  indexPath.row == 0{
+        if  indexPath.section == 0{
             self.navigationController?.pushViewController(vc, animated: true)
+        } else{
+          
         }
         return indexPath
     }
@@ -125,15 +142,5 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         postLine.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.id)
     }
-    
-  // -----------  Остановилась тут
-//    private func pressButtons(){
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(likesTapped(tapGestureRecognizer:)))
-//        self.postLine.isUserInteractionEnabled = true
-//        self.postLine.addGestureRecognizer(tapGestureRecognizer)
-//    }
-//
-//    @objc private func likesTapped(tapGestureRecognizer: UITapGestureRecognizer){
-//        let currentPost = postLine.
-//    }
+  
 }
