@@ -111,6 +111,13 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
             cell.likesOfPost.tag = indexPath.row
             cell.likesOfPost.addGestureRecognizer(tapGesture)
             
+            let tapPhoto : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(PhotoTap(tapGesture:)))
+            tapPhoto.delegate = self
+            tapPhoto.numberOfTapsRequired = 1
+            cell.contentOfPost.isUserInteractionEnabled = true
+            cell.contentOfPost.tag = indexPath.row
+            cell.contentOfPost.addGestureRecognizer(tapPhoto)
+            
             return cell
         }
     }
@@ -121,6 +128,15 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         self.postLine.reloadData()
        // print("Label tag is:\(tapGesture.view!.tag)")
     }
+    @objc func PhotoTap(tapGesture:UITapGestureRecognizer){
+      
+       
+        let countOfViews = arrayOfPost[tapGesture.view!.tag].likes
+        arrayOfPost[tapGesture.view!.tag].views = countOfViews + 1
+        self.postLine.reloadData()
+       // print("Label tag is:\(tapGesture.view!.tag)")
+    }
+    
     
   
     
