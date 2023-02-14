@@ -9,6 +9,8 @@ import UIKit
 
 class PhotosCollectionView: UICollectionView {
     
+ 
+    
     
     init(){
         let layout = UICollectionViewFlowLayout()
@@ -22,8 +24,10 @@ class PhotosCollectionView: UICollectionView {
         contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         isPagingEnabled = true
         dataSource = self
-        
+  
     }
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -32,6 +36,11 @@ class PhotosCollectionView: UICollectionView {
 
 
 extension PhotosCollectionView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate{
+    
+    
+    
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         arrayOfPhoto.count
     }
@@ -41,14 +50,24 @@ extension PhotosCollectionView: UICollectionViewDataSource, UICollectionViewDele
         let currentPhoto = arrayOfPhoto[indexPath.item]
         cell.photosInCollection.image = UIImage(named: currentPhoto)
         
-        let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(labelTap(tapGesture:)))
+        let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(photoInCollectionTap(tapGesture:)))
         tapGesture.delegate = self
         tapGesture.numberOfTapsRequired = 1
-        cell.likesOfPost.isUserInteractionEnabled = true
-        cell.likesOfPost.tag = indexPath.row
-        
-        cell.likesOfPost.addGestureRecognizer(tapGesture)
+        cell.photosInCollection.isUserInteractionEnabled = true
+        cell.photosInCollection.tag = indexPath.row
+        cell.photosInCollection.addGestureRecognizer(tapGesture)
         return cell
+    }
+    
+    @objc func photoInCollectionTap(tapGesture:UITapGestureRecognizer){
+        PhotosViewController().animatePhotoTap(index: tapGesture.view!.tag)
+        
+       
+        
+//        let countLikes = arrayOfPost[tapGesture.view!.tag].likes
+//        arrayOfPost[tapGesture.view!.tag].likes = countLikes + 1
+//        self.postLine.reloadData()
+       
     }
     
 }

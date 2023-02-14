@@ -137,6 +137,7 @@ extension ProfileHeaderView{
         
     }
     
+
     private func setupAllView(){
         
         NSLayoutConstraint.activate([
