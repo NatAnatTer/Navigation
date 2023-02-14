@@ -35,7 +35,7 @@ class PostTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.textColor = .systemGray
         view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        view.numberOfLines = 0
+        view.numberOfLines = 1
         return view
     }()
     
@@ -83,15 +83,7 @@ extension PostTableViewCell{
         self.contentView.addSubview(viewsOfPost)
         
     }
-//    private func pressButtons(){
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(likesTapped(tapGestureRecognizer:)))
-//        self.likesOfPost.isUserInteractionEnabled = true
-//        self.likesOfPost.addGestureRecognizer(tapGestureRecognizer)
-//    }
-//
-//    @objc private func likesTapped(tapGestureRecognizer: UITapGestureRecognizer){
-//
-//    }
+
     
     private func setupAllView(){
         NSLayoutConstraint.activate([

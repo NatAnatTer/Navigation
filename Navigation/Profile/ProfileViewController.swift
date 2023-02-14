@@ -9,6 +9,8 @@ import UIKit
 
 class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
     
+//
+    
     var arrayOfPost:[Post] = [postOne, postTwo, postThree, postFour]
     
     let gestRecognizer = UIGestureRecognizer()
@@ -20,6 +22,7 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
         return view
     }()
     
+
     
     let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
     
@@ -109,13 +112,19 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
             tapGesture.numberOfTapsRequired = 1
             cell.likesOfPost.isUserInteractionEnabled = true
             cell.likesOfPost.tag = indexPath.row
+            
             cell.likesOfPost.addGestureRecognizer(tapGesture)
             
-            let tapPhoto : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(PhotoTap(tapGesture:)))
+            let tapPhoto : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(photoTap(tapPhoto:)))
             tapPhoto.delegate = self
             tapPhoto.numberOfTapsRequired = 1
             cell.contentOfPost.isUserInteractionEnabled = true
-            cell.contentOfPost.tag = indexPath.row
+           cell.contentOfPost.tag = indexPath.row
+            if postList.isShortDecription{
+                cell.descriptionOfPost.numberOfLines = 2
+            } else {
+                cell.descriptionOfPost.numberOfLines = 0
+            }
             cell.contentOfPost.addGestureRecognizer(tapPhoto)
             
             return cell
@@ -126,15 +135,16 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         let countLikes = arrayOfPost[tapGesture.view!.tag].likes
         arrayOfPost[tapGesture.view!.tag].likes = countLikes + 1
         self.postLine.reloadData()
-       // print("Label tag is:\(tapGesture.view!.tag)")
-    }
-    @objc func PhotoTap(tapGesture:UITapGestureRecognizer){
-      
        
-        let countOfViews = arrayOfPost[tapGesture.view!.tag].likes
-        arrayOfPost[tapGesture.view!.tag].views = countOfViews + 1
+    }
+   
+    @objc func photoTap(tapPhoto:UITapGestureRecognizer){
+      
+        let countOfViews = arrayOfPost[tapPhoto.view!.tag].views
+        arrayOfPost[tapPhoto.view!.tag].views = countOfViews + 1
+        arrayOfPost[tapPhoto.view!.tag].isShortDecription.toggle()
         self.postLine.reloadData()
-       // print("Label tag is:\(tapGesture.view!.tag)")
+      
     }
     
     

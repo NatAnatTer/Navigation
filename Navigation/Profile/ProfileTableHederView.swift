@@ -87,7 +87,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         button.layer.shadowOpacity = 0.7
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
-        button.setTitle("Show status", for: .normal)
+        button.setTitle("Set status", for: .normal)
         return button
     }()
     

@@ -22,6 +22,7 @@ class PhotosCollectionView: UICollectionView {
         contentInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         isPagingEnabled = true
         dataSource = self
+        
     }
     
     required init?(coder: NSCoder) {
@@ -30,7 +31,7 @@ class PhotosCollectionView: UICollectionView {
 }
 
 
-extension PhotosCollectionView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension PhotosCollectionView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         arrayOfPhoto.count
     }
@@ -39,6 +40,14 @@ extension PhotosCollectionView: UICollectionViewDataSource, UICollectionViewDele
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.identifire, for: indexPath) as! PhotosCollectionViewCell
         let currentPhoto = arrayOfPhoto[indexPath.item]
         cell.photosInCollection.image = UIImage(named: currentPhoto)
+        
+        let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(labelTap(tapGesture:)))
+        tapGesture.delegate = self
+        tapGesture.numberOfTapsRequired = 1
+        cell.likesOfPost.isUserInteractionEnabled = true
+        cell.likesOfPost.tag = indexPath.row
+        
+        cell.likesOfPost.addGestureRecognizer(tapGesture)
         return cell
     }
     
