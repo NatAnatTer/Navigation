@@ -35,7 +35,7 @@ class PhotosCollectionView: UICollectionView {
 }
 
 
-extension PhotosCollectionView: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate{
+extension PhotosCollectionView: UICollectionViewDataSource, UICollectionViewDelegate{
     
     
     
@@ -50,24 +50,34 @@ extension PhotosCollectionView: UICollectionViewDataSource, UICollectionViewDele
         let currentPhoto = arrayOfPhoto[indexPath.item]
         cell.photosInCollection.image = UIImage(named: currentPhoto)
         
-        let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(photoInCollectionTap(tapGesture:)))
-        tapGesture.delegate = self
-        tapGesture.numberOfTapsRequired = 1
-        cell.photosInCollection.isUserInteractionEnabled = true
-        cell.photosInCollection.tag = indexPath.row
-        cell.photosInCollection.addGestureRecognizer(tapGesture)
+//        let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(photoInCollectionTap(tapGesture:)))
+//        tapGesture.delegate = self
+//        tapGesture.numberOfTapsRequired = 1
+//        cell.photosInCollection.isUserInteractionEnabled = true
+//        cell.photosInCollection.tag = indexPath.row
+//        cell.photosInCollection.addGestureRecognizer(tapGesture)
         return cell
     }
     
-    @objc func photoInCollectionTap(tapGesture:UITapGestureRecognizer){
-        PhotosViewController().animatePhotoTap(index: tapGesture.view!.tag)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Выбрана ячейка \(indexPath.item)")
+        let cell = collectionView.cellForItem(at: indexPath)
         
-       
-        
-//        let countLikes = arrayOfPost[tapGesture.view!.tag].likes
-//        arrayOfPost[tapGesture.view!.tag].likes = countLikes + 1
-//        self.postLine.reloadData()
-       
+        UIView.animate(withDuration: 0.5, delay: 0.3, animations: ({
+            cell?.frame = collectionView.bounds
+            
+        }), completion: nil)
     }
+    
+    
+    
+//    @objc func photoInCollectionTap(tapGesture:UITapGestureRecognizer){
+//        PhotosViewController().animatePhotoTap(index: tapGesture.view!.tag)
+//
+//        self.layoutIfNeeded()
+       
+ //   }
+    
+
     
 }
