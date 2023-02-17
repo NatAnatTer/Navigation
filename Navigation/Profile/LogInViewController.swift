@@ -154,6 +154,7 @@ class LogInViewController: UIViewController {
 
     @objc func editingChanged(_ textField: UITextField) {
         self.stackView.layer.borderColor = UIColor.lightGray.cgColor
+        self.stackView.backgroundColor = .systemGray6
       }
     
     
@@ -162,6 +163,8 @@ class LogInViewController: UIViewController {
     
         if self.loginEnterView.text == "" || self.passwordEnterView.text == ""{
             self.stackView.layer.borderColor = UIColor.systemRed.cgColor
+            
+            self.stackView.shakeLoginPassword()
         }
        else {
            if checkPasswordLength(passwordEnterView.text ?? ""){
@@ -267,4 +270,15 @@ extension LogInViewController{
     
 
     
+}
+extension UIStackView{
+    func shakeLoginPassword(){
+        let shakeAnimation = CABasicAnimation(keyPath: "position")
+        shakeAnimation.duration = 0.05
+        shakeAnimation.repeatCount = 4
+        shakeAnimation.autoreverses = true
+        shakeAnimation.fromValue = CGPoint(x: self.center.x - 4, y: self.center.y)
+        shakeAnimation.toValue = CGPoint(x: self.center.x + 4, y: self.center.y)
+        layer.add(shakeAnimation, forKey: "position")
+    }
 }

@@ -13,10 +13,10 @@ class FeedViewController: UIViewController {
     
     private lazy var toPostButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .systemGray6
+        button.backgroundColor = .systemBlue
         button.setTitle("Пост", for: .normal)
         button.layer.cornerRadius = 12
-        button.setTitleColor(.systemCyan, for: .normal)
+        button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.addTarget(self, action: #selector(pressPost), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -42,7 +42,7 @@ class FeedViewController: UIViewController {
     }
     
     private func setupView() {
-        self.view.backgroundColor = .systemMint
+        self.view.backgroundColor = .systemGray6
         self.navigationItem.title = "Лента"
         
         setupButtonPost()
