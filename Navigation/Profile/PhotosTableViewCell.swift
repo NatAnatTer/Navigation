@@ -12,7 +12,6 @@ class PhotosTableViewCell: UITableViewCell {
     static let identifire  = "PhotosTableViewCell"
     var rowWithPhotos: String = ""
     
-    
     var  photoCollectionView: UICollectionView!
     var nameOfCell: UILabel!
     var arrowToDetail: UIImageView!
