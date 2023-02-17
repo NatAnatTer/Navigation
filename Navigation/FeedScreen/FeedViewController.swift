@@ -9,13 +9,14 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    var postOne = PostFirst(title: "My first post")
+    var postOne = Post(titleOfPost: "My first post", descriptionOfPost: "My first post", imageOfPost: "postOne", likes: 1, views: 3, isShortDecription: true)
+    
     
     private lazy var toPostButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemBlue
-        button.setTitle("Пост", for: .normal)
-        button.layer.cornerRadius = 12
+        button.setTitle(getStrings(stringsEnum: .postOne), for: .normal)
+        button.layer.cornerRadius = CGFloat(getSizesOfElements(sizeEnum: .cornerRadius12))
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.addTarget(self, action: #selector(pressPost), for: .touchUpInside)
@@ -25,8 +26,8 @@ class FeedViewController: UIViewController {
     private lazy var toPostButtonTwo: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemGray
-        button.setTitle("Пост 2", for: .normal)
-        button.layer.cornerRadius = 12
+        button.setTitle(getStrings(stringsEnum: .postTwo), for: .normal)
+        button.layer.cornerRadius = CGFloat(getSizesOfElements(sizeEnum: .cornerRadius12))
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         button.addTarget(self, action: #selector(pressPost), for: .touchUpInside)
@@ -43,7 +44,7 @@ class FeedViewController: UIViewController {
     
     private func setupView() {
         self.view.backgroundColor = .systemGray6
-        self.navigationItem.title = "Лента"
+        self.navigationItem.title = getStrings(stringsEnum: .navItemTitle)
         
         setupButtonPost()
         setupButtonPostTwo()
@@ -53,7 +54,7 @@ class FeedViewController: UIViewController {
     @objc private func pressPost(){
         let postViewController = PostViewController()
         self.navigationController?.pushViewController(postViewController, animated: true)
-        postViewController.titleOfPost = postOne.title
+        postViewController.titleOfPost = postOne.titleOfPost
         
         print("Open post")
     }
@@ -65,7 +66,7 @@ extension FeedViewController{
         stackView.axis = .vertical
         stackView.distribution = .equalCentering //TODO
         stackView.alignment = .center
-        stackView.spacing = 10
+        stackView.spacing = CGFloat(getSizesOfElements(sizeEnum: .stackSpacing))
         stackView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(stackView)
         stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true

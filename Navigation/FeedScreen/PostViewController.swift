@@ -17,16 +17,16 @@ class PostViewController: UIViewController {
         let infoButton = UIBarButtonItem(barButtonSystemItem: .bookmarks, target: self, action: #selector(openInfo))
         navigationItem.rightBarButtonItem = infoButton
     }
-
+    
     private func setupView() {
-           self.view.backgroundColor = .lightGray
-           self.navigationItem.title = titleOfPost
-       }
-
+        self.view.backgroundColor = .lightGray
+        self.navigationItem.title = titleOfPost
+    }
+    
     @objc private func openInfo(){
         let infoViewController = InfoViewController()
         self.present(infoViewController, animated: true, completion: nil)
-        infoViewController.postDetail = PostFirst(title: titleOfPost)
+        infoViewController.postDetail = Post(titleOfPost: self.titleOfPost, descriptionOfPost: "My first post", imageOfPost: "postOne", likes: 1, views: 3, isShortDecription: true)
     }
     
 }

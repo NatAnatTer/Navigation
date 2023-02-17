@@ -100,7 +100,7 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
             
             let cell = postLine.dequeueReusableCell(withIdentifier: PostTableViewCell.identifire, for: indexPath) as! PostTableViewCell
             let postList = arrayOfPost[indexPath.row]
-            cell.authorOfPost.text = postList.author
+            cell.authorOfPost.text = postList.titleOfPost
             cell.contentOfPost.image = UIImage(named: postList.imageOfPost)
             cell.descriptionOfPost.text = postList.descriptionOfPost
             cell.likesOfPost.text = "Likes: \(postList.likes)"

@@ -11,13 +11,13 @@ class PostTableViewCell: UITableViewCell {
     
     static let identifire  = "PostTableViewCell"
     
-
+    
     
     let authorOfPost: UILabel = {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.textColor = .black
-        view.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        view.font = UIFont.systemFont(ofSize: CGFloat(getSizesOfElements(sizeEnum: .fontSize20)), weight: .bold)
         view.numberOfLines = 2
         return view
     }()
@@ -34,7 +34,7 @@ class PostTableViewCell: UITableViewCell {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.textColor = .systemGray
-        view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        view.font = UIFont.systemFont(ofSize: CGFloat(getSizesOfElements(sizeEnum: .fontSize14)), weight: .regular)
         view.numberOfLines = 1
         return view
     }()
@@ -43,7 +43,7 @@ class PostTableViewCell: UITableViewCell {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.textColor = .black
-        view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        view.font = UIFont.systemFont(ofSize: CGFloat(getSizesOfElements(sizeEnum: .fontSize16)), weight: .regular)
         return view
     }()
     
@@ -51,7 +51,7 @@ class PostTableViewCell: UITableViewCell {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.textColor = .black
-        view.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        view.font = UIFont.systemFont(ofSize: CGFloat(getSizesOfElements(sizeEnum: .fontSize16)), weight: .regular)
         return view
     }()
     
@@ -61,7 +61,7 @@ class PostTableViewCell: UITableViewCell {
         
         addAllSubview()
         setupAllView()
-    //    pressButtons()
+        //    pressButtons()
     }
     
     required init?(coder: NSCoder) {
@@ -83,7 +83,7 @@ extension PostTableViewCell{
         self.contentView.addSubview(viewsOfPost)
         
     }
-
+    
     
     private func setupAllView(){
         NSLayoutConstraint.activate([
