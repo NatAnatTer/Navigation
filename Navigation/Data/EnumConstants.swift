@@ -47,6 +47,7 @@ enum Strings{
     case keyPath
     case iconArrowForward
     case photoGallery
+    case delete
 }
 
 func getStrings(stringsEnum: Strings) -> String{
@@ -129,6 +130,8 @@ func getStrings(stringsEnum: Strings) -> String{
         return "arrow.forward"
     case .photoGallery:
         return "Photo Gallery"
+    case .delete:
+        return "Delete"
     }
     
 }

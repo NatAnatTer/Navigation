@@ -102,7 +102,6 @@ class LogInViewController: UIViewController {
         return view
     }()
     
-   // private var flagLP = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -267,8 +266,7 @@ extension LogInViewController{
         self.scrollView.contentInset = .zero
     }
     
-
-    
+  
 }
 extension UIStackView{
     func shakeLoginPassword(){
@@ -280,4 +278,184 @@ extension UIStackView{
         shakeAnimation.toValue = CGPoint(x: self.center.x + 4, y: self.center.y)
         layer.add(shakeAnimation, forKey: "position")
     }
+}
+extension String{
+    
+    func substring(string: String, fromIndex: Int, toIndex: Int) -> String? {
+        if fromIndex < toIndex && toIndex < string.count /*use string.characters.count for swift3*/{
+            let startIndex = string.index(string.startIndex, offsetBy: fromIndex)
+            let endIndex = string.index(string.startIndex, offsetBy: toIndex)
+            return String(string[startIndex..<endIndex])
+        }else{
+            return nil
+        }
+    }
+    
+    func checkValidEmail() -> Bool{
+        guard !self.isEmpty else{
+            return false
+        }
+        
+        var state = 0
+        var ch: Character
+        var idx = 0
+        var mark = 0
+        var local: String? = nil
+        var domain = [String]()
+      
+        while idx <= self.count && state != -1{
+            if idx == self.count{
+                ch = "\0" // Так мы обозначаем конец нашей работы
+            }else{
+                ch = self[self.index(self.startIndex, offsetBy: idx)]
+                if ch == "\0" {
+                  // символ, которым мы кодируем конец работы, не может быть частью ввода
+                  return false;
+                }
+            }
+            switch state {
+                
+            case 0:
+                // Первый символ {atext} -- текстовой части локального имени
+                if ((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z") || (ch >= "0" && ch <= "9") || ch == "_" || ch == "-"
+                    || ch == "+") {
+                    state = 1
+                    break
+                }
+                // Если встретили неправильный символ -> отмечаемся в state об ошибке
+                state = -1
+                
+            case 1:
+              // Остальные символы {atext} -- текстовой части локального имени
+              if ((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z")
+                  || (ch >= "0" && ch <= "9") || ch == "_" || ch == "-"
+                  || ch == "+") {
+                break
+              }
+              if ch == "." {
+                state = 2
+                break
+              }
+              if ch == "@" { // Конец локальной части
+                  local = substring(string: self, fromIndex: 0, toIndex: idx - mark)
+                  //local = self.substring(to: self.index(self.startIndex, offsetBy: idx - mark))
+                mark = idx + 1
+                state = 3
+                break
+              }
+              // Если встретили неправильный символ -> отмечаемся в state об ошибке
+              state = -1
+              
+            case 2:
+              // Переход к {atext} (текстовой части) после точки
+              if ((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z")
+                  || (ch >= "0" && ch <= "9") || ch == "_" || ch == "-"
+                  || ch == "+") {
+                state = 1
+                break
+              }
+              // Если встретили неправильный символ -> отмечаемся в state об ошибке
+              state = -1
+            
+            case 3:
+              // Переходим {alnum} (домену), проверяем первый символ
+              if ((ch >= "a" && ch <= "z") || (ch >= "0" && ch <= "9")
+                  || (ch >= "A" && ch <= "Z")) {
+                state = 4
+                break
+              }
+              // Если встретили неправильный символ -> отмечаемся в state об ошибке
+              state = -1
+            
+            case 4:
+              // Собираем {alnum} --- домен
+              if ((ch >= "a" && ch <= "z") || (ch >= "0" && ch <= "9")
+                  || (ch >= "A" && ch <= "Z")) {
+                break
+              }
+              if (ch == "-") {
+                state = 5
+                break
+              }
+              if (ch == ".") {
+                  let start = self.index(self.startIndex, offsetBy: mark)
+                  let end = self.index(self.endIndex, offsetBy: idx - mark)
+                  let range = start..<end
+                  let mySubstring = self[range]
+                  domain.append(substring(string: self, fromIndex: mark, toIndex: idx - mark) ?? "")
+                mark = idx + 1;
+                state = 5
+                break
+              }
+              // Проверка на конец строки
+              if (ch == "\0") {
+                  domain.append(substring(string: self, fromIndex: mark, toIndex: idx - mark) ?? "")
+              
+                state = 6
+                break // Дошли до конца строки -> заканчиваем работу
+              }
+              // Если встретили неправильный символ -> отмечаемся в state об ошибке
+              state = -1;
+             
+            case 5:
+              if ((ch >= "a" && ch <= "z") || (ch >= "0" && ch <= "9")
+                  || (ch >= "A" && ch <= "Z")) {
+                state = 4
+                break
+              }
+              if (ch == "-") {
+                break
+              }
+              // Если встретили неправильный символ -> отмечаемся в state об ошибке
+              state = -1
+              
+            case 6:
+              // Успех! (На самом деле, мы сюда никогда не попадём)
+              break
+            
+            
+            
+                
+            default:
+                break
+            }
+            idx += 1
+      }
+        
+        
+        // Остальные проверки
+
+        // Не прошли проверку выше? Возвращаем false!
+        if state != 6 {
+            return false
+        }
+        // Нам нужен домен как минимум второго уровня
+        if (domain.count < 2){
+            return false
+        }
+
+        // Ограничения длины по спецификации RFC 5321
+        if (local?.count ?? 0 > 64){
+            return false
+        }
+        // Ограничения длины по спецификации RFC 5321
+        if (self.count > 254){
+            return false
+        }
+        // Домен верхнего уровня должен состоять только из букв и быть не короче двух символов
+        idx = self.count - 1;
+        while (idx > 0) {
+          ch = self[self.index(self.startIndex, offsetBy: idx)];
+          if (ch == "." && self.count - idx > 2) {
+            return true
+          }
+          if (!((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z"))) {
+            return false
+          }
+          idx -= 1
+        }
+      
+        return true
+    }
+    
 }

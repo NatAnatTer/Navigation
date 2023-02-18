@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
     
-//
+    //
     
     var arrayOfPost:[Post] = [postOne, postTwo, postThree, postFour]
     
@@ -22,7 +22,7 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
         return view
     }()
     
-
+    
     
     let headerView = ProfileHeaderView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
     
@@ -119,7 +119,7 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
             tapPhoto.delegate = self
             tapPhoto.numberOfTapsRequired = 1
             cell.contentOfPost.isUserInteractionEnabled = true
-           cell.contentOfPost.tag = indexPath.row
+            cell.contentOfPost.tag = indexPath.row
             if postList.isShortDecription{
                 cell.descriptionOfPost.numberOfLines = 2
             } else {
@@ -135,32 +135,29 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
         let countLikes = arrayOfPost[tapGesture.view!.tag].likes
         arrayOfPost[tapGesture.view!.tag].likes = countLikes + 1
         self.postLine.reloadData()
-       
+        
     }
-   
+    
     @objc func photoTap(tapPhoto:UITapGestureRecognizer){
-      
+        
         let countOfViews = arrayOfPost[tapPhoto.view!.tag].views
         arrayOfPost[tapPhoto.view!.tag].views = countOfViews + 1
         arrayOfPost[tapPhoto.view!.tag].isShortDecription.toggle()
         self.postLine.reloadData()
-      
+        
     }
-    
-    
-  
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         postLine.deselectRow(at: indexPath, animated: true)
-       
+        
     }
- 
+    
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let vc = PhotosViewController()
         if  indexPath.section == 0{
             self.navigationController?.pushViewController(vc, animated: true)
         } else{
-          
+            
         }
         return indexPath
     }
@@ -168,5 +165,14 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         postLine.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.id)
     }
-  
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive, title: getStrings(stringsEnum: .delete)){_,_,_ in
+            self.arrayOfPost.remove(at: indexPath.item)
+            self.postLine.deleteRows(at: [indexPath], with: .fade)
+            
+        }
+        return UISwipeActionsConfiguration(actions: [action])
+    }
+    
 }
