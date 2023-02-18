@@ -32,7 +32,7 @@ class ProfileViewController: UIViewController, UIGestureRecognizerDelegate{
     }
     private func setupView() {
         self.view.backgroundColor = .systemGray6
-        self.navigationItem.title = "Профиль"
+        self.navigationItem.title = getStrings(stringsEnum: .tabBarTitleProfile)
         let safeLayout = self.view.safeAreaLayoutGuide
         gestRecognizer.delegate = self
         addAllSubviews()
@@ -93,7 +93,7 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
             
             let cell = postLine.dequeueReusableCell(withIdentifier: PhotosTableViewCell.identifire, for: indexPath) as! PhotosTableViewCell
             cell.selectionStyle = .none
-            cell.nameOfCell.text = "Photos"
+            cell.nameOfCell.text = getStrings(stringsEnum: .photosLabel)
             return cell
             
         } else {
@@ -103,8 +103,8 @@ extension ProfileViewController:  UITableViewDelegate, UITableViewDataSource{
             cell.authorOfPost.text = postList.titleOfPost
             cell.contentOfPost.image = UIImage(named: postList.imageOfPost)
             cell.descriptionOfPost.text = postList.descriptionOfPost
-            cell.likesOfPost.text = "Likes: \(postList.likes)"
-            cell.viewsOfPost.text = "Views: \(postList.views)"
+            cell.likesOfPost.text = "\(getStrings(stringsEnum: .likes)): \(postList.likes)"
+            cell.viewsOfPost.text = "\(getStrings(stringsEnum: .views)): \(postList.views)"
             
             
             let tapGesture : UITapGestureRecognizer = UITapGestureRecognizer.init(target: self, action: #selector(labelTap(tapGesture:)))

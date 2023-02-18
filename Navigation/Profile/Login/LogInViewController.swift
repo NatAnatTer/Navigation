@@ -19,7 +19,7 @@ class LogInViewController: UIViewController {
     let logoView:UIImageView = {
         let view = UIImageView(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.image = UIImage(named: "logo")
+        view.image = UIImage(named: getStrings(stringsEnum: .iconLogo))
         view.contentMode = .scaleAspectFill
         view.layer.masksToBounds = true
         return view
@@ -44,10 +44,9 @@ class LogInViewController: UIViewController {
         view.textColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
         view.font = .systemFont(ofSize: 16)
-        //  view.backgroundColor = .systemGray6
         view.textContentType = .username
         view.keyboardType = .emailAddress
-        view.placeholder = "Email or phone"
+        view.placeholder = getStrings(stringsEnum: .placeholderLogin)
         view.contentHorizontalAlignment = .fill
         view.autocapitalizationType = .none
         return view
@@ -66,7 +65,7 @@ class LogInViewController: UIViewController {
         view.textColor = .black
         view.translatesAutoresizingMaskIntoConstraints = false
         view.font = .systemFont(ofSize: 16)
-        view.placeholder = "Password"
+        view.placeholder = getStrings(stringsEnum: .placeholderPassw)
         view.isSecureTextEntry = true
         view.textContentType = .password
         view.autocapitalizationType = .none
@@ -76,9 +75,9 @@ class LogInViewController: UIViewController {
     
     let logInButtonView: UIButton = {
         var button = UIButton(frame: .zero)
-        button.setTitle("LogIn", for: .normal)
+        button.setTitle(getStrings(stringsEnum: .loginButtonText), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setBackgroundImage(UIImage(named: "BluePixel"), for: .normal)
+        button.setBackgroundImage(UIImage(named: getStrings(stringsEnum: .loginButtonColor)), for: .normal)
         button.clipsToBounds = true
         button.layer.cornerRadius = 10.0
         switch button.state{
@@ -95,8 +94,8 @@ class LogInViewController: UIViewController {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.textColor = .systemRed
-        view.text = "Длина пароля должна быть не менее 4 символов"
-        view.font = UIFont.systemFont(ofSize: 11, weight: .regular)
+        view.text = getStrings(stringsEnum: .prompt)
+        view.font = UIFont.systemFont(ofSize: CGFloat(getSizesOfElements(sizeEnum: .fontSize11)), weight: .regular)
         view.isHidden = true
         view.lineBreakMode = .byClipping
         view.numberOfLines = 2
@@ -175,9 +174,9 @@ class LogInViewController: UIViewController {
                    let profileViewController = ProfileViewController()
                    self.navigationController?.pushViewController(profileViewController, animated: true)
                } else{
-                   let alert = UIAlertController(title: "Не верный логин или пароль", message: "Проверьте правильность ввода логина и пароля", preferredStyle: .alert)
-                   alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                   NSLog("The \"OK\" alert occured.")
+                   let alert = UIAlertController(title: getStrings(stringsEnum: .wrongLoginPassw), message: getStrings(stringsEnum: .needToCheckLP), preferredStyle: .alert)
+                   alert.addAction(UIAlertAction(title: NSLocalizedString(getStrings(stringsEnum: .ok), comment: getStrings(stringsEnum: .defaultActionComment)), style: .default, handler: { _ in
+                       NSLog(getStrings(stringsEnum: .logAllert))
                    }))
                    self.present(alert, animated: true, completion: nil)
                }
@@ -273,7 +272,7 @@ extension LogInViewController{
 }
 extension UIStackView{
     func shakeLoginPassword(){
-        let shakeAnimation = CABasicAnimation(keyPath: "position")
+        let shakeAnimation = CABasicAnimation(keyPath: getStrings(stringsEnum: .keyPath))
         shakeAnimation.duration = 0.05
         shakeAnimation.repeatCount = 4
         shakeAnimation.autoreverses = true

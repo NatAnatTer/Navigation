@@ -22,11 +22,11 @@ class PhotosTableViewCell: UITableViewCell {
         self.nameOfCell.textColor = .black
         self.nameOfCell.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         self.nameOfCell.translatesAutoresizingMaskIntoConstraints = false
-        self.nameOfCell.text = "Photos"
+        self.nameOfCell.text = getStrings(stringsEnum: .photosLabel)
         
         self.arrowToDetail = UIImageView(frame: .zero)
         self.arrowToDetail.translatesAutoresizingMaskIntoConstraints = false
-        self.arrowToDetail.image = UIImage(systemName: "arrow.forward")
+        self.arrowToDetail.image = UIImage(systemName: getStrings(stringsEnum: .iconArrowForward))
         
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .horizontal

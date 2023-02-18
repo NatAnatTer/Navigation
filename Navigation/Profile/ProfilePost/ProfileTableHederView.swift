@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileHeaderView: UITableViewHeaderFooterView {
     
-    lazy var statusText: String = "Waiting for something beautiful, pretty good"
+    lazy var statusText: String = getStrings(stringsEnum: .statusText)
     static let id = "ProfileHeaderView"
     
    
@@ -17,7 +17,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     let profileIconView: UIImageView = {
         let view = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.image = UIImage(named: "profileIcon")
+        view.image = UIImage(named: getStrings(stringsEnum: .iconProfile))
         view.layer.cornerRadius = 50
         view.layer.borderWidth = 3
         view.layer.borderColor = UIColor.white.cgColor
@@ -30,7 +30,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     let profileIconViewForAnimation: UIImageView = {
         let view = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.image = UIImage(named: "profileIcon")
+        view.image = UIImage(named: getStrings(stringsEnum: .iconProfile))
         view.layer.cornerRadius = 50
         view.layer.borderWidth = 3
         view.layer.borderColor = UIColor.white.cgColor
@@ -45,18 +45,18 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     let fullNameLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "Hipster Cat"
+        view.text = getStrings(stringsEnum: .nameOfProfile)
         view.textColor = .black
-        view.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        view.font = UIFont.systemFont(ofSize: CGFloat(getSizesOfElements(sizeEnum: .fontSize18)), weight: .bold)
         return view
     }()
     
     let statusLabel: UILabel = {
         let view = UILabel(frame: .zero)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.text = "Waiting for something beautiful, pretty good"
+        view.text = getStrings(stringsEnum: .statusText)
         view.textColor = .gray
-        view.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        view.font = UIFont.systemFont(ofSize: CGFloat(getSizesOfElements(sizeEnum: .fontSize14)), weight: .regular)
         return view
     }()
     
@@ -65,7 +65,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         view.translatesAutoresizingMaskIntoConstraints = false
         view.textColor = .black
         view.font = .systemFont(ofSize: 15, weight: .regular)
-        view.placeholder = "Set your status"
+        view.placeholder = getStrings(stringsEnum: .setStatus)
         view.layer.cornerRadius = 12.0
         view.layer.borderWidth = 1.0
         view.layer.borderColor = UIColor.black.cgColor
@@ -87,7 +87,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         button.layer.shadowOpacity = 0.7
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4.0, height: 4.0)
-        button.setTitle("Set status", for: .normal)
+        button.setTitle(getStrings(stringsEnum: .setStatusButton), for: .normal)
         return button
     }()
     
@@ -102,7 +102,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     }()
     let closeButtonView:UIButton = {
         let view = UIButton(frame: CGRect(x: 0, y: 0, width: 15, height: 15))
-        view.setBackgroundImage(UIImage(systemName: "xmark"), for: .normal)
+        view.setBackgroundImage(UIImage(systemName: getStrings(stringsEnum: .iconClose)), for: .normal)
         view.tintColor = .white
         view.layer.opacity = 0.0
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -200,7 +200,7 @@ extension ProfileHeaderView{
         let text = statusEnterField.text ?? ""
         if text.count == 0 {
             statusEnterField.layer.borderColor = UIColor.red.cgColor
-            statusEnterField.placeholder = "Enter text"
+            statusEnterField.placeholder = getStrings(stringsEnum: .enterText)
         } else {
             statusLabel.text = text
             statusEnterField.text = ""
