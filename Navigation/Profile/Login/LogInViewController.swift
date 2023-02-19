@@ -141,54 +141,59 @@ class LogInViewController: UIViewController {
     }
     
     @objc func checkLength(_ textField: UITextField) {
-       
+        
         let text: String = textField.text ?? ""
         if checkPasswordLength(text){
             promptPW.isHidden = true
         } else {
             promptPW.isHidden = false
         }
-      }
-
+    }
+    
     @objc func editingChanged(_ textField: UITextField) {
         self.stackView.layer.borderColor = UIColor.lightGray.cgColor
         self.stackView.backgroundColor = .systemGray6
-      }
+    }
     
     
     @objc private func pressLogIn(){
         
-    
+        
         if self.loginEnterView.text == "" || self.passwordEnterView.text == ""{
             self.stackView.layer.borderColor = UIColor.systemRed.cgColor
             
             self.stackView.shakeLoginPassword()
         }
-       else {
-           if checkPasswordLength(passwordEnterView.text ?? ""){
-               let login = loginEnterView.text ?? ""
-               let password = passwordEnterView.text ?? ""
-               
-               if login == defaultAuthorization.login && password == defaultAuthorization.password{
-                   let profileViewController = ProfileViewController()
-                   self.navigationController?.pushViewController(profileViewController, animated: true)
-               } else{
-                   let alert = UIAlertController(title: getStrings(stringsEnum: .wrongLoginPassw), message: getStrings(stringsEnum: .needToCheckLP), preferredStyle: .alert)
-                   alert.addAction(UIAlertAction(title: NSLocalizedString(getStrings(stringsEnum: .ok), comment: getStrings(stringsEnum: .defaultActionComment)), style: .default, handler: { _ in
-                       NSLog(getStrings(stringsEnum: .logAllert))
-                   }))
-                   self.present(alert, animated: true, completion: nil)
-               }
-               
-           } else {
-               promptPW.isHidden = false
-           }
-           
+        else {
+            if checkPasswordLength(passwordEnterView.text ?? ""){
+                let login = loginEnterView.text ?? ""
+                let password = passwordEnterView.text ?? ""
+                
+                let isValidLogin = loginEnterView.text?.checkValidEmail() ?? false
+                print(isValidLogin)
+                if !isValidLogin{
+                    self.stackView.shakeLoginPassword()
+                }
+                if login == defaultAuthorization.login && password == defaultAuthorization.password{
+                    let profileViewController = ProfileViewController()
+                    self.navigationController?.pushViewController(profileViewController, animated: true)
+                } else{
+                    let alert = UIAlertController(title: getStrings(stringsEnum: .wrongLoginPassw), message: getStrings(stringsEnum: .needToCheckLP), preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString(getStrings(stringsEnum: .ok), comment: getStrings(stringsEnum: .defaultActionComment)), style: .default, handler: { _ in
+                        NSLog(getStrings(stringsEnum: .logAllert))
+                    }))
+                    self.present(alert, animated: true, completion: nil)
+                }
+                
+            } else {
+                promptPW.isHidden = false
+            }
+            
         }
-
+        
     }
     
-
+    
     
 }
 
@@ -266,7 +271,7 @@ extension LogInViewController{
         self.scrollView.contentInset = .zero
     }
     
-  
+    
 }
 extension UIStackView{
     func shakeLoginPassword(){
@@ -276,13 +281,13 @@ extension UIStackView{
         shakeAnimation.autoreverses = true
         shakeAnimation.fromValue = CGPoint(x: self.center.x - 4, y: self.center.y)
         shakeAnimation.toValue = CGPoint(x: self.center.x + 4, y: self.center.y)
-        layer.add(shakeAnimation, forKey: "position")
+        layer.add(shakeAnimation, forKey: getStrings(stringsEnum: .keyPath))
     }
 }
 extension String{
     
     func substring(string: String, fromIndex: Int, toIndex: Int) -> String? {
-        if fromIndex < toIndex && toIndex < string.count /*use string.characters.count for swift3*/{
+        if fromIndex < toIndex && toIndex < string.count{
             let startIndex = string.index(string.startIndex, offsetBy: fromIndex)
             let endIndex = string.index(string.startIndex, offsetBy: toIndex)
             return String(string[startIndex..<endIndex])
@@ -302,159 +307,127 @@ extension String{
         var mark = 0
         var local: String? = nil
         var domain = [String]()
-      
+        
         while idx <= self.count && state != -1{
             if idx == self.count{
-                ch = "\0" // Так мы обозначаем конец нашей работы
+                ch = "\0"
             }else{
                 ch = self[self.index(self.startIndex, offsetBy: idx)]
                 if ch == "\0" {
-                  // символ, которым мы кодируем конец работы, не может быть частью ввода
-                  return false;
+                    return false
                 }
             }
             switch state {
                 
             case 0:
-                // Первый символ {atext} -- текстовой части локального имени
                 if ((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z") || (ch >= "0" && ch <= "9") || ch == "_" || ch == "-"
                     || ch == "+") {
                     state = 1
                     break
                 }
-                // Если встретили неправильный символ -> отмечаемся в state об ошибке
                 state = -1
                 
             case 1:
-              // Остальные символы {atext} -- текстовой части локального имени
-              if ((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z")
-                  || (ch >= "0" && ch <= "9") || ch == "_" || ch == "-"
-                  || ch == "+") {
-                break
-              }
-              if ch == "." {
-                state = 2
-                break
-              }
-              if ch == "@" { // Конец локальной части
-                  local = substring(string: self, fromIndex: 0, toIndex: idx - mark)
-                  //local = self.substring(to: self.index(self.startIndex, offsetBy: idx - mark))
-                mark = idx + 1
-                state = 3
-                break
-              }
-              // Если встретили неправильный символ -> отмечаемся в state об ошибке
-              state = -1
-              
-            case 2:
-              // Переход к {atext} (текстовой части) после точки
-              if ((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z")
-                  || (ch >= "0" && ch <= "9") || ch == "_" || ch == "-"
-                  || ch == "+") {
-                state = 1
-                break
-              }
-              // Если встретили неправильный символ -> отмечаемся в state об ошибке
-              state = -1
-            
-            case 3:
-              // Переходим {alnum} (домену), проверяем первый символ
-              if ((ch >= "a" && ch <= "z") || (ch >= "0" && ch <= "9")
-                  || (ch >= "A" && ch <= "Z")) {
-                state = 4
-                break
-              }
-              // Если встретили неправильный символ -> отмечаемся в state об ошибке
-              state = -1
-            
-            case 4:
-              // Собираем {alnum} --- домен
-              if ((ch >= "a" && ch <= "z") || (ch >= "0" && ch <= "9")
-                  || (ch >= "A" && ch <= "Z")) {
-                break
-              }
-              if (ch == "-") {
-                state = 5
-                break
-              }
-              if (ch == ".") {
-                  let start = self.index(self.startIndex, offsetBy: mark)
-                  let end = self.index(self.endIndex, offsetBy: idx - mark)
-                  let range = start..<end
-                  let mySubstring = self[range]
-                  domain.append(substring(string: self, fromIndex: mark, toIndex: idx - mark) ?? "")
-                mark = idx + 1;
-                state = 5
-                break
-              }
-              // Проверка на конец строки
-              if (ch == "\0") {
-                  domain.append(substring(string: self, fromIndex: mark, toIndex: idx - mark) ?? "")
-              
-                state = 6
-                break // Дошли до конца строки -> заканчиваем работу
-              }
-              // Если встретили неправильный символ -> отмечаемся в state об ошибке
-              state = -1;
-             
-            case 5:
-              if ((ch >= "a" && ch <= "z") || (ch >= "0" && ch <= "9")
-                  || (ch >= "A" && ch <= "Z")) {
-                state = 4
-                break
-              }
-              if (ch == "-") {
-                break
-              }
-              // Если встретили неправильный символ -> отмечаемся в state об ошибке
-              state = -1
-              
-            case 6:
-              // Успех! (На самом деле, мы сюда никогда не попадём)
-              break
-            
-            
-            
+                if ((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z")
+                    || (ch >= "0" && ch <= "9") || ch == "_" || ch == "-"
+                    || ch == "+") {
+                    break
+                }
+                if ch == "." {
+                    state = 2
+                    break
+                }
+                if ch == "@" {
+                    local = substring(string: self, fromIndex: 0, toIndex: idx - mark)
+                    mark = idx + 1
+                    state = 3
+                    break
+                }
+                state = -1
                 
+            case 2:
+                if ((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z")
+                    || (ch >= "0" && ch <= "9") || ch == "_" || ch == "-"
+                    || ch == "+") {
+                    state = 1
+                    break
+                }
+                state = -1
+                
+            case 3:
+                if ((ch >= "a" && ch <= "z") || (ch >= "0" && ch <= "9")
+                    || (ch >= "A" && ch <= "Z")) {
+                    state = 4
+                    break
+                }
+                state = -1
+                
+            case 4:
+                if ((ch >= "a" && ch <= "z") || (ch >= "0" && ch <= "9")
+                    || (ch >= "A" && ch <= "Z")) {
+                    break
+                }
+                if (ch == "-") {
+                    state = 5
+                    break
+                }
+                if (ch == ".") {
+                    domain.append(substring(string: self, fromIndex: mark, toIndex: idx) ?? "")
+                    mark = idx + 1;
+                    state = 5
+                    break
+                }
+                if (ch == "\0") {
+                    domain.append(substring(string: self, fromIndex: mark, toIndex: idx) ?? "")
+                    state = 6
+                    break
+                }
+            case 5:
+                if ((ch >= "a" && ch <= "z") || (ch >= "0" && ch <= "9")
+                    || (ch >= "A" && ch <= "Z")) {
+                    state = 4
+                    break
+                }
+                if (ch == ".") {
+                    break
+                }
+                state = -1
+                
+            case 6:
+                break
             default:
                 break
             }
             idx += 1
-      }
+        }
         
-        
-        // Остальные проверки
-
-        // Не прошли проверку выше? Возвращаем false!
         if state != 6 {
             return false
         }
-        // Нам нужен домен как минимум второго уровня
         if (domain.count < 2){
             return false
         }
-
-        // Ограничения длины по спецификации RFC 5321
+        
         if (local?.count ?? 0 > 64){
             return false
         }
-        // Ограничения длины по спецификации RFC 5321
+        
         if (self.count > 254){
             return false
         }
-        // Домен верхнего уровня должен состоять только из букв и быть не короче двух символов
+        
         idx = self.count - 1;
-        while (idx > 0) {
-          ch = self[self.index(self.startIndex, offsetBy: idx)];
-          if (ch == "." && self.count - idx > 2) {
-            return true
-          }
-          if (!((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z"))) {
-            return false
-          }
-          idx -= 1
+        while idx > 0{
+            ch = self[self.index(self.startIndex, offsetBy: idx)];
+            if ch == "." && self.count - idx > 2 {
+                return true
+            }
+            if !((ch >= "a" && ch <= "z") || (ch >= "A" && ch <= "Z")){
+                return false
+            }
+            idx -= 1
         }
-      
+        
         return true
     }
     
