@@ -121,7 +121,7 @@ class PhotosViewController: UIViewController {
 }
 
 extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         arrayOfPhoto.count
     }
@@ -144,14 +144,14 @@ extension PhotosViewController: UICollectionViewDataSource, UICollectionViewDele
         print("print gesture \(String(describing: tapGesture.view?.tag))")
         UIImageView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseInOut){
             self.blackView.alpha = 0.7
-     
+            
             let index = tapGesture.view?.tag ?? 0
             let namePhoto = arrayOfPhoto[index]
             self.photosInAnimation.image = UIImage(named: namePhoto)
             self.photosInAnimation.isOpaque = true
             self.photosInAnimation.alpha = 1.0
             
-           
+            
         } completion:{ _ in
             UIImageView.animate(withDuration: 0.3, delay: 0){
                 self.closeButtonView.layer.opacity = 1

@@ -64,7 +64,7 @@ extension FeedViewController{
     private func setupStackView(){
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.distribution = .equalCentering //TODO
+        stackView.distribution = .equalCentering
         stackView.alignment = .center
         stackView.spacing = CGFloat(getSizesOfElements(sizeEnum: .stackSpacing))
         stackView.translatesAutoresizingMaskIntoConstraints = false

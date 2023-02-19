@@ -12,7 +12,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     lazy var statusText: String = getStrings(stringsEnum: .statusText)
     static let id = "ProfileHeaderView"
     
-   
+    
     
     let profileIconView: UIImageView = {
         let view = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
@@ -137,7 +137,7 @@ extension ProfileHeaderView{
         
     }
     
-
+    
     private func setupAllView(){
         
         NSLayoutConstraint.activate([
@@ -194,7 +194,7 @@ extension ProfileHeaderView{
     
     @objc func editingChanged(_ textField: UITextField) {
         self.statusEnterField.layer.borderColor = UIColor.black.cgColor
-      }
+    }
     
     @objc private func changeStatus(){
         let text = statusEnterField.text ?? ""
